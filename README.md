@@ -14,7 +14,7 @@ Once directory has been pulled:
 gcc filename.c -o compiled_filename && compiled_filename
 ```
 
-This command will compile, name the compilations and run the compilation all at once.
+This command will compile, name the compilation and run the compilation in one command.
 
 #### Linux Programmer's Manual functions
 
@@ -23,9 +23,9 @@ Most assignments will include a test() function where my interpretation of the L
 All functions can be found via the terminal like so:
 
 ```bash
-// specific function
+// Specific Function
 man -function_name-
 
-// whole Linux Programmer's Manual
+// Linux Programmer's Manual
 man man
 ```

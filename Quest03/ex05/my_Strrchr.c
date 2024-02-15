@@ -5,30 +5,42 @@
 
 char* my_Strrchr(char* param_1, char param_2){
     
+    int length = 0;
+    while(param_1[length] != '\0'){
+        length++;
+    }
+
+    for(int i = length -1; i >= 0; i--){
+        if(param_1[i] == param_2){
+            return &param_1[i];
+        }
+        return NULL;
+    }
+    return NULL;
 }
 
 int test(){
 
-    char input_1a[] = 'abcabc';
+    char input_1a[] = "abcabc";
     char input_1b = 'b';
     // expected "bc"
 
-    char input_2a[] = '121212';
+    char input_2a[] = "121212";
     char input_2b = '2';
     // expected "2"
 
-    char input_3a[] = 'abc';
+    char input_3a[] = "abc";
     char input_3b = 'd';
     // expected nil(NULL)
 
-    print("my_Strrchr -> %s\n", my_Strrchr(input_1a, input_1b));
-    print("strrchr -> %s\n", strrchr(input_1a, input_1b));
+    printf("my_Strrchr -> %s\n", my_Strrchr(input_1a, input_1b));
+    printf("strrchr -> %s\n", strrchr(input_1a, input_1b));
 
-    print("my_Strrchr -> %s\n", my_Strrchr(input_2a, input_2b));
-    print("strrchr -> %s\n", strrchr(input_2a, input_2b));
+    printf("my_Strrchr -> %s\n", my_Strrchr(input_2a, input_2b));
+    printf("strrchr -> %s\n", strrchr(input_2a, input_2b));
 
-    print("my_Strrchr -> %s\n", my_Strrchr(input_3a, input_3b));
-    print("strrchr -> %s\n", strrchr(input_3a, input_3b));
+    printf("my_Strrchr -> %s\n", my_Strrchr(input_3a, input_3b));
+    printf("strrchr -> %s\n", strrchr(input_3a, input_3b));
 
     return 0;
 }
