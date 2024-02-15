@@ -19,3 +19,13 @@ This command will compile, name the compilations and run the compilation all at 
 #### Linux Programmer's Manual functions
 
 Most assignments will include a test() function where my interpretation of the Linux Programmer's Manual function will be tested alongside the standard function (included in the <string.h> library).
+
+All functions can be found via the terminal like so:
+
+```bash
+// specific function
+man -function_name-
+
+// whole Linux Programmer's Manual
+man man
+```
