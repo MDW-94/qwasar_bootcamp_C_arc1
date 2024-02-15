@@ -16,6 +16,6 @@ gcc filename.c -o compiled_filename && compiled_filename
 
 This command will compile, name the compilations and run the compilation all at once.
 
-- for Linux Programmer's Manual functions -
+#### Linux Programmer's Manual functions
 
 Most assignments will include a test() function where my interpretation of the Linux Programmer's Manual function will be tested alongside the standard function (included in the <string.h> library).
