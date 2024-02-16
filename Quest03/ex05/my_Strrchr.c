@@ -5,18 +5,25 @@
 
 char* my_Strrchr(char* param_1, char param_2){
     
-    int length = 0;
-    while(param_1[length] != '\0'){
-        length++;
-    }
+    // int length = 0;
+    // while(param_1[length] != '\0'){
+    //     length++;
+    // }
 
-    for(int i = length -1; i >= 0; i--){
+    // for(int i = length -1; i >= 0; i--){
+    //     if(param_1[i] == param_2){
+    //         return &param_1[i];
+    //     }
+    //     return NULL;
+    // }
+
+    char* result = NULL;
+    for(int i = 0; param_1[i] != '\0';i++){
         if(param_1[i] == param_2){
-            return &param_1[i];
+            result = &param_1[i];
         }
-        return NULL;
     }
-    return NULL;
+    return result;
 }
 
 int test(){
