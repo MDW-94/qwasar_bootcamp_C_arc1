@@ -11,6 +11,9 @@ typedef struct s_integer_array{
     int* array;
 } integer_array; // integer_array is a shorthand for struct s_integer_array
 
+// includes headers! Look at headders in C
+#ifndef STRUCT_INTEGER_ARRAY
+#define STRUCT_INTEGER_ARRAY
 void my_first_struct(integer_array* param_1){ //defining that we want an argument by the type of 'integer_array' the shorthand for struct s_integer_array
 
     // must printf size\n and content[n]\n
@@ -21,6 +24,7 @@ void my_first_struct(integer_array* param_1){ //defining that we want an argumen
     }
 
 }
+#endif
 
 int test(){
 
