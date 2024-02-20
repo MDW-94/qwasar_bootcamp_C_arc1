@@ -22,8 +22,14 @@ typedef struct s_integer_array{
 bool my_is_sort(integer_array* param_1){
 
     // if(all array[i]s are > eachother by 1 || < eachother by 1) return 1 else return 0
-
-    return 0;
+    for(int i = 1; i < param_1->size - 1;i++){
+        if(!(param_1->array[i] > param_1->array[i - 1] && param_1->array[i] < param_1->array[i + 1] 
+        || 
+        param_1->array[i] < param_1->array[i - 1] && param_1->array[i] > param_1->array[i + 1])){
+            return false;
+        }
+    }
+    return true;
 }
 
 int test(){
@@ -53,6 +59,27 @@ int test(){
     ptr_test_4->size = 8;
     ptr_test_4->array = array_4;
 
+    if(my_is_sort(ptr_test_1)){
+        printf("Array is in sequential order\n");
+    } else {
+        printf("Array is not in sequential order\n");
+    }
+    if(my_is_sort(ptr_test_2)){
+        printf("Array is in sequential order\n");
+    } else {
+        printf("Array is not in sequential order\n");
+    }
+    if(my_is_sort(ptr_test_3)){
+        printf("Array is in sequential order\n");
+    } else {
+        printf("Array is not in sequential order\n");
+    }
+    if(my_is_sort(ptr_test_4)){
+        printf("Array is in sequential order\n");
+    } else {
+        printf("Array is not in sequential order\n");
+    }
+
     return 0;
 }
 
@@ -60,3 +87,5 @@ int main(){
     test();
     return 0;
 }
+
+// the first element (param_1->array[0]) doesn't have a previous element, and the last element (param_1->array[param_1->size - 1]) doesn't have a next element.
