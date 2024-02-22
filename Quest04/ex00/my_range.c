@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include <stdlib.h>
 // create a function my_range, returns a malloc'd array ofi ntegerrs
 
 //  This integer array should contain values between min and max
@@ -11,10 +11,23 @@
 int* my_range(int input_a, int input_b){
     int r_array_size = input_b - input_a;
 
+    int *arr;
+
+    arr = (int *)malloc(5 * sizeof(int));
+
+    for(int i = 0; i < r_array_size; i++){
+        arr[i] = i * 2;
+    }
+
+    for(int i = 0; i < r_array_size; i++){
+        printf("%d", arr[i]);
+    }
+
     // ptr = (int*) malloc(n * sizeOf(int));
 
 
     // return (int*) malloc'd array
+    return arr;
 }
 
 int test() {
