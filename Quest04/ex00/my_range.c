@@ -8,10 +8,13 @@
 
 //  eg: In: 1 && 4, Out: [1, 2, 3]
 
-int* my_range(int param_1, int param_2){
+int* my_range(int input_a, int input_b){
+    int r_array_size = input_b - input_a;
+
+    // ptr = (int*) malloc(n * sizeOf(int));
 
 
-    // return malloc'd array
+    // return (int*) malloc'd array
 }
 
 int test() {
