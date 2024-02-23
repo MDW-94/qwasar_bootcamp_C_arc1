@@ -44,19 +44,19 @@ int test() {
 
     printf("Test 1: input_1a && input_1b ->");
     for(int i = 0; i < input_1b - input_1a;i++){
-        printf("%d ", result_1[i]);
+        printf(" %d", result_1[i]);
     }
     printf("\n");
 
         printf("Test 2: input_2a && input_2b ->");
     for(int i = 0; i < input_2b - input_2a;i++){
-        printf("%d ", result_2[i]);
+        printf(" %d", result_2[i]);
     }
     printf("\n");
 
         printf("Test 3: input_3a && input_3b ->");
     for(int i = 0; i < input_3b - input_3a;i++){
-        printf("%d ", result_3[i]);
+        printf(" %d", result_3[i]);
     }
     printf("\n");
 
