@@ -13,20 +13,17 @@ int* my_range(int input_a, int input_b){
 
     int *arr;
 
-    arr = (int *)malloc(5 * sizeof(int));
+    arr = (int*)malloc(r_array_size*sizeof(int));
 
-    for(int i = 0; i < r_array_size; i++){
-        arr[i] = i * 2;
+    if(arr == NULL){
+        fprintf( stderr, "Memory allocation failed\n");
+        exit(1);
     }
 
-    for(int i = 0; i < r_array_size; i++){
-        printf("%d", arr[i]);
+    for(int i = 0; i < r_array_size;i++){
+        arr[i] = input_a + i;
     }
 
-    // ptr = (int*) malloc(n * sizeOf(int));
-
-
-    // return (int*) malloc'd array
     return arr;
 }
 
@@ -41,12 +38,20 @@ int test() {
     int input_3a = 10;
     int input_3b = 11;
 
-    printf("Test 1: input_1a && input_1b -> %d", my_range(input_1a, input_1b));
+    int* result_1 = my_range(input_1a, input_1b);
+    int* result_2 = my_range(input_2a, input_2b);
+    int* result_3 = my_range(input_3a, input_3b);
 
-    printf("Test 2: input_2a && input_2b -> %d", my_range(input_2a, input_2b));
+    printf("Test 1: input_1a && input_1b ->");
+    for(int i = 0; i < input_1b - input_1a;i++){
+        printf("%d ", result_1[i]);
+    }
+    printf("\n");
+
+    // printf("Test 2: input_2a && input_2b ->");
 
 
-    printf("Test 3: input_3a && input_3b -> %d", my_range(input_3a, input_3b));
+    // printf("Test 3: input_3a && input_3b ->");
 
     return 0;
 }
