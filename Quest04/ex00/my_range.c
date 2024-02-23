@@ -48,10 +48,17 @@ int test() {
     }
     printf("\n");
 
-    // printf("Test 2: input_2a && input_2b ->");
+        printf("Test 2: input_2a && input_2b ->");
+    for(int i = 0; i < input_2b - input_2a;i++){
+        printf("%d ", result_2[i]);
+    }
+    printf("\n");
 
-
-    // printf("Test 3: input_3a && input_3b ->");
+        printf("Test 3: input_3a && input_3b ->");
+    for(int i = 0; i < input_3b - input_3a;i++){
+        printf("%d ", result_3[i]);
+    }
+    printf("\n");
 
     return 0;
 }
