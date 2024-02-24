@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h> // malloc belongs to this header file
 // create a function my_range, returns a malloc'd array ofi ntegerrs
 
 //  This integer array should contain values between min and max
@@ -14,6 +14,8 @@ int* my_range(int input_a, int input_b){
     int *arr;
 
     arr = (int*)malloc(r_array_size*sizeof(int));
+
+    
 
     if(arr == NULL){
         fprintf( stderr, "Memory allocation failed\n");
@@ -67,3 +69,5 @@ int main(){
     test();
     return 0;
 }
+
+// Dynamic Memory Allocation: The mechanism by which storage/memory/cells can be allocated to variables during the run time is called Dynamic Memory Allocation (not to be confused with DMA).
