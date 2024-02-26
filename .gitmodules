@@ -3,4 +3,4 @@
 	url = git@git.us.qwasar.io:quest03_161109_s1pnkj/quest03.git
 [submodule "Quest02/quest02"]
 	path = Quest02/quest02
-	url = /Users/apple/Desktop/Coding/Qwasar/C_Bootcamp/Quest02
+	url = git@github.com:MDW-94/quest02.git
