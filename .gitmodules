@@ -1,3 +1,6 @@
 [submodule "Quest03/Quest03/quest03"]
 	path = Quest03/Quest03/quest03
 	url = git@git.us.qwasar.io:quest03_161109_s1pnkj/quest03.git
+[submodule "Quest02/quest02"]
+	path = Quest02/quest02
+	url = /Users/apple/Desktop/Coding/Qwasar/C_Bootcamp/Quest02
