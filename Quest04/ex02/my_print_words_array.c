@@ -31,12 +31,14 @@ void my_print_words_array(string_array* param_1){
     while(i != param_1->size){
         // int x;
         // x = &param_1->array[i];
+
+        // char * x = *param_1->array[i];
         
         if(param_1->array[j] != NULL){
-            putchar(65);
+            putchar(*param_1->array[i]);
         } else {
             putchar('\n');
-            putchar(65);
+            putchar(*param_1->array[i]);
             j = 0;
         }
         j++;
@@ -45,7 +47,6 @@ void my_print_words_array(string_array* param_1){
             putchar('\n');
         }
     }
-
 }
 
 // Qs:
@@ -84,3 +85,5 @@ int main(){
     test();
     return 0;
 }
+
+// https://cplusplus.com/doc/tutorial/pointers/
