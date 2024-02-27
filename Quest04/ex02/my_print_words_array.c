@@ -26,18 +26,24 @@ void my_print_words_array(string_array* param_1){
     // }
 
     int i = 0;
+    int j = 0;
 
     while(i != param_1->size){
-        int j = 0;
-
-        // putchar(&param_1->array[i]);
+        // int x;
+        // x = &param_1->array[i];
+        
         if(param_1->array[j] != NULL){
             putchar(65);
-            j++;
         } else {
             putchar('\n');
+            putchar(65);
+            j = 0;
         }
+        j++;
         i++;
+        if(i == param_1->size){
+            putchar('\n');
+        }
     }
 
 }
