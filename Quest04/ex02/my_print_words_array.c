@@ -32,7 +32,7 @@ void my_print_words_array(string_array* param_1){
         // int x;
         // x = &param_1->array[i];
 
-        // char * x = *param_1->array[i];
+        // char x = *param_1->array[i];
         
         if(param_1->array[j] != NULL){
             putchar(*param_1->array[i]);
