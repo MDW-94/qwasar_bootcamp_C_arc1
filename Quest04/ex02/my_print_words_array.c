@@ -36,16 +36,11 @@ void my_print_words_array(string_array* param_1){
             if(param_1->array[j][i] != 00) {
                 putchar(param_1->array[j][i]);
             } else {
-                putchar(param_1->array[j][i]);
                 putchar('\n');
+                putchar(param_1->array[j + 1][0]); // Need to try an grab the first character of each array
                 i = 0;
                 j++;
             }
-    
-
-        } else {
-
-            putchar('\n');
         }
         i++;
     }
