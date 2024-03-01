@@ -18,40 +18,24 @@ typedef struct s_string_Array {
 // 'string_array' contains two parameters: an integer 'size' and a double pointer a character 'array'
 
 void my_print_words_array(string_array* param_1){
-    // for(int i = 1; i < param_1->size -1;i++){
-        // putchar(param_1->array[i - 1]);
-        // warning: incompatible pointer to integer conversion passing 'char *' to parameter of type 'int' [-Wint-conversion]
-
-    //     putchar(&param_1->array[i - 1]);
-    // }
 
     int i = 0, j = 0;
-    // int j = 0;
-
     while(i != param_1->size){
-
         if(param_1->array[j] != 00){
-
-
-            if(param_1->array[j][i] != 00) {
-                putchar(param_1->array[j][i]);
-            } else {
+            if(param_1->array[j][i] == 00) {
                 putchar('\n');
-                putchar(param_1->array[j + 1][0]); // Need to try an grab the first character of each array
+                if(param_1->array[j + 1] != 00){
+                    putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
+                }
                 i = 0;
                 j++;
+            } else {
+                putchar(param_1->array[j][i]);
             }
         }
         i++;
     }
 }
-
-// Qs:
-// What exactly is 'putchar' doing?
-// 'putchar' is used to write a character of unsigned char type to stdout. This method accepts a mandatory method of which is the character to be written to stdout
-// This functino returns the character written on the stdout as an unsigned char
-
-// How do we iterate through a struct if it is an array of arrays?
 
 int test(){
     string_array input_1a;
@@ -67,6 +51,11 @@ int test(){
     return 0;
 }
 
+int main(){
+    test();
+    return 0;
+}
+
 // Test Function ('test'):
 // Declares a variable 'input_1b' of type 'string_Array' - creates a 'structure vairable'
 // Initializes the 'size' parameter of 'input_1b' to 8
@@ -78,10 +67,13 @@ int test(){
 
 // Note: The double pointer ('char**') is used for the 'arra'y parameter because it represents an array of strings. Each element of the array ('char*') is a pointer to a character string 
 
-int main(){
-    test();
-    return 0;
-}
+
+// Qs:
+// What exactly is 'putchar' doing?
+// 'putchar' is used to write a character of unsigned char type to stdout. This method accepts a mandatory method of which is the character to be written to stdout
+// This functino returns the character written on the stdout as an unsigned char
+
+// How do we iterate through a struct if it is an array of arrays?
 
 // https://cplusplus.com/doc/tutorial/pointers/
 
