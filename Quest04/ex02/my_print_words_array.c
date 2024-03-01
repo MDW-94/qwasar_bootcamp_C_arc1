@@ -25,27 +25,29 @@ void my_print_words_array(string_array* param_1){
     //     putchar(&param_1->array[i - 1]);
     // }
 
-    int i = 0;
-    int j = 0;
+    int i = 0, j = 0;
+    // int j = 0;
 
     while(i != param_1->size){
-        // int x;
-        // x = &param_1->array[i];
 
-        // char x = *param_1->array[i];
-        
-        if(param_1->array[j] != NULL){
-            putchar(*param_1->array[i]);
+        if(param_1->array[j] != 00){
+
+
+            if(param_1->array[j][i] != 00) {
+                putchar(param_1->array[j][i]);
+            } else {
+                putchar(param_1->array[j][i]);
+                putchar('\n');
+                i = 0;
+                j++;
+            }
+    
+
         } else {
+
             putchar('\n');
-            putchar(*param_1->array[i]);
-            j = 0;
         }
-        j++;
         i++;
-        if(i == param_1->size){
-            putchar('\n');
-        }
     }
 }
 
@@ -87,3 +89,31 @@ int main(){
 }
 
 // https://cplusplus.com/doc/tutorial/pointers/
+
+// https://stackoverflow.com/questions/606879/how-do-i-access-an-individual-character-from-an-array-of-strings-in-c
+
+
+
+        // int x;
+        // x = &param_1->array[i];
+
+        // char x = *param_1->array[i]; doesn't appear to work
+        
+        // if(param_1->array[j] != NULL){ // if there is a string at this index position
+            // int ptr_array = *param_1->array[j];
+
+        //     putchar(param_1->array[j][i]);
+        // } else {
+        //     putchar('\n');
+        //     putchar(122);
+        //     j = 0;
+        // }
+
+        // if(param_1->array[j][i] != NULL){
+
+        // }
+        // j++;
+        // i++;
+        // if(i == param_1->size){
+        //     putchar('\n');
+        // }
