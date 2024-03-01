@@ -51,6 +51,11 @@ void my_print_words_array(string_array* param_1){
 
         // ----------------------
         i++;
+
+        
+        if(i == param_1->size){
+            putchar('\n');
+        }
     }
 }
 
