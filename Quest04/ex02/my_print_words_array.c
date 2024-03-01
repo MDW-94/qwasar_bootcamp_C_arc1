@@ -24,7 +24,7 @@ void my_print_words_array(string_array* param_1){
         if(param_1->array[j] != 00){
             if(param_1->array[j][i] == 00) {
                 putchar('\n');
-                if(param_1->array[j + 1] != 00){
+                if(param_1->array[j + 1] != 00 && param_1->array[j + 1][0] != '\0'){
                     putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
                 }
                 i = 0;
@@ -47,6 +47,25 @@ int test(){
 
    my_print_words_array(&input_1a);
    free(input_1a.array);
+
+       string_array input_2a;
+    input_2a.size = 3;
+    input_2a.array = (char**)malloc(input_2a.size * sizeof(char*));
+    input_2a.array[0] = "123";
+
+   my_print_words_array(&input_2a);
+   free(input_2a.array);
+
+     string_array input_3a;
+    input_3a.size = 7;
+    input_3a.array = (char**)malloc(input_3a.size * sizeof(char*));
+    input_3a.array[0] = "";
+    input_3a.array[1] = "";
+    input_3a.array[2] = "hello";
+
+   my_print_words_array(&input_3a);
+   free(input_3a.array);
+
 
     return 0;
 }
