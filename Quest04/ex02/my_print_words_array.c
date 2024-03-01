@@ -20,7 +20,7 @@ typedef struct s_string_Array {
 void my_print_words_array(string_array* param_1){
 
     int i = 0, j = 0;
-    while(i != param_1->size){
+    while(i != param_1->size){ // bound to array size
 
 
         if(param_1->array[j] != 00){ //&& param_1->array[j][i] != 00 ??
@@ -30,14 +30,18 @@ void my_print_words_array(string_array* param_1){
 
                 // ---------------
                 putchar('\n');
-                if(param_1->array[j + 1] != 00 && param_1->array[j + 1][0] != '\0'){
-                    putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
-                }
+                // if(param_1->array[j + 1] != 00 && param_1->array[j + 1][0] != '\0'){
+                //     putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
+                // }
                 // ---------------
 
 
                 i = 0;
                 j++;
+                if(param_1->array[j] != 00 && param_1->array[j][i] != 00){
+                     putchar(param_1->array[j][i]);
+                }
+               
             } else {
                 putchar(param_1->array[j][i]);
             }
