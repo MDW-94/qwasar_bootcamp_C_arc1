@@ -46,13 +46,13 @@ void my_print_words_array(string_array* param_1){
     
         // ----------------------
         i++;
-        z++;
-        if(z == param_1->size){
-            putchar('\n');
-        }
-        //  if(i == param_1->size){ // use this in place of the above when only using i and j
+        // z++;
+        // if(z == param_1->size){
         //     putchar('\n');
         // }
+         if(i == param_1->size){ // use this in place of the above when only using i and j
+            putchar('\n');
+        }
     }
 }
 
