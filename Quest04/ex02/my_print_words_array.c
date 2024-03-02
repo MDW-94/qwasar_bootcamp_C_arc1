@@ -19,8 +19,8 @@ typedef struct s_string_Array {
 
 void my_print_words_array(string_array* param_1){
 
-    int i = 0, j = 0;
-    while(i != param_1->size){ // bound to array size
+    int i = 0, j = 0, z = 0;
+    while(z != param_1->size){ // bound to array size
 
 
         if(param_1->array[j] != 00){ //&& param_1->array[j][i] != 00 ??
@@ -30,12 +30,6 @@ void my_print_words_array(string_array* param_1){
 
                 // ---------------
                 putchar('\n');
-                // if(param_1->array[j + 1] != 00 && param_1->array[j + 1][0] != '\0'){
-                //     putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
-                // }
-                // ---------------
-
-
                 i = 0;
                 j++;
                 if(param_1->array[j] != 00 && param_1->array[j][i] != 00){
@@ -48,12 +42,11 @@ void my_print_words_array(string_array* param_1){
             // ------------------
 
         }
-
+    
         // ----------------------
         i++;
-
-        
-        if(i == param_1->size){
+        z++;
+        if(z == param_1->size){
             putchar('\n');
         }
     }
@@ -144,4 +137,15 @@ int main(){
         // i++;
         // if(i == param_1->size){
         //     putchar('\n');
+        // }
+
+     // if(param_1->array[j + 1] != 00 && param_1->array[j + 1][0] != '\0'){
+     //     putchar(param_1->array[j + 1][0]); // fetch first char of next array && seg fault needs to stop at the end
+     // }
+     // ---------------
+
+        //  } else {  // THIS CODE WAS USED TO TEST HOW MANY TIMES THE ALGORITHM RAN WHEN I AND J WERE THE ONLY INCREMENTORS
+        //     putchar('A');
+        //     putchar('\n');
+        
         // }
