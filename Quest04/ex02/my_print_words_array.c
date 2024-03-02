@@ -19,8 +19,9 @@ typedef struct s_string_Array {
 
 void my_print_words_array(string_array* param_1){
 
-    int i = 0, j = 0, z = 0;
-    while(z != param_1->size){ // bound to array size
+    int i = 0, j = 0;
+    int z = 0; // This prevents unnecessary iterations of the algorithm - 
+    while(i != param_1->size){ // bound to array size
 
 
         if(param_1->array[j] != 00){ //&& param_1->array[j][i] != 00 ??
@@ -49,6 +50,9 @@ void my_print_words_array(string_array* param_1){
         if(z == param_1->size){
             putchar('\n');
         }
+        //  if(i == param_1->size){ // use this in place of the above when only using i and j
+        //     putchar('\n');
+        // }
     }
 }
 
@@ -72,7 +76,7 @@ int test(){
    free(input_2a.array);
 
      string_array input_3a;
-    input_3a.size = 7;
+    input_3a.size = 6;
     input_3a.array = (char**)malloc(input_3a.size * sizeof(char*));
     input_3a.array[0] = "";
     input_3a.array[1] = "";
