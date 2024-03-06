@@ -56,6 +56,25 @@ void my_print_words_array(string_array* param_1){
     }
 }
 
+// #ifndef STRUCT_STRING_ARRAY // THIS IS THE ANSWER THAT PASSED GANDALF BUT WHEN TESTED WITH MY CODE LOCALLY THERE IS A SEGMENTATION ERROR
+// #define STRUCT_STRING_ARRAY
+// typedef struct s_string_Array {
+//     int size; // member (int variable)
+//     char** array; // member (char** variable)
+// } string_array;
+// #endif
+
+// void my_print_words_array(string_array* param_1){
+//     for(int i = 0; i < param_1->size;i++){
+//         char *str = param_1->array[i];
+//         while(*str != 00){
+//             putchar(*str);
+//             str++;
+//         }
+//         putchar('\n');
+//     }
+// }
+
 int test(){
     string_array input_1a;
     input_1a.size = 8;
