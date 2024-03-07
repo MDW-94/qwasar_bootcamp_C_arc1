@@ -22,15 +22,17 @@ typedef struct s_integer_array {
 integer_array* my_count_on_it(string_array* param_1){
     // you have to use malloc to create the allocated space in the memory in order to assign the arrays
 
-    integer_array* result; //allocate memory for integer struct
+    integer_array* result = (integer_array*)malloc(sizeof(integer_array)); //allocate memory for integer struct
     result->size = param_1->size;
+    result->array = (int*)malloc(result->size*sizeof(int));
 
     for(int i = 0; i < param_1->size;i++){
         char *str = param_1->array[i]; //allocate memory for the array in string array
         int j = 0;
-        while(*str != 00){
+        while(*str != '\0'){
             // iterates through each character in the string at index i
             j++;
+            str++;
         }
         result->array[i] = j;
     }
@@ -46,8 +48,18 @@ int main() {
     input_1-> array[2] = "the";
     input_1-> array[3] = "way";
 
-    my_count_on_it(input_1);
+    integer_array* result = my_count_on_it(input_1);
+
+    // free the memory allocated for the string array and the string_array struct
+    for(int i = 0; i < input_1->size;i++){
+        free(input_1->array[i]);
+    }
     free(input_1->array); // malloc and free require <stdblib.h>
+    free(input_1);
+
+    // free the allocated memory for the integer array and the integer_array struct
+    free(result->array);
+    free(result);
 
     return 0;
 }
