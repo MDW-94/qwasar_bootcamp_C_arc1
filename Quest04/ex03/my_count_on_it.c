@@ -53,7 +53,7 @@ integer_array* my_count_on_it(string_array* param_1){
     result->array = (int*)malloc(result->size*sizeof(int));
 
     for(int i = 0; i < param_1->size;i++){
-        char* str = strdup(param_1->array[i]); //allocate memory for the array in string array
+        char* str = my_strdup(param_1->array[i]); //allocate memory for the array in string array
 
 
         int j = 0;
