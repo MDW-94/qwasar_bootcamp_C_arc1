@@ -73,10 +73,10 @@ int main() {
     input_1->array = (char**)malloc(input_1->size * sizeof(char*));
 
     // You cannot use string literals here, you must use strdup
-    input_1->array[0] = strdup("This");
-    input_1->array[1] = strdup("is");
-    input_1->array[2] = strdup("the");
-    input_1->array[3] = strdup("way");
+    input_1->array[0] = my_strdup("This");
+    input_1->array[1] = my_strdup("is");
+    input_1->array[2] = my_strdup("the");
+    input_1->array[3] = my_strdup("way");
 
     integer_array* result = my_count_on_it(input_1);
 
