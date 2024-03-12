@@ -25,15 +25,15 @@ void my_strcat(char* dest, const char* src){
 
     while(*dest != '\0'){
         dest++;
-    }
+    } // get to the end of the character array
 
     while(*src != '\0'){
-        *dest = *src;
-        dest++;
-        src++;
-    }
+        *dest = *src; //now at the end of the charcater array, set it to the first character of the src array
+        dest++; // move on by 1 from that position
+        src++; // move to the next character in the src array
+    } 
 
-    *dest = '\0';
+    *dest = '\0'; // at the end, declare a null terminator
 }
 
 char* my_join(string_array* array, char* sep_char){
