@@ -54,14 +54,31 @@ void my_strcat(char* dest, const char* src){
 char* my_join(string_array* array, char* sep_char){
     int req_size = 0;
 
-    for(int i = 0; i < array->size;i++){
+    for(int i = 0; i < array->size;i++){ // DETERMINE THE MAOUNT OF SPACE FOR EACH CHARACTER IN THE CHILD ARRAYS + SEPARATOR CHARACTER
+        int child_array_size = 0, req_sep_char_size = 0;
         // increment req_size by amount of characters in each array + sep_char
+        child_array_size = my_strlen(array->array[i]);
+
+        if(i != array->size){ // if it is not the last string
+            req_sep_char_size = my_strlen(sep_char);
+        }
+
+        req_size += (child_array_size + req_sep_char_size); // increment the req_size by the sum of both these values
     }
+
+    // ITERATE, DETERMINE LENGTH OF STRING, DETERMINE LENGTH OF SPACER, INCREMENT COUNTER
 
     // Once amount of size required for resultant string is calculated:
     char* str = (char*)malloc(req_size*sizeof(char));
 
     // Create the resultant string with concatenation;
+
+    for(int i = 0; i < array->size;i++){
+        my_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
+        if(i != array->size){ // if this is not the last word:
+              my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
+        };
+    };
 
     return str;
 }
@@ -103,7 +120,7 @@ int main(){
 
     //  ------- call my_join function and print the result
 
-    char* result = my_join(test_1, " ");
+    char* result = my_join(test_1, "blah");
 
     printf("RESULT: %s\n", result);
 
