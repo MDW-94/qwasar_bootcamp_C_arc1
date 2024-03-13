@@ -17,9 +17,49 @@ typedef struct s_string_Array {
 } string_array;
 #endif
 
+int my_strlen(char* str){
+    int result = 0;
+
+    while(*str != 00){
+        result++;
+        str++;
+    }
+
+    return result;
+}
+
+char* my_strcpy(char* dest, const char* src){
+    char* temp = dest; // store the start of the dest str - the pointer to the first mem address
+
+    while((*dest++ = *src++) != 00)
+
+    return temp; // after copying data to dest, we still now have the ref for first mem adddress - we return this, it is unchanged - but the string now has new data
+}
+
+void my_strcat(char* dest, const char* src){
+
+    while(*dest != 00){
+        dest++;
+    } // set pointer to end of destinatino string, ready for concatenation
+
+    while(*src != 00){
+        *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = '\0';
+}
+
+char* my_join(string_array* array, char* sep_char){
+
+}
+
 int main(){
 
-    char* string[] = {
+    // ------- SETUP DATA for STRUCT
+
+    char* test_strings[] = {
         "Hello",
         "World",
         "!"
@@ -27,7 +67,42 @@ int main(){
 
     int size_1 = 3;
 
-    char** result = (char**)malloc(size_1*sizeof(char**));
+    // ------- declare and initialize new  struct for test, inc malloc
+
+    string_array* test_1 = (string_array*)malloc(sizeof(string_array));
+
+    test_1->size = size_1;
+
+    test_1->array = (char**)malloc(size_1*sizeof(char*)); // allocate memory for 3 string pointers - parent array
+
+    // allocate memory for each child array, then copy it into the parent array
+
+    for(int i = 0; i , size_1;i++){
+        test_1->array[i] = (char*)malloc((my_strlen(test_strings[i]) + 1) * sizeof(char));
+        // + 1 is including space for null terminator
+        my_strcpy(test_1->array[i], test_strings[i]);
+    };
+
+    // ------ print result
+
+    for(int i = 0 ; i < test_1->size;i++){
+        printf("String %d: %s\n", i + 1, test_1->array[i]);
+    } // printing the incrementator +1 && the string at test_1->array[i] - checking to see if a string has been copied into this allocated memory space
+
+
+    //  ------- call my_join function and print the result
+
+    char* result = my_join(test_1-> " ");
+
+
+    // -------- free the memory
+
+    for(int i = 0; i < test_1->size;i++){
+        free(test_1->array[i]); // free the individual strings after allocation - child arrays
+    }
+    free(test_1->array); // free the space allocatet for the parent arrays
+
+    
 
     return 0;
 }
