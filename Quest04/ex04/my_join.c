@@ -31,7 +31,7 @@ int my_strlen(char* str){
 char* my_strcpy(char* dest, const char* src){
     char* temp = dest; // store the start of the dest str - the pointer to the first mem address
 
-    while((*dest++ = *src++) != 00)
+    while((*dest++ = *src++) != 00);
 
     return temp; // after copying data to dest, we still now have the ref for first mem adddress - we return this, it is unchanged - but the string now has new data
 }
@@ -52,7 +52,18 @@ void my_strcat(char* dest, const char* src){
 }
 
 char* my_join(string_array* array, char* sep_char){
+    int req_size = 0;
 
+    for(int i = 0; i < array->size;i++){
+        // increment req_size by amount of characters in each array + sep_char
+    }
+
+    // Once amount of size required for resultant string is calculated:
+    char* str = (char*)malloc(req_size*sizeof(char));
+
+    // Create the resultant string with concatenation;
+
+    return str;
 }
 
 int main(){
@@ -77,7 +88,7 @@ int main(){
 
     // allocate memory for each child array, then copy it into the parent array
 
-    for(int i = 0; i , size_1;i++){
+    for(int i = 0; i < size_1;i++){
         test_1->array[i] = (char*)malloc((my_strlen(test_strings[i]) + 1) * sizeof(char));
         // + 1 is including space for null terminator
         my_strcpy(test_1->array[i], test_strings[i]);
@@ -87,12 +98,14 @@ int main(){
 
     for(int i = 0 ; i < test_1->size;i++){
         printf("String %d: %s\n", i + 1, test_1->array[i]);
-    } // printing the incrementator +1 && the string at test_1->array[i] - checking to see if a string has been copied into this allocated memory space
+    } // printing the incrementator +1 && the string at test_1->array[i] - checking to see if a string has been copied into this allocated memory space - SO FAR THIS ONLY PRINTS THE FIRST CHARACTER OF EACH STTRING 
 
 
     //  ------- call my_join function and print the result
 
-    char* result = my_join(test_1-> " ");
+    char* result = my_join(test_1, " ");
+
+    printf("RESULT: %s\n", result);
 
 
     // -------- free the memory
@@ -101,6 +114,7 @@ int main(){
         free(test_1->array[i]); // free the individual strings after allocation - child arrays
     }
     free(test_1->array); // free the space allocatet for the parent arrays
+    free(test_1);
 
     
 
