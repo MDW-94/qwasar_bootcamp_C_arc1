@@ -63,6 +63,21 @@ void my_strcat(char* dest, const char* src){
     *dest = '\0'; //PROBLEM?
 }
 
+void my_mod_strcat(char* dest, const char* src){
+
+    while(*dest != 00){
+        dest++;
+    } // set pointer to end of destinatino string, ready for concatenation
+
+    while(*src != 00){
+        // *dest = *src;
+        dest++;
+        src++;
+    }
+
+    *dest = '\0'; //PROBLEM?
+}
+
 char* my_join(string_array* array, char* sep_char){
     int req_size = 0;
 
@@ -95,16 +110,13 @@ char* my_join(string_array* array, char* sep_char){
 
         // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
 
-        if(i != array->size){ // if this is not the last word:
+        if(i != array->size - 1){ // if this is not the last word: array->size needs to be minused by 1
               my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
         } else {
-            while(*str != 00){
-                str++;
-            }
-            *str = '\0';
+            my_mod_strcat(str, sep_char);
         };
 
-    // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS
+    // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS - SOLVED
     };
 
 
