@@ -36,6 +36,18 @@ char* my_strcpy(char* dest, const char* src){
     return temp; // after copying data to dest, we still now have the ref for first mem adddress - we return this, it is unchanged - but the string now has new data
 }
 
+char* my_mod_strcpy(char* dest, const char* src){
+    char* temp = dest; // store the start of the dest str - the pointer to the first mem address
+
+    while(*dest != 00){
+        dest++;
+    }
+
+    while((*dest++ = *src++) != 00);
+
+    return temp; // after copying data to dest, we still now have the ref for first mem adddress - we return this, it is unchanged - but the string now has new data
+}
+
 void my_strcat(char* dest, const char* src){
 
     while(*dest != 00){
@@ -48,7 +60,7 @@ void my_strcat(char* dest, const char* src){
         src++;
     }
 
-    *dest = '\0';
+    *dest = '\0'; //PROBLEM?
 }
 
 char* my_join(string_array* array, char* sep_char){
@@ -71,17 +83,38 @@ char* my_join(string_array* array, char* sep_char){
     // Once amount of size required for resultant string is calculated:
     char* str = (char*)malloc(req_size*sizeof(char));
 
+
+
+
     // Create the resultant string with concatenation;
 
+    // resultant str is EMPTY HERE
+
     for(int i = 0; i < array->size;i++){
-        my_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
+        my_mod_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
+
+        // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
+
         if(i != array->size){ // if this is not the last word:
               my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
+        } else {
+            while(*str != 00){
+                str++;
+            }
+            *str = '\0';
         };
+
+    // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS
     };
+
+
 
     return str;
 }
+
+
+
+
 
 int main(){
 
