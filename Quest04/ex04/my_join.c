@@ -79,50 +79,79 @@ void my_mod_strcat(char* dest, const char* src){
 }
 
 char* my_join(string_array* array, char* sep_char){
-    int req_size = 0;
+    if(array == NULL || array->size == 0)
+        return NULL;
 
-    for(int i = 0; i < array->size;i++){ // DETERMINE THE MAOUNT OF SPACE FOR EACH CHARACTER IN THE CHILD ARRAYS + SEPARATOR CHARACTER
-        int child_array_size = 0, req_sep_char_size = 0;
-        // increment req_size by amount of characters in each array + sep_char
-        child_array_size = my_strlen(array->array[i]);
-
-        if(i != array->size){ // if it is not the last string
-            req_sep_char_size = my_strlen(sep_char);
+    int req_size = 1; // Initialize with 1 for the null terminator
+    for(int i = 0; i < array->size; i++){
+        req_size += my_strlen(array->array[i]);
+        if(i != array->size - 1) {
+            req_size += my_strlen(sep_char);
         }
-
-        req_size += (child_array_size + req_sep_char_size); // increment the req_size by the sum of both these values
     }
 
-    // ITERATE, DETERMINE LENGTH OF STRING, DETERMINE LENGTH OF SPACER, INCREMENT COUNTER
+    char* str = (char*)malloc(req_size * sizeof(char));
+    if(str == NULL)
+        return NULL;
 
-    // Once amount of size required for resultant string is calculated:
-    char* str = (char*)malloc(req_size*sizeof(char));
-
-
-
-
-    // Create the resultant string with concatenation;
-
-    // resultant str is EMPTY HERE
-
-    for(int i = 0; i < array->size;i++){
-        my_mod_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
-
-        // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
-
-        if(i != array->size - 1){ // if this is not the last word: array->size needs to be minused by 1
-              my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
-        } else {
-            my_mod_strcat(str, sep_char);
-        };
-
-    // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS - SOLVED
-    };
-
-
+    int position = 0;
+    for(int i = 0; i < array->size; i++){
+        my_mod_strcpy(str + position, array->array[i]);
+        position += my_strlen(array->array[i]);
+        if(i != array->size - 1) {
+            my_mod_strcpy(str + position, sep_char);
+            position += my_strlen(sep_char);
+        }
+    }
 
     return str;
 }
+
+// char* my_join(string_array* array, char* sep_char){
+//     int req_size = 0;
+
+//     for(int i = 0; i < array->size;i++){ // DETERMINE THE MAOUNT OF SPACE FOR EACH CHARACTER IN THE CHILD ARRAYS + SEPARATOR CHARACTER
+//         int child_array_size = 0, req_sep_char_size = 0;
+//         // increment req_size by amount of characters in each array + sep_char
+//         child_array_size = my_strlen(array->array[i]);
+
+//         if(i != array->size){ // if it is not the last string
+//             req_sep_char_size = my_strlen(sep_char);
+//         }
+
+//         req_size += (child_array_size + req_sep_char_size); // increment the req_size by the sum of both these values
+//     }
+
+//     // ITERATE, DETERMINE LENGTH OF STRING, DETERMINE LENGTH OF SPACER, INCREMENT COUNTER
+
+//     // Once amount of size required for resultant string is calculated:
+//     char* str = (char*)malloc(req_size*sizeof(char));
+
+
+
+
+//     // Create the resultant string with concatenation;
+
+//     // resultant str is EMPTY HERE
+
+//     for(int i = 0; i < array->size;i++){
+//         my_mod_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
+
+//         // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
+
+//         if(i != array->size - 1){ // if this is not the last word: array->size needs to be minused by 1
+//               my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
+//         } else {
+//             my_mod_strcat(str, sep_char);
+//         };
+
+//     // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS - SOLVED
+//     };
+
+
+
+//     return str;
+// }
 
 
 
@@ -139,6 +168,11 @@ int main(){
     };
 
     int size_1 = 3;
+
+    // char* test_strings[] = {
+    // };
+
+    // int size_1 = 0;
 
     // ------- declare and initialize new  struct for test, inc malloc
 
@@ -164,6 +198,8 @@ int main(){
 
 
     //  ------- call my_join function and print the result
+
+    // char* result = my_join(test_1, "blah");
 
     char* result = my_join(test_1, "blah");
 
