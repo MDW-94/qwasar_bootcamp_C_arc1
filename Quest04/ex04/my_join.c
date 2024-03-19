@@ -107,56 +107,6 @@ char* my_join(string_array* array, char* sep_char){
     return str;
 }
 
-// char* my_join(string_array* array, char* sep_char){
-//     int req_size = 0;
-
-//     for(int i = 0; i < array->size;i++){ // DETERMINE THE MAOUNT OF SPACE FOR EACH CHARACTER IN THE CHILD ARRAYS + SEPARATOR CHARACTER
-//         int child_array_size = 0, req_sep_char_size = 0;
-//         // increment req_size by amount of characters in each array + sep_char
-//         child_array_size = my_strlen(array->array[i]);
-
-//         if(i != array->size){ // if it is not the last string
-//             req_sep_char_size = my_strlen(sep_char);
-//         }
-
-//         req_size += (child_array_size + req_sep_char_size); // increment the req_size by the sum of both these values
-//     }
-
-//     // ITERATE, DETERMINE LENGTH OF STRING, DETERMINE LENGTH OF SPACER, INCREMENT COUNTER
-
-//     // Once amount of size required for resultant string is calculated:
-//     char* str = (char*)malloc(req_size*sizeof(char));
-
-
-
-
-//     // Create the resultant string with concatenation;
-
-//     // resultant str is EMPTY HERE
-
-//     for(int i = 0; i < array->size;i++){
-//         my_mod_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
-
-//         // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
-
-//         if(i != array->size - 1){ // if this is not the last word: array->size needs to be minused by 1
-//               my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
-//         } else {
-//             my_mod_strcat(str, sep_char);
-//         };
-
-//     // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS - SOLVED
-//     };
-
-
-
-//     return str;
-// }
-
-
-
-
-
 int main(){
 
     // ------- SETUP DATA for STRUCT
@@ -219,6 +169,54 @@ int main(){
     return 0;
 }
 
+
+//  old my_join
+
+// char* my_join(string_array* array, char* sep_char){
+//     int req_size = 0;
+
+//     for(int i = 0; i < array->size;i++){ // DETERMINE THE MAOUNT OF SPACE FOR EACH CHARACTER IN THE CHILD ARRAYS + SEPARATOR CHARACTER
+//         int child_array_size = 0, req_sep_char_size = 0;
+//         // increment req_size by amount of characters in each array + sep_char
+//         child_array_size = my_strlen(array->array[i]);
+
+//         if(i != array->size){ // if it is not the last string
+//             req_sep_char_size = my_strlen(sep_char);
+//         }
+
+//         req_size += (child_array_size + req_sep_char_size); // increment the req_size by the sum of both these values
+//     }
+
+//     // ITERATE, DETERMINE LENGTH OF STRING, DETERMINE LENGTH OF SPACER, INCREMENT COUNTER
+
+//     // Once amount of size required for resultant string is calculated:
+//     char* str = (char*)malloc(req_size*sizeof(char));
+
+
+
+
+//     // Create the resultant string with concatenation;
+
+//     // resultant str is EMPTY HERE
+
+//     for(int i = 0; i < array->size;i++){
+//         my_mod_strcpy(str, array->array[i]); // COPY CONTENTS OF CHILD ARRAY INTO RESULT ARRAY
+
+//         // resultant str has COPIED CONTENT FROM CHILD ARRAY HERE
+
+//         if(i != array->size - 1){ // if this is not the last word: array->size needs to be minused by 1
+//               my_strcat(str, sep_char); // CONCATENATE THE SPACER ARRAY TO THE END OF THE ARRAY
+//         } else {
+//             my_mod_strcat(str, sep_char);
+//         };
+
+//     // SOMEHOW THE STR IS BEING WIPED AND THEN THE FOR LOOP ASSIGNS THE VALUES AGAIN - CHECK HELPER FUNCTIONS - SOLVED
+//     };
+
+
+
+//     return str;
+// }
 
 
 
