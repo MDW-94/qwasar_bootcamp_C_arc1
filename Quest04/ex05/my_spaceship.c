@@ -31,40 +31,114 @@ typedef struct s_direction_array {
 } ship_position;
 #endif
 
+int my_strlen(char* str){
+    int result = 0;
+
+    while(*str != 00){
+        result++;
+        str++;
+    }
+
+    return result;
+}
 
 
-char* my_spaceship(char* param_1){
+char* my_spaceship(char* str_og){
+    if(str_og == 00);
+        return NULL; // or output format default?
 
-    char lit_orient[4][5] = {'up', 'right', 'down', 'left'}; //variable[no. of string][length of string]
+    char lit_orientation[4][5] = {'up', 'right', 'down', 'left'}; //variable[no. of string][length of string]
 
     ship_position* position = (ship_position*)malloc(sizeof(ship_position));
+
+    // X, Y Values:
+    position->x_value = 0; // these become our counters?
+    position->y_value = 0;
+
+    // Orientation:
     int struct_size = 4; // four arrays of directions
     position->orientation = (char**)malloc(struct_size*sizeof(char*)); // mem allocation for 4 orientation arrays
 
-    position->x_value = 0;
-    position->y_value = 0;
-
     // Automated: (for loop, strlen, strcpy)
     for(int i = 0; i < 4; i++){ // <= 3?
-        int orient_size = my_strlen(lit_orient[i]);
-        position->orientation[i] = (char*)malloc(orient_size*sizeof(char));
-        
+        // Pt. 1
+        int orient_size = my_strlen(lit_orientation[i]);
+        position->orientation[i] = (char*)malloc(orient_size + 1*sizeof(char)); // mem allocated, '+1' for null terminator?
+
+        // Pt. 2
+        position->orientation[i] = lit_orientation[i]; 
+        // assign string literal to array position - potential problem? If so use strcpy to iterate through string literal?
     }
     
-    
     // Hardcoded:
-    position->orientation[0] = (char*)malloc(2*sizeof(char)); // 'up' extra for null?
-    position->orientation[1] = (char*)malloc(5*sizeof(char)); // 'right'
-    position->orientation[2] = (char*)malloc(4*sizeof(char)); // 'down'
-    position->orientation[3] = (char*)malloc(4*sizeof(char)); // 'left'
+    // position->orientation[0] = (char*)malloc(2*sizeof(char)); // 'up' extra for null?
+    // position->orientation[1] = (char*)malloc(5*sizeof(char)); // 'right'
+    // position->orientation[2] = (char*)malloc(4*sizeof(char)); // 'down'
+    // position->orientation[3] = (char*)malloc(4*sizeof(char)); // 'left'
 
-    position->orientation[0] = 'up';
-    position->orientation[1] = 'right';
-    position->orientation[2] = 'down';
-    position->orientation[3] = 'left';
+    // position->orientation[0] = 'up';
+    // position->orientation[1] = 'right';
+    // position->orientation[2] = 'down';
+    // position->orientation[3] = 'left';
 
     // INPUT: "RRAALLAA" string of direcitons
 
+
+
+
+
+
+    // DETERMINE X, Y & ORIENTATION
+
+    int orientation_counter = 0; // counter for orientation
+    int str_og_size = my_strlen(str_og); // size of input string
+    for(int i = 0; i < str_og_size;i++){ // iterate for amount of char in input string
+        // remember to dereference the pointer!
+        char* char_address = str_og + i; //pointer is incremented according to value of iteration
+        char char_at_i = *char_address;
+
+        if(char_at_i != 'R' || char_at_i != 'L' || char_at_i != 'A'){
+            return NULL;
+        } //handle incorrect input
+
+        // HANDLE R
+
+        if(char_at_i == 'R'){
+            orientation_counter++;
+            if(orientation_counter > 3){
+                orientation_counter = 0;
+            }
+        } // if character is R, increment orientation counter - if ceiling reached, reset to 0
+
+
+        // HANDLE L
+        if(char_at_i == 'L'){
+            orientation_counter--;
+            if(orientation_counter < 0){
+                orientation_counter = 3;
+            }
+        } // if character is L, decrement orientation counter - if bottom is reached, set counter to 3
+
+
+        // HANDLE A 
+        if(char_at_i == 'A' && orientation_counter == 0){
+            position->y_value++;
+        }
+
+        if(char_at_i == 'A' && orientation_counter == 1){
+            position->x_value++;
+        }
+
+        if(char_at_i == 'A' && orientation_counter == 2){
+            position->y_value--;
+        }
+
+        if(char_at_i == 'A' && orientation_counter == 3){
+            position->x_value--;
+        }
+    }
+
+    // Now the struct x, y values are updated && we have the index reference for which position the ship is facing
  
 
     int result_size = 0; //sum of all static characters in result string + dynamic characters in result in string
