@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 // Design a simulator for a spaceship.
 // This simulator create a virtual "space" and kee;s track of the basic movements and directions of a given ship
@@ -44,10 +45,12 @@ int my_strlen(char* str){
 
 
 char* my_spaceship(char* str_og){
-    if(str_og == 00);
+    if(str_og == 00){
         return NULL; // or output format default?
+    }
 
-    char lit_orientation[4][5] = {'up', 'right', 'down', 'left'}; //variable[no. of string][length of string]
+
+    char lit_orientation[4][5] = {"up", "right", "down", "left"}; //variable[no. of string][length of string]
 
     ship_position* position = (ship_position*)malloc(sizeof(ship_position));
 
@@ -62,12 +65,20 @@ char* my_spaceship(char* str_og){
     // Automated: (for loop, strlen, strcpy)
     for(int i = 0; i < 4; i++){ // <= 3?
         // Pt. 1
-        int orient_size = my_strlen(lit_orientation[i]);
-        position->orientation[i] = (char*)malloc(orient_size + 1*sizeof(char)); // mem allocated, '+1' for null terminator?
+        // int orient_size = my_strlen(lit_orientation[i]);
+        position->orientation[i] = (char*)malloc((my_strlen(lit_orientation[i])) + 1*sizeof(char)); // mem allocated, '+1' for null terminator?
 
         // Pt. 2
         position->orientation[i] = lit_orientation[i]; 
         // assign string literal to array position - potential problem? If so use strcpy to iterate through string literal?
+    }
+
+    // TESTING PT. 1
+    printf("Initialising // Testing Struct x_value: %i", position->x_value);
+    printf("Initialising // Testing Struct y_value: %i", position->y_value);
+
+    for(int i = 0; i < 4;i++){
+        printf("Initialising // Testing Struct orientation array %i: %s", i, position->orientation[i]);
     }
     
     // Hardcoded:
