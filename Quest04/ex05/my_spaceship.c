@@ -55,7 +55,7 @@ char* my_spaceship(char* str_og){
     ship_position* position = (ship_position*)malloc(sizeof(ship_position));
 
     // X, Y Values:
-    position->x_value = 0; // these become our counters?
+    position->x_value = 0; // these become our counters
     position->y_value = 0;
 
     // Orientation:
@@ -73,15 +73,7 @@ char* my_spaceship(char* str_og){
         // assign string literal to array position - potential problem? If so use strcpy to iterate through string literal?
     }
 
-    // TESTING PT. 1
-    printf("Initialising // Testing Struct x_value: %i", position->x_value);
-    printf("Initialising // Testing Struct y_value: %i", position->y_value);
-
-    for(int i = 0; i < 4;i++){
-        printf("Initialising // Testing Struct orientation array %i: %s", i, position->orientation[i]);
-    }
-    
-    // Hardcoded:
+        // Hardcoded:
     // position->orientation[0] = (char*)malloc(2*sizeof(char)); // 'up' extra for null?
     // position->orientation[1] = (char*)malloc(5*sizeof(char)); // 'right'
     // position->orientation[2] = (char*)malloc(4*sizeof(char)); // 'down'
@@ -96,7 +88,14 @@ char* my_spaceship(char* str_og){
 
 
 
+        // TESTING PT. 1
+    printf("Testing // Initialised Struct x_value: %i", position->x_value);
+    printf("Testing // Initialised Struct y_value: %i", position->y_value);
 
+    for(int i = 0; i < 4;i++){
+        printf("Testing // Initialised Struct orientation array %i: %s", i, position->orientation[i]);
+    }
+    
 
 
     // DETERMINE X, Y & ORIENTATION
@@ -148,6 +147,12 @@ char* my_spaceship(char* str_og){
             position->x_value--;
         }
     }
+
+        // TESTING PT. 2
+    printf("Testing // Updated Struct x_value: %i", position->x_value);
+    printf("Testing // Updated Struct y_value: %i", position->y_value);
+    printf("Testing // Updated Struct orientation value: %s", position->orientation[orientation_counter]);
+
 
     // Now the struct x, y values are updated && we have the index reference for which position the ship is facing
  
