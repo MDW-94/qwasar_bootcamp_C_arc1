@@ -145,7 +145,7 @@ char* my_spaceship(char* str_og){
 
               if(orientation_counter < 0){
                 orientation_counter = 3;
-                printf("| Action: orientation counter was set to 3 due to decrementing below 0 \n| Ship Position %i, %i facing %s\n", 
+                printf("| Action: orientation counter was set to 3 due to decrementing below 0 \n| Ship Position %d, %d facing %s\n", 
                 position->x_value, 
                 position->y_value,
                 position->orientation[orientation_counter]
@@ -252,9 +252,13 @@ int main() {
 
     char* test_1 = (char*)malloc(10*sizeof(char)); // 10 just a random amount, could be more accurate
     // test_1 = "RAALLRA";
-    test_1 = "RRALAA";
+    // test_1 = "RRALAA";
+    test_1 = "RAALALL";
 
     printf("FINAL OUTPUT: %s\n",my_spaceship(test_1));
+    printf("ORIGINAL INPUT: %s\n", test_1);
 
     return 0;
 }
+
+//https://carbon.now.sh/ - CREATE VERSIONS OF CODE TO PRESENT
