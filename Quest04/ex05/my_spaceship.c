@@ -96,6 +96,7 @@ char* my_spaceship(char* str_og){
         printf("Testing // Initialised Struct orientation array %i: %s\n", i, position->orientation[i]);
     }
     
+    printf("\n");
 
 
     // DETERMINE X, Y & ORIENTATION
@@ -103,13 +104,16 @@ char* my_spaceship(char* str_og){
     int orientation_counter = 0; // counter for orientation
     char char_at_i;
     int str_og_size = my_strlen(str_og); // size of input string
-    for(int i = 0; i < str_og_size;i++){ // iterate for amount of char in input string
+    printf("str_og_size variable %i\n", str_og_size);
+    printf("\n");
+    for(int i = 0; i < str_og_size;i++){ 
+        // iterate for amount of char in input string
         // remember to dereference the pointer!
         char* char_address = str_og + i; //pointer is incremented according to value of iteration
         char_at_i = *char_address;
         printf("char_at_i initialised with %c\n", char_at_i);
 
-        if(char_at_i != 'R' || char_at_i != 'L' || char_at_i != 'A'){
+        if(char_at_i != 'R' && char_at_i != 'L' && char_at_i != 'A'){
             return NULL;
         } //handle incorrect input
 
@@ -117,47 +121,53 @@ char* my_spaceship(char* str_og){
 
         if(char_at_i == 'R'){ //ascii 82
             orientation_counter++;
-            printf("orientation counter was incremented due to R | Ship Position %i, %i facing %s\n", 
-            position->x_value, 
-            position->y_value, 
-            position->orientation[orientation_counter]
-            );
 
-            if(orientation_counter > 3){
+             if(orientation_counter > 3){
                 orientation_counter = 0;
-                printf("orientation counter was reset due to reaching ceiling| Ship Position %i, %i facing %s\n", 
+                printf("| Action: orientation counter was reset due to reaching ceiling \n| Ship Position %i, %i facing %s\n", 
                 position->x_value, 
                 position->y_value, 
                 position->orientation[orientation_counter]
                 );
-            }
+            } 
+
+            printf("| Action: orientation counter was incremented due to R \n| Ship Position %i, %i facing %s\n", 
+            position->x_value, 
+            position->y_value, 
+            position->orientation[orientation_counter]
+            );
         } // if character is R, increment orientation counter - if ceiling reached, reset to 0
 
 
         // HANDLE L
         if(char_at_i == 'L'){ // ascii 76
             orientation_counter--;
-            printf("orientation counter was decremented due to L | Ship Position %i, %i facing %s\n", 
-            position->x_value, 
-            position->y_value, 
-            position->orientation[orientation_counter]
-            );
 
-            if(orientation_counter < 0){
+              if(orientation_counter < 0){
                 orientation_counter = 3;
-                printf("orientation counter was set to 3 due to decrementing below 0 | Ship Position %i, %i facing %s\n", 
+                printf("| Action: orientation counter was set to 3 due to decrementing below 0 \n| Ship Position %i, %i facing %s\n", 
                 position->x_value, 
                 position->y_value,
                 position->orientation[orientation_counter]
                 );
             }
+
+        
+            printf("| Action: orientation counter was decremented due to L \n| Ship Position %i, %i facing %s\n", 
+            position->x_value, 
+            position->y_value, 
+            position->orientation[orientation_counter]
+            );
+
+          
         } // if character is L, decrement orientation counter - if bottom is reached, set counter to 3
 
 
         // HANDLE A 
         if(char_at_i == 'A' && orientation_counter == 0){ // ascii 65
             position->y_value++;
-            printf("y incremented - due to A && up | Ship Position %i, %i facing %s\n", 
+
+            printf("| Action: y incremented - due to A && up \n| Ship Position %i, %i facing %s\n", 
             position->x_value, 
             position->y_value, 
             position->orientation[orientation_counter]
@@ -166,7 +176,8 @@ char* my_spaceship(char* str_og){
 
         if(char_at_i == 'A' && orientation_counter == 1){
             position->x_value++;
-            printf("x incremented - due to A && right | Ship Position %i, %i facing %s\n", 
+
+            printf("| Action: x incremented - due to A && right \n| Ship Position %i, %i facing %s\n", 
             position->x_value, 
             position->y_value, 
             position->orientation[orientation_counter]
@@ -176,7 +187,8 @@ char* my_spaceship(char* str_og){
 
         if(char_at_i == 'A' && orientation_counter == 2){
             position->y_value--;
-            printf("y decremented - due to A && down | Ship Position %i, %i facing %s\n", 
+
+            printf("| Action: y decremented - due to A && down \n| Ship Position %i, %i facing %s\n", 
             position->x_value, 
             position->y_value, 
             position->orientation[orientation_counter]
@@ -185,13 +197,15 @@ char* my_spaceship(char* str_og){
 
         if(char_at_i == 'A' && orientation_counter == 3){
             position->x_value--;
-            printf("x decremented due to A and left | Ship Position %i, %i facing %s\n", 
+            
+            printf("| Action: x decremented due to A and left \n| Ship Position %i, %i facing %s\n", 
             position->x_value, 
             position->y_value, 
             position->orientation[orientation_counter]
             );
         }
 
+        printf("\n");
 
     }
 
