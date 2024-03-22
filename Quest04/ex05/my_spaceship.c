@@ -245,7 +245,8 @@ char* my_spaceship(char* str_og){
 int main() {
 
     char* test_1 = (char*)malloc(10*sizeof(char)); // 10 just a random amount, could be more accurate
-    test_1 = "RAALLRA";
+    // test_1 = "RAALLRA";
+    test_1 = "RRALAA";
 
     my_spaceship(test_1);
 
