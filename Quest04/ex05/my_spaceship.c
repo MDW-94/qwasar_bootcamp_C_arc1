@@ -50,7 +50,7 @@ char* my_spaceship(char* str_og){
     }
 
 
-    char lit_orientation[4][5] = {"up", "right", "down", "left"}; //variable[no. of string][length of string]
+    char lit_orientation[4][5 + 1] = {"up", "right", "down", "left"}; //variable[no. of string][length of string] - length of string needs +1
 
     ship_position* position = (ship_position*)malloc(sizeof(ship_position));
 
@@ -63,7 +63,7 @@ char* my_spaceship(char* str_og){
     position->orientation = (char**)malloc(struct_size*sizeof(char*)); // mem allocation for 4 orientation arrays
 
     // Automated: (for loop, strlen, strcpy)
-    for(int i = 0; i < 4; i++){ // <= 3?
+    for(int i = 0; i < struct_size; i++){ // <= 3?
         // Pt. 1
         // int orient_size = my_strlen(lit_orientation[i]);
         position->orientation[i] = (char*)malloc((my_strlen(lit_orientation[i])) + 1*sizeof(char)); // mem allocated, '+1' for null terminator?
@@ -89,11 +89,11 @@ char* my_spaceship(char* str_og){
 
 
         // TESTING PT. 1
-    printf("Testing // Initialised Struct x_value: %i", position->x_value);
-    printf("Testing // Initialised Struct y_value: %i", position->y_value);
+    printf("Testing // Initialised Struct x_value: %i\n", position->x_value);
+    printf("Testing // Initialised Struct y_value: %i\n", position->y_value);
 
     for(int i = 0; i < 4;i++){
-        printf("Testing // Initialised Struct orientation array %i: %s", i, position->orientation[i]);
+        printf("Testing // Initialised Struct orientation array %i: %s\n", i, position->orientation[i]);
     }
     
 
@@ -106,6 +106,7 @@ char* my_spaceship(char* str_og){
         // remember to dereference the pointer!
         char* char_address = str_og + i; //pointer is incremented according to value of iteration
         char char_at_i = *char_address;
+        printf("char_at_i initialised with %c\n", char_at_i);
 
         if(char_at_i != 'R' || char_at_i != 'L' || char_at_i != 'A'){
             return NULL;
@@ -115,8 +116,10 @@ char* my_spaceship(char* str_og){
 
         if(char_at_i == 'R'){
             orientation_counter++;
+            printf("orientation counter was incremented due to R\n");
             if(orientation_counter > 3){
                 orientation_counter = 0;
+                printf("orientation counter was reset due to reaching ceiling\n");
             }
         } // if character is R, increment orientation counter - if ceiling reached, reset to 0
 
@@ -124,8 +127,10 @@ char* my_spaceship(char* str_og){
         // HANDLE L
         if(char_at_i == 'L'){
             orientation_counter--;
+            printf("orientation counter was decremented due to L\n");
             if(orientation_counter < 0){
                 orientation_counter = 3;
+                printf("orientation counter was set to 3 due to decrementing below 0\n");
             }
         } // if character is L, decrement orientation counter - if bottom is reached, set counter to 3
 
@@ -133,25 +138,30 @@ char* my_spaceship(char* str_og){
         // HANDLE A 
         if(char_at_i == 'A' && orientation_counter == 0){
             position->y_value++;
+            printf("y incremented - due to A && up\n");
         }
 
         if(char_at_i == 'A' && orientation_counter == 1){
             position->x_value++;
+            printf("x incremented - due to A && right\n");
+
         }
 
         if(char_at_i == 'A' && orientation_counter == 2){
             position->y_value--;
+            printf("y decremented - due to A && down\n");
         }
 
         if(char_at_i == 'A' && orientation_counter == 3){
             position->x_value--;
+            printf("x decremented due to A and left\n");
         }
     }
 
         // TESTING PT. 2
-    printf("Testing // Updated Struct x_value: %i", position->x_value);
-    printf("Testing // Updated Struct y_value: %i", position->y_value);
-    printf("Testing // Updated Struct orientation value: %s", position->orientation[orientation_counter]);
+    printf("Testing // Updated Struct x_value: %i\n", position->x_value);
+    printf("Testing // Updated Struct y_value: %i\n", position->y_value);
+    printf("Testing // Updated Struct orientation value: %s\n", position->orientation[orientation_counter]);
 
 
     // Now the struct x, y values are updated && we have the index reference for which position the ship is facing
@@ -182,5 +192,11 @@ char* my_spaceship(char* str_og){
 // }
 
 int main() {
+
+    char* test_1 = (char*)malloc(10*sizeof(char)); // 10 just a random amount, could be more accurate
+    test_1 = "RAALLRA";
+
+    my_spaceship(test_1);
+
     return 0;
 }
