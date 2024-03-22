@@ -216,12 +216,18 @@ char* my_spaceship(char* str_og){
 
 
     // Now the struct x, y values are updated && we have the index reference for which position the ship is facing
+
+    // "{x: X, y: Y, direction: 'DIRECTION'}" - strlen?
  
+    int result_size = my_strlen("{x: X, y: Y, direction: 'right'}"); //sum of all static characters in result string + dynamic characters in result in string
 
-    int result_size = 0; //sum of all static characters in result string + dynamic characters in result in string
+    char* result_str = (char*)malloc(result_size*sizeof(char)); // malloc needed for the end?
 
-    char* result_str = (char*)malloc(result_size*sizeof(char));
-
+    sprintf(result_str, "{x: %i, y: %i, direction: '%s'}", 
+    position->x_value,
+    position->y_value,
+    position->orientation[orientation_counter]
+    );
 
     // OUTPUT: String w array of x,y coords and orientation
 
@@ -248,7 +254,7 @@ int main() {
     // test_1 = "RAALLRA";
     test_1 = "RRALAA";
 
-    my_spaceship(test_1);
+    printf("FINAL OUTPUT: %s\n",my_spaceship(test_1));
 
     return 0;
 }
