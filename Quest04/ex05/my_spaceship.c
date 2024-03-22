@@ -232,7 +232,7 @@ char* my_spaceship(char* str_og){
     // OUTPUT: String w array of x,y coords and orientation
 
     // sprintf to store all data inside a string
-
+    printf("\n");
     return result_str;
 }
 
