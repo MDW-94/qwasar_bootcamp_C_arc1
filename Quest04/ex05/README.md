@@ -1,5 +1,31 @@
+
+<img width="288" alt="Screenshot 2024-03-24 at 12 57 44" src="https://github.com/MDW-94/qwasar_bootcamp_C_arc1/assets/138756503/4ba380c6-7661-43ee-8ccf-0434e51d5fcb">
+
 Coordinate System in C
 
+Design a simulator for a spaceship.
+This simulator create a virtual "space" and kee;s track of the basic movements and directions of a given ship
+
+Your job is to keep track of where the ship is and it's orientation relative to its starting point
+
+The simulator must take in a string of letters that represent a planned flight path for the spaceship
+
+"RRALALAA is interpretted as Turn right, turn right, advance, turn left, advance, advance"
+
+Once given this initial flight path, your program must return the x,y coordinates of a ship's final destination as well as it's orientation relative to the starting point
+
+Orientation is represented as left, right, up or down
+
+Space is infinite, so the x,y coordinates you return could be placed on a seemingly infiinite grid and can be negatieve or positive values
+
+EG upward facing ship at 0,0 - takes "RRALAA" - the finish will be 2, -1 and orientation will be right (facing right)
+
+OUTPUT: "{x: X, y: Y, direction: 'DIRECTION'}" - struct?
+This function returns a STRING
+you can use 'snprintf'
+
+
+## Commentary
 I’ve been continuing to develop my programming skills through Qwasar’s Elite Software Engineer course on a part-time basis. We’ve been learning C - it’s a lot of fun! 
 🛰 - Excited to share one of my favourite functions, which I had previously coded in JS earlier in the course - a coordinate system 
 By developing this function first in Javascript and then in C, I’ve learned a lot about the differences between compiled languages like C and interpreted languages like Python and Javascript. Converting my original function to a new language forced me to focus on memory allocation, pointers & structs ⚙️
