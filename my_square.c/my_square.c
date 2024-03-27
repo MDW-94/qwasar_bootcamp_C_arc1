@@ -31,7 +31,29 @@ char** my_square(int ac, char**av){
     for(int i = 0; i < final_str->size;i++){
         for(int j = 0; j < ac; j++){
             final_str->array_strings[i] = (char*)malloc(ac + 1*sizeof(char));
+            // Populate the arrays with the values here?
+
+            if(i == 0 || i == final_str->size){ // handle first and last array of struct
+                if(j == 0 || j == ac){
+                    final_str->array_strings[i][j] = 'o';
+                    if(j == ac){
+                          final_str->array_strings[i][j] = '\n';
+                    }
+                } else {
+                    final_str->array_strings[i][j] = '-';
+                }
+            } else { // handle the middle arrays
+                if(j == 0 || j == ac){
+                    final_str->array_strings[i][j] = '|';
+                    if(j == ac){
+                          final_str->array_strings[i][j] = '\n';
+                    }
+                } else {
+                    final_str->array_strings[i][j] = ' ';
+                }
+            }
         }
+        printf("%s", final_str->array_strings[i]);
     }
 
 
@@ -39,15 +61,32 @@ char** my_square(int ac, char**av){
     // for loop bound to x axis for child array length - populate arrays w correct cahracters
     // for loop bound to y axis value for amount of child arrays to be printed on new lines - populate parent array
 
+        //   if(i == 0 || i == final_str->size){ // handle first and last array of struct
+        //         if(j == 0 || j == ac){
+        //             final_str->array_strings[j] = 'o';
+        //         } else {
+        //             final_str->array_strings[j] = '-';
+        //         }
+        //     } else { // handle the middle arrays
+        //         if(j == 0 || j == ac){
+        //             final_str->array_strings[j] = '|';
+        //         } else {
+        //             final_str->array_strings[j] = ' ';
+        //         }
+        //     }
+
 
 
     // Pt.3 - Print the Arrays
     // for loop, print the sequence of these arrays from the struct - fin
 
+    return NULL;
+
 }
 
 
 int main(int ac, char **av){ // why is input a pointer to a pointer??
+    my_square(4, 4);
 
     return 0;
 }
