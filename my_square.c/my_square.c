@@ -23,6 +23,17 @@ char** my_square(int ac, char**av){
     // - malloc for each child array, dependent on the x axis argument
     // - malloc for the parent array - dependent on the y axis argument
 
+    square_array* final_str = (square_array*)malloc(sizeof(square_array));
+    final_str->size = **av; // size defining no. strings within struct
+
+    final_str->array_strings = (char**)malloc(final_str->size*sizeof(char*));
+
+    for(int i = 0; i < final_str->size;i++){
+        for(int j = 0; j < ac; j++){
+            final_str->array_strings[i] = (char*)malloc(ac + 1*sizeof(char));
+        }
+    }
+
 
     // Pt. 2 - Create the Arrays
     // for loop bound to x axis for child array length - populate arrays w correct cahracters
@@ -36,7 +47,7 @@ char** my_square(int ac, char**av){
 }
 
 
-int main(int ac, char **av){
+int main(int ac, char **av){ // why is input a pointer to a pointer??
 
     return 0;
 }
