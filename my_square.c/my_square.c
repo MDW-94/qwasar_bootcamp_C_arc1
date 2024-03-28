@@ -96,3 +96,7 @@ int main(int ac, char **av){ // why is input a pointer to a pointer??
 // |   |
 // |   |
 // o---o
+
+// https://en.cppreference.com/w/c/language/main_function#:~:text=The%20names%20argc%20and%20argv,**%20av)%20is%20equally%20valid.
+
+// https://learn.microsoft.com/en-us/cpp/cpp/main-function-command-line-args?view=msvc-170
