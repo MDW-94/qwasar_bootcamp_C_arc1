@@ -1,60 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #ifndef CHAR_SQUARE_ARRAY
-// #define CHAR_SQUARE_ARRAY
-// typedef struct char_square_array {
-//     int size;
-//     char** array_strings;
-// } square_array;
-// #endif
+#ifndef CHAR_SQUARE_ARRAY
+#define CHAR_SQUARE_ARRAY
+typedef struct char_square_array {
+    int size;
+    char** array_strings;
+} square_array;
+#endif
 
 
-// char** my_square(int ac, char**av){
-//     // INPUT: int x axis, char** y axis || an integer + a pointer to a pointer
-//     // - ?? how many array are printed on a newline? 
-//     // - array size is determined by the x axis integer
-//     // - first and last array in the parent array will be identical
-//     // - arrays in between first and last will be identical
-//     // OUTPUT: a printed colelctino of arrays, their size defined by the x parameter
+char** my_square(int ac, char**av){
+    // INPUT: int x axis, char** y axis || an integer + a pointer to a pointer
+    // - ?? how many array are printed on a newline? 
+    // - array size is determined by the x axis integer
+    // - first and last array in the parent array will be identical
+    // - arrays in between first and last will be identical
+    // OUTPUT: a printed colelctino of arrays, their size defined by the x parameter
 
-//     // Pt.1 - declare correct space for the arrays
-//     // - malloc for the structure, including its size - dependent on the two arguments
-//     // - malloc for each child array, dependent on the x axis argument
-//     // - malloc for the parent array - dependent on the y axis argument
+    // Pt.1 - declare correct space for the arrays
+    // - malloc for the structure, including its size - dependent on the two arguments
+    // - malloc for each child array, dependent on the x axis argument
+    // - malloc for the parent array - dependent on the y axis argument
 
-//     square_array* final_str = (square_array*)malloc(sizeof(square_array));
-//     final_str->size = **av; // size defining no. strings within struct
+    square_array* final_str = (square_array*)malloc(sizeof(square_array));
+    final_str->size = **av; // size defining no. strings within struct
 
-//     final_str->array_strings = (char**)malloc(final_str->size*sizeof(char*));
+    final_str->array_strings = (char**)malloc(final_str->size*sizeof(char*));
 
-//     for(int i = 0; i < final_str->size;i++){
-//         for(int j = 0; j < ac; j++){
-//             final_str->array_strings[i] = (char*)malloc(ac + 1*sizeof(char));
-//             // Populate the arrays with the values here?
+    for(int i = 0; i < final_str->size;i++){
+        for(int j = 0; j < ac; j++){
+            final_str->array_strings[i] = (char*)malloc(ac + 1*sizeof(char));
+            // Populate the arrays with the values here?
 
-//             if(i == 0 || i == final_str->size){ // handle first and last array of struct
-//                 if(j == 0 || j == ac){
-//                     final_str->array_strings[i][j] = 'o';
-//                     if(j == ac){
-//                           final_str->array_strings[i][j] = '\n';
-//                     }
-//                 } else {
-//                     final_str->array_strings[i][j] = '-';
-//                 }
-//             } else { // handle the middle arrays
-//                 if(j == 0 || j == ac){
-//                     final_str->array_strings[i][j] = '|';
-//                     if(j == ac){
-//                           final_str->array_strings[i][j] = '\n';
-//                     }
-//                 } else {
-//                     final_str->array_strings[i][j] = ' ';
-//                 }
-//             }
-//         }
-//         printf("%s", final_str->array_strings[i]);
-//     }
+            if(i == 0 || i == final_str->size){ // handle first and last array of struct
+                if(j == 0 || j == ac){
+                    final_str->array_strings[i][j] = 'o';
+                    if(j == ac){
+                          final_str->array_strings[i][j] = '\n';
+                    }
+                } else {
+                    final_str->array_strings[i][j] = '-';
+                }
+            } else { // handle the middle arrays
+                if(j == 0 || j == ac){
+                    final_str->array_strings[i][j] = '|';
+                    if(j == ac){
+                          final_str->array_strings[i][j] = '\n';
+                    }
+                } else {
+                    final_str->array_strings[i][j] = ' ';
+                }
+            }
+        }
+        printf("%s", final_str->array_strings[i]);
+    }
 
 
     // Pt. 2 - Create the Arrays
@@ -80,12 +80,47 @@
     // Pt.3 - Print the Arrays
     // for loop, print the sequence of these arrays from the struct - fin
 
-//     return NULL;
+    return NULL;
 
-// }
+}
 
 
-int main(int ac, char **av){ // why is input a pointer to a pointer??
+int main(int ac, char **av){ 
+
+    printf("Program Name: %s\n", av[0]);
+
+    int x = atoi(av[1]);
+    int y = atoi(av[2]);
+
+    if(ac < 3){
+        int x = 1;
+        int y = atoi(av[1]);
+    }
+
+    for(int i = 0; i < y; i++){
+        for(int j = 0; j < x;j++){
+            if(i == 0 || i == y - 1){
+                if(j == 0 || j == x - 1){
+                        printf("o");
+                    } else {
+                        printf("-");
+                    }
+            } else {
+                if(j == 0 || j == x - 1){
+                    printf("|");
+                } else {
+                    printf(" ");
+                }
+            }
+        }
+     printf("\n");   
+    }
+    return 0;
+}
+
+// The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
+
+// why is input a pointer to a pointer??
     // my_square(4, 4);
 
     // ac = no. args + name
@@ -98,42 +133,6 @@ int main(int ac, char **av){ // why is input a pointer to a pointer??
 
     // If 4, 1
     // four arrays at a length of 1
-
-    printf("Program Name: %s\n", av[0]);
-
-    int x = atoi(av[1]);
-    int y = atoi(av[2]);
-
-    for(int i = 0; i < y; i++){
-
-        for(int j = 0; j < x;j++){
-            if(i == 0 || i == y - 1){
-
-                if(j == 0 || j == x - 1){
-                        printf("o");
-                    } else {
-                        printf("-");
-                    }
-
-            } else {
-
-                if(j == 0 || j == x - 1){
-                    printf("|");
-                } else {
-                    printf(" ");
-                }
-
-            }
-        
-        }
-
-     printf("\n");   
-    }
-
-    // The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
-
-    return 0;
-}
 
 // $>./a.out 4 4
 // o---o
