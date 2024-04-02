@@ -86,7 +86,23 @@ char** my_square(int ac, char**av){
 
 
 int main(int ac, char **av){ // why is input a pointer to a pointer??
-    my_square(4, 4);
+    // my_square(4, 4);
+
+    // ac = no. args + name
+    // av = array of arrays + name of program
+
+    // Argument Input: 4, 4
+    // Result: 4 by 4 square
+
+    // 4 arrays at a length of 4 
+
+    // If 4, 1
+    // four arrays at a length of 1
+
+    int x = atoi(*av[1]);
+    int y = atoi(*av[2]);
+
+    // The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
 
     return 0;
 }
@@ -100,3 +116,6 @@ int main(int ac, char **av){ // why is input a pointer to a pointer??
 // https://en.cppreference.com/w/c/language/main_function#:~:text=The%20names%20argc%20and%20argv,**%20av)%20is%20equally%20valid.
 
 // https://learn.microsoft.com/en-us/cpp/cpp/main-function-command-line-args?view=msvc-170
+
+
+// https://www.tutorialspoint.com/cprogramming/c_command_line_arguments.htm
