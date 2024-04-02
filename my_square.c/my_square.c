@@ -101,34 +101,33 @@ int main(int ac, char **av){ // why is input a pointer to a pointer??
 
     printf("Program Name: %s\n", av[0]);
 
-    int x = atoi(*av[1]);
-    int y = atoi(*av[2]);
+    int x = atoi(av[1]);
+    int y = atoi(av[2]);
 
     for(int i = 0; i < y; i++){
 
-
         for(int j = 0; j < x;j++){
-            if(i == 0 || i == y){
+            if(i == 0 || i == y - 1){
 
-                if(j == 0 || j == x){
-                        print("o");
+                if(j == 0 || j == x - 1){
+                        printf("o");
                     } else {
-                        print("-");
+                        printf("-");
                     }
 
             } else {
 
-                if(j == 0 || j == x){
-                    print("|");
+                if(j == 0 || j == x - 1){
+                    printf("|");
                 } else {
-                    print(" ");
+                    printf(" ");
                 }
 
             }
         
         }
 
-    print('\n');   
+     printf("\n");   
     }
 
     // The C library function int atoi(const char *str) converts the string argument str to an integer (type int).
