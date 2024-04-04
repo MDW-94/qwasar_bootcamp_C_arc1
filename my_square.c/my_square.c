@@ -92,8 +92,9 @@ int main(int ac, char **av){
     int x, y;
 
     if(ac < 3){
-        x = 1;
-        y = atoi(av[1]);
+        // x = 1;
+        // y = atoi(av[1]);
+        return 00;
     } else {
         x = atoi(av[1]);
         y = atoi(av[2]);
