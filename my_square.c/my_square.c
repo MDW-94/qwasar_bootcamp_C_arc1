@@ -89,12 +89,14 @@ int main(int ac, char **av){
 
     printf("Program Name: %s\n", av[0]);
 
-    int x = atoi(av[1]);
-    int y = atoi(av[2]);
+    int x, y;
 
     if(ac < 3){
-        int x = 1;
-        int y = atoi(av[1]);
+        x = 1;
+        y = atoi(av[1]);
+    } else {
+        x = atoi(av[1]);
+        y = atoi(av[2]);
     }
 
     for(int i = 0; i < y; i++){
