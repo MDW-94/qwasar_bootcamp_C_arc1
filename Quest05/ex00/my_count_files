@@ -1,0 +1,70 @@
+find . -type f -o -type d | wc -l
+
+// 'find .' searches starting from the current directory ('.')
+
+// '-type f -o -type d' specifies that it should find either files ('-type f') or directories ('-type d'). The '-o' option is used to represent logical OR, so it ensures that both types are considered
+
+// '| wc -l' Pipes the output of 'find' to 'wc -l', which counts the number of lines
+
+// This command will count all files and directoreies, including hidden ones
+
+
+// BELOW IS OVERCOMPLICATING --------
+
+// ls | wc -l
+
+
+// https://kodekloud.com/blog/file-count-in-directory-linux/#:~:text=To%20count%20all%20files%2C%20both,of%20lines%20in%20the%20output.
+
+// #include <stdio.h>
+// #include <stdlib.h>
+
+// int main(int ac, char** av){
+
+//     return 0;
+// }
+
+// $> ls | wc -l
+// output:  2
+
+// https://www.geeksforgeeks.org/build-your-own-cat-command-in-c-for-linux/
+
+// https://www.gnu.org/software/libc/manual/html_node/Opening-a-Directory.html
+
+// https://www.gnu.org/software/libc/manual/html_node/Simple-Directory-Lister-Mark-II.html
+
+// https://en.wikibooks.org/wiki/C_Programming/POSIX_Reference/dirent.h#:~:text=h%20is%20the%20header%20in,is%20usually%20portable%20between%20platforms.
+
+// Exercise: my_count_files
+
+// Write a command line that counts and displays the number of regular files and directories in the current directory and all its sub-directories. It should include ".", the starting directory.
+
+// Tips
+// You should dig into the command ls (man ls)
+// You should dig into the command wc (man wc)
+
+// $>./my_count_files | cat -e
+// 13$
+// $>
+
+//  cat command is a common command and allows you to create
+// single or multiple files, view content of a file,
+// concatenate files and redirecct output in terminal or files
+
+// 'cat <filename>' outputs all the text in a file to the terminal
+
+//  cat -n File - line numbers alongside output of text lines in terminal
+
+//  cat *.txt will output contents of all text files into the terminal
+
+//  man ls to look at programmer's manual for 'ls'
+
+//  man wc - returns the word count of an inputted file
+
+
+// ls -a outputs ALL files within the directory including hidden ones
+
+//  Finally, pipe (|) lets you chain commands.
+
+// The objective is to be more of an expert with find and discover -type file option, globing (* replace any characters...), and --exec to be able to run another command (for example basename :D.)
+

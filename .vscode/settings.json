@@ -6,6 +6,7 @@
     "bitset": "c",
     "initializer_list": "c",
     "unordered_map": "c",
-    "vector": "c"
+    "vector": "c",
+    "my_count_files": "c"
   }
 }
