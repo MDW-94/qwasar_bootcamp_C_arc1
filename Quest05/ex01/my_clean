@@ -25,3 +25,7 @@ find . -type f \( -name '*~' -o -name '#*#' \)
 `-name '*~'` : Specifies files whose names end with '~'
 '-o' : Logical OR operator
 `-name '#*#'` : Specifies files whose names start and end with '#'
+
+find . -type f \( -name '*~*' -o -name '*#*' \)
+
+Same thing again but files that include both characters
