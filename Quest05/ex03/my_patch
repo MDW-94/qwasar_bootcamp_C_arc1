@@ -19,3 +19,4 @@ When you copy both files, make sure to return to the line. (press enter)
 a patch is a file that contains the differences between the original source code and the modified source code. You can apply a patch to a file or a codebase using the patch command. The patch command reads the patch file and applies the changes specified in it to the target files.
 
 
+patch <origin> > <patchfile>
