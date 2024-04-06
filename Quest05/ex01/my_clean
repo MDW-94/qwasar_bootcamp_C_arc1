@@ -1,0 +1,27 @@
+command line that will search for all files in the current directory as well as in it directories - with a name ending by ~, or a name that starts and ends with #
+
+The command line will print and delete all files found
+Only one command is allowed: no ; or && or other trickeries
+
+dig into the command line 'find' - man finefind 
+
+find . -type f -or -type d
+- Find all files and directories in the current directory
+
+find . -type f -name *~* -or - type d
+- Find all files with "~" in the name and all directories in current directory
+
+
+find . -name *~* -or -name *#* ?? incorrect
+
+
+find . -type f \( -name '*~' -o -name '#*#' \)
+
+
+'find' : the command used to search for files/directories
+'.' : Specifies the starting directory for the search (current directory)
+' -type f' : specifies that we're only interested in files, not directories
+'\( ...\ )' : Groups expressions together
+`-name '*~'` : Specifies files whose names end with '~'
+'-o' : Logical OR operator
+`-name '#*#'` : Specifies files whose names start and end with '#'
