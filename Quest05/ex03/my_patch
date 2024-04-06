@@ -1,0 +1,21 @@
+Description
+Patch transform a file origin to a fixed file applying the transformation or you can called it patch.
+
+Create a file my_patch, so that:
+
+$>diff a my_patch > sw.diff
+Use the patch command to apply the patch on file a from the diff sw.diff.
+
+Tips
+You will need to use the command patch (man patch)
+When you copy both files, make sure to return to the line. (press enter)
+
+
+
+
+------
+
+
+a patch is a file that contains the differences between the original source code and the modified source code. You can apply a patch to a file or a codebase using the patch command. The patch command reads the patch file and applies the changes specified in it to the target files.
+
+
