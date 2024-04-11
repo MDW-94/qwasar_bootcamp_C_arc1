@@ -1,3 +1,9 @@
+<!-- my_patch 1st -->
+$>  diff a my_patch > sw.diff    
+<!-- my_patch 2nd -->
+$>  patch -i sw.diff -o my_patch a
+
+
 Description
 Patch transform a file origin to a fixed file applying the transformation or you can called it patch.
 
@@ -20,3 +26,6 @@ a patch is a file that contains the differences between the original source code
 
 
 patch <origin> > <patchfile>
+
+
+https://www.ibm.com/docs/sk/aix/7.1?topic=p-patch-command
