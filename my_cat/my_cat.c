@@ -12,12 +12,11 @@ int my_cat(char* fileName, FILE** readFile){
             printf("%c", c);
             c = fgetc(*readFile);
         }
+        fclose(*readFile);
     }
 
     printf("---------------------");
     printf("\nThe function has successfully read the file\n");
-
-    
     // Remember to close the file with fclose()
     return 1;
 }
@@ -27,24 +26,41 @@ int my_cat(char* fileName, FILE** readFile){
 int main(int ac, char** av){
 
     FILE* fileToBeRead;
-    char filename[100], c;
 
+    char filename[100], c;
     printf("Enter the filename to open \n");
     scanf("%s", filename);
     printf("---------------------\n");
 
+    // for(int i = 1; i < ac; i++){
+    //         if(my_cat(av[i], &fileToBeRead) != 1){
+    //     printf("\n %s: Error opening file.\n", __FUNCTION__);
+    // } else {
+    //     // post function code
+    //     printf("File read successully\n");
+    //     printf("---------------------\n");
+    // }
+    // }
+
     for(int i = 1; i < ac; i++){
-            if(my_cat(av[i], &fileToBeRead) != 1){
+        if(av[i] == filename){
+
+        if(my_cat(av[i], &fileToBeRead) != 1){
+
+            
         printf("\n %s: Error opening file.\n", __FUNCTION__);
-    } else {
-        // post function code
-        printf("File read successully\n");
-        printf("---------------------\n");
+            } else {
+                // post function code
+                printf("File read successully\n");
+                printf("---------------------\n");
+            }
+
+
+        } else {
+            printf("filename not found\n");
+            break;
+        }
     }
-    }
-
-
-
     return 0;
 }
 
