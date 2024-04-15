@@ -14,6 +14,7 @@ int my_cat(char* fileName, FILE** readFile){
         }
     }
 
+    printf("---------------------");
     printf("\nThe function has successfully read the file\n");
 
     
@@ -30,14 +31,19 @@ int main(int ac, char** av){
 
     printf("Enter the filename to open \n");
     scanf("%s", filename);
-    printf("\n");
+    printf("---------------------\n");
 
-    if(my_cat(av[2], &fileToBeRead) != 1){
+    for(int i = 1; i < ac; i++){
+            if(my_cat(av[i], &fileToBeRead) != 1){
         printf("\n %s: Error opening file.\n", __FUNCTION__);
     } else {
         // post function code
         printf("File read successully\n");
+        printf("---------------------\n");
     }
+    }
+
+
 
     return 0;
 }
