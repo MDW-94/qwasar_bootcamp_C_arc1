@@ -27,9 +27,10 @@ int main(int ac, char** av){
 
     FILE* fileToBeRead;
 
-    char filename[100], c;
+    char filename[100];
     printf("Enter the filename to open \n");
     scanf("%s", filename);
+    printf("%s\n", filename);
     printf("---------------------\n");
 
     // for(int i = 1; i < ac; i++){
@@ -47,7 +48,7 @@ int main(int ac, char** av){
 
         if(my_cat(av[i], &fileToBeRead) != 1){
 
-            
+
         printf("\n %s: Error opening file.\n", __FUNCTION__);
             } else {
                 // post function code
