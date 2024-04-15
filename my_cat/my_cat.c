@@ -32,7 +32,7 @@ int main(int ac, char** av){
     scanf("%s", filename);
     printf("\n");
 
-    if(my_cat(av[1], &fileToBeRead) != 1){
+    if(my_cat(av[2], &fileToBeRead) != 1){
         printf("\n %s: Error opening file.\n", __FUNCTION__);
     } else {
         // post function code

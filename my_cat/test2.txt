@@ -1,3 +1,4 @@
 This is the second test text file.
 
 Which contains more content that should be read by the cat function.
+
