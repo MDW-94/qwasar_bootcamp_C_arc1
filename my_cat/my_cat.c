@@ -28,9 +28,13 @@ int my_cat(char* fileName, FILE** readFile){
         printf("No file was given");
         return 0;
     } else {
+        char ch;
         while(*readFile != EOF){
-            printf("%c", *readFile);
+            ch = (char)*readFile;
+            printf("%c", ch);
+            readFile++;
         }
+        
         fclose(*readFile);
     }
     return 1;
@@ -39,7 +43,7 @@ int my_cat(char* fileName, FILE** readFile){
 // Notes
 // EOF - End Of File macrio is a negative integer, which indicates that the end-of-file has been reached
 // fgets(myString, 100, fptr) - takes three parameters, myString is the array we create to store the extracted data from the file, the second parameter is the maximum size of the data to read, the third parameter is the file pointer that is used to read the file
-
+// fgetc() - translte to: f: file stream, get: to get in return something, c: character
 
 
 int main(int ac, char** av){
@@ -81,8 +85,14 @@ int main(int ac, char** av){
 }
 
 
+
+
+
+
 // https://users.cs.utah.edu/~germain/PPS/Topics/C_Language/file_IO.html
 
 // https://www.geeksforgeeks.org/c-program-print-contents-file/
 
 // https://stackoverflow.com/questions/16869467/command-line-arguments-reading-a-file
+
+// https://www.tutorialspoint.com/c_standard_library/stdio_h.htm
