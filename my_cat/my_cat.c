@@ -1,26 +1,44 @@
 #include <stdio.h>
 // #include <string.h>
 
-int my_cat(char* fileName, FILE** readFile){
-    int c;
+// PROHIBITED USE OF FGETC METHOD
+// int my_cat(char* fileName, FILE** readFile){
+//     int c;
 
+//     if((*readFile = fopen(fileName, "r")) == NULL){
+//         printf("No file was given");
+//         return 0;
+//     } else {
+//         c = fgetc(*readFile);
+//         while(c != EOF){
+//             printf("%c", c);
+//             c = fgetc(*readFile);
+//         }
+//         fclose(*readFile);
+//     }
+
+//     // printf("---------------------");
+//     // printf("\nThe function has successfully read the file\n");
+//     // Remember to close the file with fclose()
+//     return 1;
+// }
+
+int my_cat(char* fileName, FILE** readFile){
     if((*readFile = fopen(fileName, "r")) == NULL){
         printf("No file was given");
         return 0;
     } else {
-        c = fgetc(*readFile);
-        while(c != EOF){
-            printf("%c", c);
-            c = fgetc(*readFile);
+        while(*readFile != EOF){
+            printf("%c", *readFile);
         }
         fclose(*readFile);
     }
-
-    // printf("---------------------");
-    // printf("\nThe function has successfully read the file\n");
-    // Remember to close the file with fclose()
     return 1;
 }
+
+// Notes
+// EOF - End Of File macrio is a negative integer, which indicates that the end-of-file has been reached
+// fgets(myString, 100, fptr) - takes three parameters, myString is the array we create to store the extracted data from the file, the second parameter is the maximum size of the data to read, the third parameter is the file pointer that is used to read the file
 
 
 
