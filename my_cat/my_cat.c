@@ -14,7 +14,7 @@ int my_cat(char* fileName, FILE** readFile){
         }
     }
 
-    printf("The function has successfully read the file\n");
+    printf("\nThe function has successfully read the file\n");
 
     
     // Remember to close the file with fclose()
@@ -30,6 +30,7 @@ int main(int ac, char** av){
 
     printf("Enter the filename to open \n");
     scanf("%s", filename);
+    printf("\n");
 
     if(my_cat(av[1], &fileToBeRead) != 1){
         printf("\n %s: Error opening file.\n", __FUNCTION__);
