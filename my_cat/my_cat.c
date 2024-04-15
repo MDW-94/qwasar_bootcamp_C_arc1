@@ -14,7 +14,7 @@ int my_cat(char* fileName, FILE** readFile){
         }
     }
 
-    printf("Here is the function that will read the file\n");
+    printf("The function has successfully read the file\n");
 
     
     // Remember to close the file with fclose()
