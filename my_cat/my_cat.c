@@ -28,12 +28,13 @@ int my_cat(char* fileName, FILE** readFile){
         printf("No file was given");
         return 0;
     } else {
-        char ch;
-        while(*readFile != EOF){
-            ch = (char)*readFile;
-            printf("%c", ch);
-            readFile++;
-        }
+       char buffer[10];
+       size_t bytesRead;
+       while((bytesRead = fread(buffer, 1, 10, *readFile)) > 0){
+            for(size_t i = 0; i < bytesRead; i++){
+                printf("%c", buffer[i]);
+            }
+       }
         
         fclose(*readFile);
     }
