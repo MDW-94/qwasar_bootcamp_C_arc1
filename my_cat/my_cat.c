@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 int my_cat(char* fileName, FILE** readFile){
     int c;
@@ -31,9 +32,12 @@ int main(int ac, char** av){
     printf("Enter the filename to open \n");
     scanf("%s", filename);
     printf("%s\n", filename);
+    printf("%s <- outputted as string form\n", av[1]);
     printf("---------------------\n");
 
-    // for(int i = 1; i < ac; i++){
+    // THIS IS ENOUGH FOR THE ASSIGNMENT! 
+
+    // for(int i = 1; i < ac; i++){ 
     //         if(my_cat(av[i], &fileToBeRead) != 1){
     //     printf("\n %s: Error opening file.\n", __FUNCTION__);
     // } else {
@@ -44,21 +48,15 @@ int main(int ac, char** av){
     // }
 
     for(int i = 1; i < ac; i++){
-        if(av[i] == filename){
+        if(strcmp(av[i], filename) == 0){
 
-        if(my_cat(av[i], &fileToBeRead) != 1){
-
-
-        printf("\n %s: Error opening file.\n", __FUNCTION__);
-            } else {
+            if(my_cat(av[i], &fileToBeRead) != 1){
+            printf("\n %s: Error opening file.\n", __FUNCTION__);
+                } else {
                 // post function code
                 printf("File read successully\n");
                 printf("---------------------\n");
             }
-
-
-        } else {
-            printf("filename not found\n");
             break;
         }
     }
@@ -70,4 +68,4 @@ int main(int ac, char** av){
 
 // https://www.geeksforgeeks.org/c-program-print-contents-file/
 
-
+// https://stackoverflow.com/questions/16869467/command-line-arguments-reading-a-file
