@@ -1,0 +1,8 @@
+Hello,
+
+This is the test file.
+
+It contains text that should be outputted to the console
+after being read through the my_cat.c program.
+
+Bye.
