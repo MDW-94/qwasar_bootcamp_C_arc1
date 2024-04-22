@@ -25,8 +25,6 @@ void print_array(int* array, int size_array){
     }
 }
 
-
-
 int main(int ac, char** av){
     int index = 1;
     int array[MAX_ARRAY_SIZE] = {0};
