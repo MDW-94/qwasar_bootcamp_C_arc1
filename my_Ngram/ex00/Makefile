@@ -17,6 +17,9 @@ do:
 # This is important because subshells don’t share local variables.
 
 # https://chriswiegman.com/2021/08/using-parameters-in-a-make-target/
+# https://opensource.com/article/18/8/what-how-makefile
+# https://www3.nd.edu/~zxu2/acms60212-40212/Makefile.pdf
+# https://makefiletutorial.com/
 
 # Explanation:
 
