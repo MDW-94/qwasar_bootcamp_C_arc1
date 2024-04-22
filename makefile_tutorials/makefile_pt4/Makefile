@@ -34,3 +34,5 @@ blah.o: blah.c
 
 blah.c:
 	echo "int main() { return 0; }" > blah.c #Run first
+
+# If you delete blah.c, all three targets will be rerun. If you edit it (and thus change the timestamp to newer than blah.o), the first two targets will run. If you run touch blah.o (and thus change the timestamp to newer than blah), then only the first target will run. IF you change nothing, none of the targets will run. Try it out!
