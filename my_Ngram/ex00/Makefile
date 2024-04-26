@@ -1,4 +1,5 @@
 CC := gcc
+CFLAGS := -Wall -Wextra -Werror
 
 all: my_ngram.c compile run
 

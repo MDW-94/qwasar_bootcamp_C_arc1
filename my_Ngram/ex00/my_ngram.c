@@ -1,6 +1,6 @@
 #include <stdio.h>
 #define MAX_ARRAY_SIZE 128
-void fill_array(int* array, int size_array, char* str){
+void fill_array(int* array, char* str){
     int index = 0;
     printf("CURRENT STRING: %s\n", str);
     while(str[index] != '\0'){
@@ -23,7 +23,7 @@ int main(int ac, char** av){
     int index = 1;
     int array[MAX_ARRAY_SIZE] = {0};
     while(index < ac){
-        fill_array(&array[0], MAX_ARRAY_SIZE, av[index]);
+        fill_array(&array[0], av[index]);
         index += 1;
     }
     print_array(&array[0], MAX_ARRAY_SIZE);
