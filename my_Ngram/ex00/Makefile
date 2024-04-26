@@ -1,15 +1,16 @@
-CC = gcc
-# CFLAGS = 
+CC := gcc
 
-all: my_ngram.c compile
+all: my_ngram.c compile run
 
 my_ngram.c:
 	touch my_ngram.c
-	echo
-
+ 
 compile: my_ngram.c 
 	$(CC) my_ngram.c -o my_ngram
-	./my_ngram hello my name is 
+
+run: 
+	@read INPUT && \
+	./my_ngram $$INPUT
 
 clean:	
 	rm -f *.c my_ngram
