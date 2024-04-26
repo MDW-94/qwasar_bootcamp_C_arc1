@@ -1,12 +1,30 @@
-my_Ngram: my_ngram.c
-	gcc my_ngram.c -o my_ngram 
+CC = gcc
+# CFLAGS = 
 
-.PHONY: do
+all: my_ngram.c compile
 
-do:
-	@echo "Enter a sentence: "; \
-	read INPUT; \
-	./my_ngram "$$INPUT"
+my_ngram.c:
+	touch my_ngram.c
+	echo
+
+compile: my_ngram.c 
+	$(CC) my_ngram.c -o my_ngram
+	./my_ngram hello my name is 
+
+clean:	
+	rm -f *.c my_ngram
+
+fclean: clean
+	rm - f *.c *.o
+
+
+
+# .PHONY: do
+
+# do:
+# 	@echo "Enter a sentence: "; \
+# 	read INPUT; \
+# 	./my_ngram "$$INPUT"
 
 # clean:
 # 	@echo "Cleaning up..."
