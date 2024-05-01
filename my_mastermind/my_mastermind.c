@@ -3,6 +3,8 @@
 #include <string.h>
 #include <time.h>
 
+// #define RAND_MAX 9
+
 // #ifndef GAME_SETTINGS
 // #define GAME_SETTINGS
 // typedef struct game_settings {
@@ -10,6 +12,12 @@
 //     int n_attempts;
 // } settings;
 // #endif
+
+// char* generate_code(){
+//     char* result_code[4] = {'1','2','3','4'};
+//     return result_code;
+
+// }
 
 
 // int ac, char** av
@@ -24,7 +32,7 @@ int main(int ac, char** av){
 
     char secret_code[4];
 
-        if(ac > 0){
+        if(ac > 1){ //if there are any args in run command
         char code_param[2]; *code_param = atoi(av[1]);
 
         if(strcmp(code_param, "-c") && av[2]){
@@ -32,7 +40,21 @@ int main(int ac, char** av){
         }
 
         // char attempt_param[1] = atoi(av[3]);
-    }
+        } else {
+        // *secret_code = generate_code();
+            printf("\n\nGenerating secret code\n");
+            srand(time(0)); 
+            // required before rand() to use timestamp as seed for rand generator
+            for(int i = 0; i < 4;i++){
+                int number = rand() % pieces_size;
+                printf("%i\n", number);
+                secret_code[i] = (char)number;
+            }
+        // secret_code[0] = rand();
+        // secret_code[1] = rand();
+        // secret_code[2] = rand();
+        // secret_code[3] = rand();
+         }
     // Secret code = n1,n2,n3,n4 where n is an int from array || specified code av[x] == '-c x'
     // int attempts = default: 10 || specfiied av[x] == '-t x'
 
@@ -56,3 +78,5 @@ int main(int ac, char** av){
 
 
 // https://www.geeksforgeeks.org/time-function-in-c/
+
+// https://www.tutorialspoint.com/c_standard_library/c_function_rand.htm
