@@ -40,7 +40,10 @@ int main(int ac, char** av){
         char code_param[2]; *code_param = atoi(av[1]);
 
         if(strcmp(code_param, "-c") && av[2]){
-            *secret_code = atoi(av[2]);
+            while(*secret_code != '\0'){
+                *secret_code = atoi(av[2]);
+            }
+     
         }
 
         // char attempt_param[1] = atoi(av[3]);
