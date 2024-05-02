@@ -48,7 +48,7 @@ int main(int ac, char** av){
         // char attempt_param[1] = atoi(av[3]);
         } else {
         // *secret_code = generate_code();
-            printf("\n\nGenerating secret code\n");
+            printf("\nGenerating secret code\n");
             srand(time(0)); 
             // required before rand() to use timestamp as seed for rand generator
             for(int i = 0; i < 4;i++){
@@ -69,6 +69,10 @@ int main(int ac, char** av){
 
     // switch(){} for multiple if statements?
     // default: // 
+
+    printf("\n=========================================\n");
+
+    printf("\nInitializing pieces in array - necessary?\n\n");
 
     for(int i = 0; i < pieces_size;i++){
             printf("Piece %i -> %c\n", i, pieces[i]);
