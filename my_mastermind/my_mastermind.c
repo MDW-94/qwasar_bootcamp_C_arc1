@@ -43,7 +43,6 @@ int main(int ac, char** av){
             while(*secret_code != '\0'){
                 *secret_code = atoi(av[2]);
             }
-     
         }
 
         // char attempt_param[1] = atoi(av[3]);
@@ -53,9 +52,9 @@ int main(int ac, char** av){
             srand(time(0)); 
             // required before rand() to use timestamp as seed for rand generator
             for(int i = 0; i < 4;i++){
-                int number = rand() % pieces_size;
+                int number = (rand() % pieces_size);
                 printf("%i\n", number);
-                secret_code[i] = (char)number;
+                secret_code[i] = '0' + number;
             }
         // secret_code[0] = rand();
         // secret_code[1] = rand();
