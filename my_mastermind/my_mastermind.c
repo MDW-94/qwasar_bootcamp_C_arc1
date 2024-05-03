@@ -59,15 +59,15 @@ void game_engine(char secret_code[], int rounds_declared){
     while(round_index < rounds_declared && answer_check != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
+
+        // TAKE USER INPUT
         // char player_answer;
        int player_answer = 0;
-
         // strcmp(player_answer, secret_code);
-
         scanf("%d", &player_answer);
 
+        // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
-        
         if(player_answer == 3){ // needs to evaluate secret code and player input
             printf("Success!\n");
             printf("\n=========================================\n");
