@@ -99,11 +99,9 @@ int main(int ac, char** av){
     int rounds_declared = 0;
 
     generate_secret_code(ac, av, pieces_size, secret_code); 
-
     printf("Secret Code: %s\n", secret_code);
 
     printf("\n=========================================\n");
-
     printf("\nInitializing pieces in array - necessary?\n\n");
 
     for(int i = 0; i < pieces_size;i++){
@@ -114,7 +112,6 @@ int main(int ac, char** av){
     printf("\nStarting Game...\n\n");
 
     rounds_declared= initialize_rounds(ac, av);
-    // printf("\nRounds Declared -> %i\n", rounds_declared);
     game_engine(secret_code, rounds_declared);
 
 
