@@ -24,18 +24,17 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
         char code_param[1]; *code_param = atoi(av[1]);
         if(strcmp(code_param, "-c") && av[2]){
             printf("\nDeclared Secret Code: Initializing...\n");
-
             for(int i = 0; i < 4;i++){
                 secret_code[i] = av[2][i];
             }
         }
         } else {
-            printf("\nGenerating secret code\n");
+            printf("\nGenerating secret code...\n");
             srand(time(0)); 
             // required before rand() to use timestamp as seed for rand generator
             for(int i = 0; i < 4;i++){
                 int number = (rand() % pieces_size);
-                printf("%i\n", number);
+                // printf("%i\n", number);
                 secret_code[i] = '0' + number;
             }
          }
