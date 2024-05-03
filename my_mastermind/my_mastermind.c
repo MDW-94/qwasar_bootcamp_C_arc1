@@ -21,10 +21,13 @@
 
 char generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]){
       if(ac > 1){ //if there are any args in run command
-        char code_param[2]; *code_param = atoi(av[1]);
+        char code_param[1]; *code_param = atoi(av[1]);
         if(strcmp(code_param, "-c") && av[2]){
-            while(*secret_code != '\0'){
-                *secret_code = atoi(av[2]);
+            printf("\nDeclared Secret Code: Initializing...\n");
+            for(int i = 0; i < 4;i++){
+                // int number = atoi(av[2]);
+                // secret_code[i] = '0' + number;
+                 secret_code[i] = atoi(av[2]);
             }
         }
         } else {
@@ -46,7 +49,6 @@ int initialize_rounds(int ac, char** av){
         if(strcmp(code_param, "-t") && av[4]){
             return atoi(av[4]);
         }
-
     }
     return 10;
 }
@@ -69,7 +71,8 @@ int main(int ac, char** av){
     char secret_code[4];
     int rounds_declared = 0;
 
-    generate_secret_code(ac, av, pieces_size, secret_code);        
+    generate_secret_code(ac, av, pieces_size, secret_code); 
+
     printf("Secret Code: %s\n", secret_code);
 
     // Secret code = n1,n2,n3,n4 where n is an int from array || specified code av[x] == '-c x'
@@ -91,7 +94,7 @@ int main(int ac, char** av){
 
     rounds_declared= initialize_rounds(ac, av);
 
-    printf("\nRounds Declared - > %i\n", rounds_declared);
+    printf("\nRounds Declared -> %i\n", rounds_declared);
 
 
 
