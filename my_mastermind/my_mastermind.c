@@ -20,18 +20,14 @@
 // }
 
 char generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]){
-    // char result_code[4];
-
       if(ac > 1){ //if there are any args in run command
         char code_param[2]; *code_param = atoi(av[1]);
-
         if(strcmp(code_param, "-c") && av[2]){
             while(*secret_code != '\0'){
                 *secret_code = atoi(av[2]);
             }
         }
         } else {
-        // *secret_code = generate_code();
             printf("\nGenerating secret code\n");
             srand(time(0)); 
             // required before rand() to use timestamp as seed for rand generator
@@ -41,9 +37,6 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
                 secret_code[i] = '0' + number;
             }
          }
-
-
-
     return *secret_code;
 }
 
