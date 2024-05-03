@@ -53,13 +53,30 @@ int initialize_rounds(int ac, char** av){
 
 void game_engine(char secret_code[], int rounds_declared){
     int round_index = 0;
-    int player_answer = 0;
+    int answer_check = 0;
     printf("Rounds Declared -> %i\n", rounds_declared);
     printf("Secret Code -> %s\n", secret_code);
-    while(round_index < rounds_declared && player_answer != 1){
+    while(round_index < rounds_declared && answer_check != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
-        round_index += 1;
+        // char player_answer;
+       int player_answer = 0;
+
+        // strcmp(player_answer, secret_code);
+
+        scanf("%d", &player_answer);
+
+        // strcmp(, secret_code) compare player input to secret code
+        
+        if(player_answer == 3){ // needs to evaluate secret code and player input
+            printf("Success!\n");
+            printf("\n=========================================\n");
+            answer_check = 1;
+        } else {
+            //determine differences and move onto next round
+            printf("Try Again\n");
+            round_index += 1;
+        }
     }
 }
 
