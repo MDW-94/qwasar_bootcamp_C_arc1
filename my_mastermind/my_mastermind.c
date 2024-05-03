@@ -24,10 +24,9 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
         char code_param[1]; *code_param = atoi(av[1]);
         if(strcmp(code_param, "-c") && av[2]){
             printf("\nDeclared Secret Code: Initializing...\n");
+
             for(int i = 0; i < 4;i++){
-                // int number = atoi(av[2]);
-                // secret_code[i] = '0' + number;
-                 secret_code[i] = atoi(av[2]);
+                secret_code[i] = av[2][i];
             }
         }
         } else {
