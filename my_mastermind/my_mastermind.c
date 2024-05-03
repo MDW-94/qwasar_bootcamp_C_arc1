@@ -54,11 +54,11 @@ int initialize_rounds(int ac, char** av){
 void game_engine(char secret_code[], int rounds_declared){
     int round_index = 0;
     int player_answer = 0;
-    printf("Rounds Declared -> %i", rounds_declared);
+    printf("Rounds Declared -> %i\n", rounds_declared);
+    printf("Secret Code -> %s\n", secret_code);
     while(round_index < rounds_declared && player_answer != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
-        printf("%s\n", secret_code);
         round_index += 1;
     }
 }
