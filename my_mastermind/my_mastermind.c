@@ -51,6 +51,18 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+void game_engine(char secret_code[], int rounds_declared){
+    int round_index = 0;
+    int player_answer = 0;
+    printf("Rounds Declared -> %i", rounds_declared);
+    while(round_index < rounds_declared && player_answer != 1){
+        printf("\n=========================================\n");
+        printf("\nRound %i\n", round_index);
+        printf("%s\n", secret_code);
+        round_index += 1;
+    }
+}
+
 
 // int ac, char** av
 int main(int ac, char** av){
@@ -73,12 +85,6 @@ int main(int ac, char** av){
 
     printf("Secret Code: %s\n", secret_code);
 
-    // Secret code = n1,n2,n3,n4 where n is an int from array || specified code av[x] == '-c x'
-    // int attempts = default: 10 || specfiied av[x] == '-t x'
-
-    // switch(){} for multiple if statements?
-    // default: // 
-
     printf("\n=========================================\n");
 
     printf("\nInitializing pieces in array - necessary?\n\n");
@@ -91,9 +97,8 @@ int main(int ac, char** av){
     printf("\nStarting Game...\n\n");
 
     rounds_declared= initialize_rounds(ac, av);
-
-    printf("\nRounds Declared -> %i\n", rounds_declared);
-
+    // printf("\nRounds Declared -> %i\n", rounds_declared);
+    game_engine(secret_code, rounds_declared);
 
 
     return 0;
@@ -135,3 +140,9 @@ int main(int ac, char** av){
         // secret_code[2] = rand();
         // secret_code[3] = rand();
         //  }
+
+// Secret code = n1,n2,n3,n4 where n is an int from array || specified code av[x] == '-c x'
+// int attempts = default: 10 || specfiied av[x] == '-t x'
+
+// switch(){} for multiple if statements?
+// default: // 
