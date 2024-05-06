@@ -27,6 +27,8 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
             for(int i = 0; i < 4;i++){
                 secret_code[i] = av[2][i];
             }
+            secret_code[4] = '\0';
+
         }
         } else {
             printf("\nGenerating secret code...\n");
@@ -37,6 +39,7 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
                 // printf("%i\n", number);
                 secret_code[i] = '0' + number;
             }
+            secret_code[4] = '\0';
          }
     return *secret_code;
 }
@@ -62,13 +65,13 @@ void game_engine(char secret_code[], int rounds_declared){
 
         // TAKE USER INPUT
         // char player_answer;
-       int player_answer = 0;
+       char player_answer;
         // strcmp(player_answer, secret_code);
-        scanf("%d", &player_answer);
+        scanf("%s", &player_answer);
 
         // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
-        if(player_answer == 3){ // needs to evaluate secret code and player input
+        if(strcmp(&player_answer, secret_code) == 0){ // needs to evaluate secret code and player input
             printf("Success!\n");
             printf("\n=========================================\n");
             answer_check = 1;
