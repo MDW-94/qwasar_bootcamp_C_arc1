@@ -66,7 +66,7 @@ void determine_diff(const char* answer, const char* secret_code){
         index++;
     }
 
-    printf("Well place pieces: %i\n", well_placed);
+    printf("Well placed pieces: %i\n", well_placed);
     printf("Misplaced pieces: %i\n", misplaced);
 
 }
@@ -84,10 +84,13 @@ void game_engine(char secret_code[], int rounds_declared){
         // char player_answer;
        char player_answer;
         // strcmp(player_answer, secret_code);
-        scanf("%s", &player_answer);
+        scanf(">%s", &player_answer);
 
         // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
+        if((while(&player_answer != '\n') != )){
+            printf("Wrong input!");
+        }
         if(strcmp(&player_answer, secret_code) == 0){ // needs to evaluate secret code and player input
             printf("Success!\n");
             printf("\n=========================================\n");
