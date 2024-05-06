@@ -53,6 +53,17 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+
+void check_player_answer(const char* answer){
+    printf("CHECK PLAYER ANSWER FOR NON INTEGERS\n");
+    while(*answer != '\0'){
+        printf("%c\n", *answer);
+        answer++;
+    }
+    printf("CHECK PLAYER ANSWER FOR NON INTEGERS\n");
+}
+
+// THE MISPLACED SECTION OF THIS CODE STILL NEEDS TO BE COMPLETED
 void determine_diff(const char* answer, const char* secret_code){
     int well_placed = 0;
     int misplaced = 0;
@@ -67,7 +78,7 @@ void determine_diff(const char* answer, const char* secret_code){
     }
 
     printf("Well placed pieces: %i\n", well_placed);
-    printf("Misplaced pieces: %i\n", misplaced);
+    printf("Misplaced pieces: %i\n", misplaced); //THIS STILL NEEDS TO BE COMPLETED
 
 }
 
@@ -86,6 +97,9 @@ void game_engine(char secret_code[], int rounds_declared){
         // strcmp(player_answer, secret_code);
         printf(">");
         scanf("%s", &player_answer);
+
+        // VET PLAYER ANSWER
+        check_player_answer(&player_answer);
 
         // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
