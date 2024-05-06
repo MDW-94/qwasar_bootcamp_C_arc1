@@ -28,7 +28,6 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
                 secret_code[i] = av[2][i];
             }
             secret_code[4] = '\0';
-
         }
         } else {
             printf("\nGenerating secret code...\n");
@@ -40,7 +39,7 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
                 secret_code[i] = '0' + number;
             }
             secret_code[4] = '\0';
-         }
+        }
     return *secret_code;
 }
 
@@ -52,6 +51,24 @@ int initialize_rounds(int ac, char** av){
         }
     }
     return 10;
+}
+
+void determine_diff(const char* answer, const char* secret_code){
+    int well_placed = 0;
+    int misplaced = 0;
+    int index = 0;
+
+    while(answer[index] != '\0'){
+        if(answer[index] == secret_code[index]){
+            well_placed++;
+        }
+        
+        index++;
+    }
+
+    printf("Well place pieces: %i\n", well_placed);
+    printf("Misplaced pieces: %i\n", misplaced);
+
 }
 
 void game_engine(char secret_code[], int rounds_declared){
@@ -76,7 +93,9 @@ void game_engine(char secret_code[], int rounds_declared){
             printf("\n=========================================\n");
             answer_check = 1;
         } else {
-            //determine differences and move onto next round
+            //determine differences and move onto next round - - CREATE FUNCTION
+
+            determine_diff(&player_answer, secret_code);
             printf("Try Again\n");
             round_index += 1;
         }
@@ -116,7 +135,6 @@ int main(int ac, char** av){
 
     rounds_declared= initialize_rounds(ac, av);
     game_engine(secret_code, rounds_declared);
-
 
     return 0;
 }
