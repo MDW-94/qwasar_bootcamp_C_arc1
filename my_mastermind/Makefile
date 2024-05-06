@@ -15,9 +15,9 @@ compile: my_mastermind.c
 	$(CC) $(CFLAGS) my_mastermind.c -o $(TARGET)
 
 run:
-	./$(TARGET)
+	./$(TARGET) -c "9090" -t 20
 
-# ./$(TARGET) -c "9090" -t 20
+# ./$(TARGET)
 
 # always remember: ggcc filename.c -o filename && ./filename
 
