@@ -84,13 +84,11 @@ void game_engine(char secret_code[], int rounds_declared){
         // char player_answer;
        char player_answer;
         // strcmp(player_answer, secret_code);
-        scanf(">%s", &player_answer);
+        printf(">");
+        scanf("%s", &player_answer);
 
         // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
-        if((while(&player_answer != '\n') != )){
-            printf("Wrong input!");
-        }
         if(strcmp(&player_answer, secret_code) == 0){ // needs to evaluate secret code and player input
             printf("Success!\n");
             printf("\n=========================================\n");
