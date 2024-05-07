@@ -79,14 +79,14 @@ void determine_diff(const char* answer, const char* secret_code){
     while(answer[index] != '\0'){
         if(answer[index] == secret_code[index]){
             well_placed++;
-        } // else?
-        
-        int j = 0; //placement?
-        while(secret_code[j] != '\0'){
-            if(answer[index] == secret_code[j] && j != index){
-                misplaced++;
+        } else {
+            int j = 0; //placement?
+            while(secret_code[j] != '\0'){
+                if(answer[index] == secret_code[j] && j != index){ // CURRENT ISSUE: CODE: 5384, INPUT: 1551 RETURNS WP:0 MP:2
+                    misplaced++;
+                }
+                j++; 
             }
-            j++; 
         }
         index++;
     }
