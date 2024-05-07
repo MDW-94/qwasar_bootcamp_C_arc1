@@ -75,18 +75,22 @@ void determine_diff(const char* answer, const char* secret_code){
     int well_placed = 0;
     int misplaced = 0;
     int index = 0;
+    int j = 0;
 
     while(answer[index] != '\0'){
         if(answer[index] == secret_code[index]){
             well_placed++;
         }
-        
+        while(secret_code[j] != '\0'){
+            if(answer[index] == secret_code[j] && j != index){
+                misplaced++;
+            }
+            j++;
+        }
         index++;
     }
-
     printf("Well placed pieces: %i\n", well_placed);
     printf("Misplaced pieces: %i\n", misplaced); //THIS STILL NEEDS TO BE COMPLETED
-
 }
 
 void game_engine(char secret_code[], int rounds_declared){
