@@ -54,13 +54,15 @@ int initialize_rounds(int ac, char** av){
 }
 
 
-void check_player_answer(const char* answer){
-    printf("CHECK PLAYER ANSWER FOR NON INTEGERS\n");
+int check_player_answer(const char* answer){
     while(*answer != '\0'){
-        printf("%c\n", *answer);
+        if(*answer > '9' || *answer < '0'){
+            return 0;
+        }
+        // printf("%c\n", *answer);
         answer++;
     }
-    printf("CHECK PLAYER ANSWER FOR NON INTEGERS\n");
+    return 1;
 }
 
 // THE MISPLACED SECTION OF THIS CODE STILL NEEDS TO BE COMPLETED
@@ -99,7 +101,9 @@ void game_engine(char secret_code[], int rounds_declared){
         scanf("%s", &player_answer);
 
         // VET PLAYER ANSWER
-        check_player_answer(&player_answer);
+        if(check_player_answer(&player_answer) == 0){
+            printf("Wrong input!\n");
+        };
 
         // COMPARE INPUT WITH SECRET CODE
         // strcmp(, secret_code) compare player input to secret code
