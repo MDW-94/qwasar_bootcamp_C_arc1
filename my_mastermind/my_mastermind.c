@@ -99,21 +99,21 @@ void game_engine(char secret_code[], int rounds_declared){
         printf("\nRound %i\n", round_index);
 
         // TAKE USER INPUT
-       char player_answer;
+       char player_answer[4];
         printf(">");
-        scanf("%s", &player_answer);
+        scanf("%s", player_answer);
 
         // VET PLAYER ANSWER
-        if(check_player_answer(&player_answer) == 0){
+        if(check_player_answer(player_answer) == 0){
             printf("Wrong input!\n");
         } else {
             // COMPARE INPUT WITH SECRET CODE
-            if(strcmp(&player_answer, secret_code) == 0){
+            if(strcmp(player_answer, secret_code) == 0){
                 printf("Success!\n");
                 printf("\n=========================================\n");
                 answer_check = 1;
             } else {
-                determine_diff(&player_answer, secret_code);
+                determine_diff(player_answer, secret_code);
                 printf("Try Again\n");
                 round_index += 1;
             }
