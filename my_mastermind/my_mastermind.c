@@ -71,27 +71,37 @@ int check_player_answer(const char* answer){
 }
 
 // THE MISPLACED SECTION OF THIS CODE STILL NEEDS TO BE COMPLETED
-void determine_diff(const char* answer, const char* secret_code){
+void determine_diff( char* answer, const char* secret_code){
     int well_placed = 0;
     int misplaced = 0;
     int index = 0;
+
+    // white peg, black peg, no peg: black pegs match, white pegs wrong order, blank -> 3 possibilities
   
     while(answer[index] != '\0'){
         if(answer[index] == secret_code[index]){
+            printf("WP Found at index -> %i\n", index);
             well_placed++;
+            answer[index] = 'x';
         } else {
             int j = 0; //placement?
             while(secret_code[j] != '\0'){
                 if(answer[index] == secret_code[j] && j != index){ // CURRENT ISSUE: CODE: 5384, INPUT: 1551 RETURNS WP:0 MP:2
+                    printf("Misplaced found at index -> %i | j -> %i\n", index, j);
                     misplaced++;
+                    answer[index] = 'x';
+                    j = 3;
                 }
                 j++; 
+                //delete any matches on each iteration? Make it not part of the range/make it unrecognisable? - THE SECRET CODE MUST NOT BE CHANGED - but the input could?
             }
         }
         index++;
     }
+    printf("----------------------------\n");
     printf("Well placed pieces: %i\n", well_placed);
     printf("Misplaced pieces: %i\n", misplaced); //THIS STILL NEEDS TO BE COMPLETED
+    printf("----------------------------\n");
 }
 
 void game_engine(char secret_code[], int rounds_declared){
