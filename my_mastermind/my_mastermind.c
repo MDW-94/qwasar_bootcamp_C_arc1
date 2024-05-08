@@ -71,13 +71,15 @@ int check_player_answer(const char* answer){
 }
 
 // THE MISPLACED SECTION OF THIS CODE STILL NEEDS TO BE COMPLETED
-void determine_diff( char* answer, const char* secret_code){
+void determine_diff(char* answer, const char* secret_code){
     int well_placed = 0;
     int misplaced = 0;
     int index = 0;
 
     // white peg, black peg, no peg: black pegs match, white pegs wrong order, blank -> 3 possibilities
   
+
+  //PT 1 NEEDS TO HAPPEN INDEPEDENTLY THEN PT 2 OTHERWISE THERE WILL BE DUPLICATES AND ERRORS
     while(answer[index] != '\0'){
         if(answer[index] == secret_code[index]){
             printf("WP Found at index -> %i\n", index);
