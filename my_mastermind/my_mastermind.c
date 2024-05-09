@@ -60,11 +60,10 @@ void determine_diff(char* answer, char* secret_code){
     int index           = 0;
     int check_answer[4] = {0,0,0,0};
     int check_code[4]   = {0,0,0,0};
-    int refresh         = 0;
 
     // PT.1
     while(answer[index] != '\0'){
-        if(answer[index] == secret_code[index] && refresh != 1){
+        if(answer[index] == secret_code[index]){
             // printf("WP Found at index -> %i\n", index);
             well_placed++;
             check_answer[index]     = 1;
