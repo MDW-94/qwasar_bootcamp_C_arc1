@@ -69,28 +69,18 @@ int check_player_answer(const char* answer){
     return 1;
 }
 
-// THIS IS THE OLD VERSION FOR REFERENCE
 void determine_diff(char* answer, char* secret_code){
-    // temporary array needs to be created in order to mark the values!
-    // char* temp_answer = NULL;
-    // char* temp_code = NULL;
-    // while((*temp_answer++ = *answer++) && (*temp_code++ = *secret_code++));
-
-
-    int well_placed = 0;
-    int misplaced = 0;
-    int index = 0;
+    int well_placed     = 0;
+    int misplaced       = 0;
+    int index           = 0;
     int check_answer[4] = {0,0,0,0};
-    int check_code[4] = {0,0,0,0};
-    int refresh = 0;
-
-    // printf("\nTemp Answer -> %s || Temp Code -> %s\n", temp_answer, temp_code);
+    int check_code[4]   = {0,0,0,0};
+    int refresh         = 0;
 
     // white peg, black peg, no peg: black pegs match, white pegs wrong order, blank -> 3 possibilities
   
-
-  //PT 1 NEEDS TO HAPPEN INDEPEDENTLY THEN PT 2 OTHERWISE THERE WILL BE DUPLICATES AND ERRORS
-    while(answer[index] != '\0' && refresh != 1){
+    // PT.1
+    while(answer[index] != '\0'){
         if(answer[index] == secret_code[index] && refresh != 1){
 
             printf("WP Found at index -> %i\n", index);
@@ -99,13 +89,17 @@ void determine_diff(char* answer, char* secret_code){
             check_answer[index] = 1;
             check_code[index] = 1;
 
-            if(answer[index] == '\0'){
-                index = 0;
-                refresh = 1;
-            }
+        }
+        printf("\nWhile 1 Index Count: %i\n", index);
+        index++;
+    }
 
-        } else {
-            int j = 0; //placement?
+    index = 0;
+
+    // PT.2
+    while(answer[index] != '\0'){
+        if(answer[index] != secret_code[index]){
+            int j = 0;
             while(secret_code[j] != '\0'){
                 if(answer[index] == secret_code[j] && j != index && check_code[j] != 1 && check_answer[index] != 1){
                     printf("Misplaced found at index -> %i | j -> %i\n", index, j);
@@ -117,11 +111,14 @@ void determine_diff(char* answer, char* secret_code){
                 j++; 
             }
         }
+        printf("\nWhile 2 Index Count: %i\n", index);
         index++;
     }
+
+
     printf("----------------------------\n");
     printf("Well placed pieces: %i\n", well_placed);
-    printf("Misplaced pieces: %i\n", misplaced); //THIS STILL NEEDS TO BE COMPLETED
+    printf("Misplaced pieces: %i\n", misplaced);
     printf("----------------------------\n");
 }
 
@@ -158,8 +155,6 @@ void game_engine(char secret_code[], int rounds_declared){
     }
 }
 
-
-// int ac, char** av
 int main(int ac, char** av){
 
     time_t sec;
@@ -170,21 +165,12 @@ int main(int ac, char** av){
     printf("Time: %.24s\n", ctime(&sec));
     printf("\n=========================================\n");
 
-    // Array of numbers "Pieces"
     const int pieces_size = 9;
-    // char pieces[pieces_size] = {'0','1','2','3','4','5','6','7','8'}; // necessary?
     char secret_code[4];
     int rounds_declared = 0;
 
     generate_secret_code(ac, av, pieces_size, secret_code); 
     printf("Secret Code: %s\n", secret_code);
-
-    // printf("\n=========================================\n");
-    // printf("\nInitializing pieces in array - necessary?\n\n");
-
-    // for(int i = 0; i < pieces_size;i++){
-    //         printf("Piece %i -> %c\n", i, pieces[i]);
-    // }
 
     printf("\n=========================================\n");
     printf("\nStarting Game...\n\n");
