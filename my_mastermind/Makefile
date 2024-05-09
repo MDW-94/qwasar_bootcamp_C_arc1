@@ -11,10 +11,10 @@ all: compile run
 # 	EOF
 
 
-compile: my_mastermind.c
+compile: $(TARGET).c
 	$(CC) $(CFLAGS) my_mastermind.c -o $(TARGET)
 
-run:
+run: $(TARGET)
 	./$(TARGET)
 
 # ./$(TARGET) -c "9090" -t 20
