@@ -53,7 +53,6 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
-
 int check_player_answer(const char* answer){
     int counter = 0;
     while(*answer != '\0'){
@@ -70,32 +69,52 @@ int check_player_answer(const char* answer){
     return 1;
 }
 
-// THE MISPLACED SECTION OF THIS CODE STILL NEEDS TO BE COMPLETED
-void determine_diff(char* answer, const char* secret_code){
+// THIS IS THE OLD VERSION FOR REFERENCE
+void determine_diff(char* answer, char* secret_code){
+    // temporary array needs to be created in order to mark the values!
+    // char* temp_answer = NULL;
+    // char* temp_code = NULL;
+    // while((*temp_answer++ = *answer++) && (*temp_code++ = *secret_code++));
+
+
     int well_placed = 0;
     int misplaced = 0;
     int index = 0;
+    int check_answer[4] = {0,0,0,0};
+    int check_code[4] = {0,0,0,0};
+    int refresh = 0;
+
+    // printf("\nTemp Answer -> %s || Temp Code -> %s\n", temp_answer, temp_code);
 
     // white peg, black peg, no peg: black pegs match, white pegs wrong order, blank -> 3 possibilities
   
 
   //PT 1 NEEDS TO HAPPEN INDEPEDENTLY THEN PT 2 OTHERWISE THERE WILL BE DUPLICATES AND ERRORS
-    while(answer[index] != '\0'){
-        if(answer[index] == secret_code[index]){
+    while(answer[index] != '\0' && refresh != 1){
+        if(answer[index] == secret_code[index] && refresh != 1){
+
             printf("WP Found at index -> %i\n", index);
             well_placed++;
-            answer[index] = 'x';
+
+            check_answer[index] = 1;
+            check_code[index] = 1;
+
+            if(answer[index] == '\0'){
+                index = 0;
+                refresh = 1;
+            }
+
         } else {
             int j = 0; //placement?
             while(secret_code[j] != '\0'){
-                if(answer[index] == secret_code[j] && j != index){ // CURRENT ISSUE: CODE: 5384, INPUT: 1551 RETURNS WP:0 MP:2
+                if(answer[index] == secret_code[j] && j != index && check_code[j] != 1 && check_answer[index] != 1){
                     printf("Misplaced found at index -> %i | j -> %i\n", index, j);
                     misplaced++;
-                    answer[index] = 'x';
+                    check_answer[index] = 1;
+                    check_code[j] = 1;
                     j = 3;
                 }
                 j++; 
-                //delete any matches on each iteration? Make it not part of the range/make it unrecognisable? - THE SECRET CODE MUST NOT BE CHANGED - but the input could?
             }
         }
         index++;
@@ -114,6 +133,7 @@ void game_engine(char secret_code[], int rounds_declared){
     while(round_index < rounds_declared && answer_check != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
+        printf("\nSecret Code -> %s\n", secret_code);
 
         // TAKE USER INPUT
        char player_answer[4];
