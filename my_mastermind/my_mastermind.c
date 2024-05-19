@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 char generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]){
       if(ac > 1){ //if there are any args in run command
@@ -113,28 +114,55 @@ void game_engine(char secret_code[], int rounds_declared){
     while(round_index < rounds_declared && answer_check != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
-        // printf("\nSecret Code -> %s\n", secret_code);
+        printf("\nSecret Code -> %s\n", secret_code);
 
         // TAKE USER INPUT
-       char player_answer[4];
-        printf(">");
-        scanf("%s", player_answer);
+        char player_answer[6] = {'>',00,00,00,00,'\0'};
+        
+      
 
-        // VET PLAYER ANSWER
-        if(check_player_answer(player_answer) == 0){
-            printf("Wrong input!\n");
-        } else {
-            // COMPARE INPUT WITH SECRET CODE
+        // if(read(STDIN_FILENO, &player_answer, 4) > 0){
+        //     printf("\n%s\n", player_answer);
+        // }
+
+        if(read(0, &player_answer, 4)){
+            // player_answer[3] = '\0';
+                    // COMPARE INPUT WITH SECRET CODE
             if(strcmp(player_answer, secret_code) == 0){
+                printf(">");
                 printf("Success!\n");
                 printf("\n=========================================\n");
                 answer_check = 1;
             } else {
+                printf(">");
                 determine_diff(player_answer, secret_code);
                 printf("Try Again\n");
                 round_index += 1;
             }
+        } else {
+            printf("Wrong input!\n");
         }
+
+
+        //DOESN'T PASS GANDALF
+        // scanf("%s", player_answer);
+
+        //      // VET PLAYER ANSWER
+        // if(check_player_answer(player_answer) == 0){
+        //     printf("Wrong input!\n");
+        // } else {
+        //     // COMPARE INPUT WITH SECRET CODE
+        //     if(strcmp(player_answer, secret_code) == 0){
+        //         printf("Success!\n");
+        //         printf("\n=========================================\n");
+        //         answer_check = 1;
+        //     } else {
+        //         determine_diff(player_answer, secret_code);
+        //         printf("Try Again\n");
+        //         round_index += 1;
+        //     }
+        // }
+
     }
 }
 
