@@ -117,7 +117,18 @@ void game_engine(char secret_code[], int rounds_declared){
         printf("\nSecret Code -> %s\n", secret_code);
 
         // TAKE USER INPUT
-        char player_answer[6] = {'>',00,00,00,00,'\0'};
+        char player_answer; // declare char variable
+        while(read(0, &player_answer, 1)){
+            // if(strlen(&player_answer) = 4){
+
+            // }
+            // BREAK THE LOOP
+        }; 
+        // 0 - reads input form keyboard
+        // &player_answer - address of the variable where read characters are stored
+        // 1 - specifies the number of byes to be read
+        
+ 
         
       
 
@@ -125,17 +136,17 @@ void game_engine(char secret_code[], int rounds_declared){
         //     printf("\n%s\n", player_answer);
         // }
 
-        if(read(0, &player_answer, 4)){
-            // player_answer[3] = '\0';
+        if(strlen(&player_answer) < 4 && strlen(&player_answer) > 0){
+            // &player_answer[3] = '\0';
                     // COMPARE INPUT WITH SECRET CODE
-            if(strcmp(player_answer, secret_code) == 0){
+            if(strcmp(&player_answer, secret_code) == 0){
                 printf(">");
                 printf("Success!\n");
                 printf("\n=========================================\n");
                 answer_check = 1;
             } else {
                 printf(">");
-                determine_diff(player_answer, secret_code);
+                determine_diff(&player_answer, secret_code);
                 printf("Try Again\n");
                 round_index += 1;
             }
