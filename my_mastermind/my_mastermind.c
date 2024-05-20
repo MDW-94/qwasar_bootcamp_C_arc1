@@ -118,6 +118,7 @@ void game_engine(char secret_code[], int rounds_declared){
 
         // TAKE USER INPUT
         printf(">");
+        
         char player_answer[5]; // declare char variable
         // char ch;
         for(int i = 0 ; i < 5;i++){
