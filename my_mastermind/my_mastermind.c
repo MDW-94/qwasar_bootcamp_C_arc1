@@ -114,14 +114,16 @@ char read_input(char p_input[]){
     // return *p_input;
     int nr;
     int index = 0;
-    while((nr = read(0, &p_input[index], 1)) > 0 && index != 4 && nr != -1 && nr != 0){
+    while((nr = read(0, &p_input[index], 1)) > 0 && index != 4){
         index++;
+        if(nr == -1){
+            printf("\nWrong input");
+        }
+    }
+    if(nr == -1){
+        printf("\nWrong input");
     }
 
-
-    if(nr == -1){ // SHOULD WRONG INPUT BE HANDLED HERE?
-        printf("\nWrong input!");
-    }
     p_input[4] = '\0';
     return *p_input;
 }

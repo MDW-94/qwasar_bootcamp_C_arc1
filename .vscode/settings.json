@@ -7,6 +7,8 @@
     "initializer_list": "c",
     "unordered_map": "c",
     "vector": "c",
-    "my_count_files": "c"
+    "my_count_files": "c",
+    "variant": "c",
+    "chrono": "c"
   }
 }
