@@ -114,15 +114,20 @@ char read_input(char p_input[]){
     // return *p_input;
     int nr;
     int index = 0;
-    while((nr = read(0, &p_input[index], 1)) > 0 && index != 4){
-        index++;
+    //read() upon successful completion returns the number of bytes read, if error returns -1, if EOF returns 0
+    while((nr = read(0, &p_input[index], 1)) != -1 && nr != 0 && index != 4){
         if(nr == -1){
             printf("\nWrong input");
         }
-    }
-    if(nr == -1){
-        printf("\nWrong input");
-    }
+        index++;
+    } 
+    // THIS DOESN'T WORK SADLY
+    // else {
+    //     if(nr == -1){
+    //     printf("\nWrong input");
+    //     }
+    // }
+   
 
     p_input[4] = '\0';
     return *p_input;
