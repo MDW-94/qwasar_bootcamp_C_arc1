@@ -143,8 +143,13 @@ char read_input(char p_input[]){
    
     // if(nr == 4){
     p_input[4] = '\0';
+    if(check_player_answer(p_input) == 1){
+        return *p_input;
+    } else {
+        return 00;
+    }
     // }
-    return *p_input;
+
 }
 
 void game_engine(char secret_code[], int rounds_declared){
@@ -160,7 +165,8 @@ void game_engine(char secret_code[], int rounds_declared){
         // TAKE USER INPUT
         // char player_answer[5]; // declare char variable
         // char ch;
-        char player_answer[5];
+        printf(">");char player_answer[5];
+        
         read_input(player_answer);
         printf(">%s\n", player_answer);
         
