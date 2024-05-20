@@ -107,8 +107,20 @@ void determine_diff(char* answer, char* secret_code){
 }
 
 char read_input(char p_input[]){
-    for(int i = 0 ; i < 5;i++){
-        read(0, &p_input[i], 1);
+    // for(int i = 0 ; i < 5;i++){
+    //     read(0, &p_input[i], 1);
+    // }
+    // p_input[4] = '\0';
+    // return *p_input;
+    int nr;
+    int index = 0;
+    while((nr = read(0, &p_input[index], 1)) > 0 && index != 4 && nr != -1 && nr != 0){
+        index++;
+    }
+
+
+    if(nr == -1){ // SHOULD WRONG INPUT BE HANDLED HERE?
+        printf("\nWrong input!");
     }
     p_input[4] = '\0';
     return *p_input;
@@ -144,9 +156,6 @@ void game_engine(char secret_code[], int rounds_declared){
         // &player_answer - address of the variable where read characters are stored
         // 1 - specifies the number of byes to be read
         
- 
-        
-      
 
         // if(read(STDIN_FILENO, &player_answer, 4) > 0){
         //     printf("\n%s\n", player_answer);
