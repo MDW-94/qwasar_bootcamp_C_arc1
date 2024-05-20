@@ -124,11 +124,14 @@ char read_input(char p_input[]){
 
     do  {
         nr = read(0,&p_input[index], 1);
-        if(nr != 4){
-            printf("\nWrong input");
-        }
         index++;
     } while (nr != -1 && nr != 0 && index != 4);
+    // if(nr != 4){
+    //         printf("\nWrong input");
+    // }
+    if(nr == 1){
+            printf("\n nr == 1\n");
+    }
     // THIS DOESN'T WORK SADLY
     // else {
     //     if(nr == -1){
@@ -138,8 +141,9 @@ char read_input(char p_input[]){
 
     // Apparently while((nr=read(fd,&ch,sizeof(ch))) > 0) isn't very portable to other systems as it doesn't handle -1 which is an error or 0 which is an EOF 
    
-
+    // if(nr == 4){
     p_input[4] = '\0';
+    // }
     return *p_input;
 }
 
