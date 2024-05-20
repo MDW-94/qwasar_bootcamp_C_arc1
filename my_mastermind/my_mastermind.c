@@ -106,6 +106,14 @@ void determine_diff(char* answer, char* secret_code){
     printf("----------------------------\n");
 }
 
+char read_input(char p_input[]){
+    for(int i = 0 ; i < 5;i++){
+        read(0, &p_input[i], 1);
+    }
+    p_input[4] = '\0';
+    return *p_input;
+}
+
 void game_engine(char secret_code[], int rounds_declared){
     int round_index     = 0;
     int answer_check    = 0;
@@ -117,15 +125,14 @@ void game_engine(char secret_code[], int rounds_declared){
         printf("\nSecret Code -> %s\n", secret_code);
 
         // TAKE USER INPUT
-        printf(">");
-        
-        char player_answer[5]; // declare char variable
+        // char player_answer[5]; // declare char variable
         // char ch;
-        for(int i = 0 ; i < 5;i++){
-            read(0, &player_answer[i], 1);
-        }
-        player_answer[4] = '\0';
-        printf("\n->%s\n", player_answer);
+        char player_answer[5];
+        read_input(player_answer);
+        printf(">%s\n", player_answer);
+        
+       
+        // printf("\n->%s\n", player_answer);
 
         // int indx = 0;
         // while((*player_answer = read(0, &ch, 1)) > 0){
