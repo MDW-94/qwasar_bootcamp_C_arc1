@@ -38,197 +38,20 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
-
-
-
-
-
-int check_player_answer(const char* answer){
-    int counter = 0;
-    while(*answer != '\0'){
-        if(*answer > '9' || *answer < '0'){
-            return 0;
-        }
-        // printf("%c\n", *answer);
-        counter++;
-        answer++;
-    }
-    if(counter > 4 || counter < 4){
-        return 0;
-    }
-    return 1;
-}
-
-void determine_diff(char* answer, char* secret_code){
-    // SETUP
-    int well_placed     = 0;
-    int misplaced       = 0;
-    int index           = 0;
-    int check_answer[4] = {0,0,0,0};
-    int check_code[4]   = {0,0,0,0};
-
-    // PT.1
-    while(answer[index] != '\0'){
-        if(answer[index] == secret_code[index]){
-            // printf("WP Found at index -> %i\n", index);
-            well_placed++;
-            check_answer[index]     = 1;
-            check_code[index]       = 1;
-        }
-        // printf("\nWhile 1 Index Count: %i\n", index);
-        index++;
-    }
-
-    // RESET INDEX
-    index               = 0;
-
-    // PT.2
-    while(answer[index] != '\0'){
-        if(answer[index] != secret_code[index]){
-            int j       = 0;
-            while(secret_code[j] != '\0'){
-                if(answer[index] == secret_code[j] 
-                && j != index 
-                && check_code[j] != 1 
-                && check_answer[index] != 1){
-                    // printf("Misplaced found at index -> %i | j -> %i\n", index, j);
-                    misplaced++;
-                    check_answer[index] = 1;
-                    check_code[j]       = 1;
-                    j                   = 3;
-                }
-                j++; 
-            }
-        }
-        // printf("\nWhile 2 Index Count: %i\n", index);
-        index++;
-    }
-
-
-    printf("----------------------------\n");
-    printf("Well placed pieces: %i\n", well_placed);
-    printf("Misplaced pieces: %i\n", misplaced);
-    printf("----------------------------\n");
-}
-
-char read_input(char* p_input){
-    // for(int i = 0 ; i < 5;i++){
-    //     read(0, &p_input[i], 1);
-    // }
-    // p_input[4] = '\0';
-    // return *p_input;
-    int nr;
-    int index = 0;
-    char ch;
-   //read() upon successful completion returns the number of bytes read, if error returns -1, if EOF returns 0
-    // while((nr = read(0, &p_input[index], 1)) != -1 && nr != 0 && index != 4){
-    //     if(nr == -1){
-    //         printf("\nWrong input");
-    //     }
-    //     index++;
-    // } 
-
-    do  {
-        nr = read(0,&ch, 1);
-        p_input[index] = ch;
-        index++;
-    } while (nr != -1 && nr != 0 && index != 4);
-
-    // if(nr != 4){
-    //         printf("\nWrong input");
-    // }
-
-    // if(nr == 1){
-    //         printf("\n nr == 1\n");
-    // }
-
-    // THIS DOESN'T WORK SADLY
-    // else {
-    //     if(nr == -1){
-    //     printf("\nWrong input");
-    //     }
-    // }
-
-    // Apparently while((nr=read(fd,&ch,sizeof(ch))) > 0) isn't very portable to other systems as it doesn't handle -1 which is an error or 0 which is an EOF 
-   
-    // if(nr == 4){
-    p_input[4] = '\0';
-    if(check_player_answer(p_input) == 1){
-        // return *p_input;
-        return 1;
-    } else {
-        return 00;
-    }
-    if(check_player_answer(p_input) == 0){
-        // HANDLE EOF
-    }
-    // }
-
-}
-
-void game_engine(char secret_code[], int rounds_declared){
+int game_engine(char secret_code[], int rounds_declared){
     int round_index     = 0;
     int answer_check    = 0;
     printf("Rounds Declared -> %i\n", rounds_declared);
     printf("Secret Code -> %s\n", secret_code);
     while(round_index < rounds_declared && answer_check != 1){
-        printf("\n=========================================\n");
-        printf("\nRound %i\n", round_index);
-        // printf("\nSecret Code -> %s\n", secret_code);
-
-        // TAKE USER INPUT
-        // char player_answer[5]; // declare char variable
-        // char ch;
-        // printf(">");
-        char player_answer[5];
-        read_input(player_answer);
-        // printf(">%s\n", player_answer);
-
-        // if player checked answer function equals: 1 == success, 0 == Try Again, -1 == Wrong Input!
-
-
-        
-        if(strlen(player_answer) < 5 && strlen(player_answer) > 0){
-            // player_answer[3] = '\0';
-                    // COMPARE INPUT WITH SECRET CODE
-            if(strcmp(player_answer, secret_code) == 0){
-                // printf(">");
-                printf("Success!\n");
-                printf("\n=========================================\n");
-                answer_check = 1;
-            } else {
-                // printf(">");
-                determine_diff(player_answer, secret_code);
-                printf("Try Again\n");
-                round_index += 1;
-            }
-        } else {
-            printf("Wrong input!\n");
-        }
-
-
-        //DOESN'T PASS GANDALF
-        // scanf("%s", player_answer);
-
-        //      // VET PLAYER ANSWER
-        // if(check_player_answer(player_answer) == 0){
-        //     printf("Wrong input!\n");
-        // } else {
-        //     // COMPARE INPUT WITH SECRET CODE
-        //     if(strcmp(player_answer, secret_code) == 0){
-        //         printf("Success!\n");
-        //         printf("\n=========================================\n");
-        //         answer_check = 1;
-        //     } else {
-        //         determine_diff(player_answer, secret_code);
-        //         printf("Try Again\n");
-        //         round_index += 1;
-        //     }
-        // }
+        printf("\n---");
+        printf("\nRound %i", round_index);
+        round_index++;
 
     }
-}
 
+    return 00;
+}
 
 
 int main(int ac, char** av){
@@ -257,6 +80,195 @@ int main(int ac, char** av){
     return 0;
 }
 
+
+// ===========================
+// int check_player_answer(const char* answer){
+//     int counter = 0;
+//     while(*answer != '\0'){
+//         if(*answer > '9' || *answer < '0'){
+//             return 0;
+//         }
+//         // printf("%c\n", *answer);
+//         counter++;
+//         answer++;
+//     }
+//     if(counter > 4 || counter < 4){
+//         return 0;
+//     }
+//     return 1;
+// }
+
+// void determine_diff(char* answer, char* secret_code){
+//     // SETUP
+//     int well_placed     = 0;
+//     int misplaced       = 0;
+//     int index           = 0;
+//     int check_answer[4] = {0,0,0,0};
+//     int check_code[4]   = {0,0,0,0};
+
+//     // PT.1
+//     while(answer[index] != '\0'){
+//         if(answer[index] == secret_code[index]){
+//             // printf("WP Found at index -> %i\n", index);
+//             well_placed++;
+//             check_answer[index]     = 1;
+//             check_code[index]       = 1;
+//         }
+//         // printf("\nWhile 1 Index Count: %i\n", index);
+//         index++;
+//     }
+
+//     // RESET INDEX
+//     index               = 0;
+
+//     // PT.2
+//     while(answer[index] != '\0'){
+//         if(answer[index] != secret_code[index]){
+//             int j       = 0;
+//             while(secret_code[j] != '\0'){
+//                 if(answer[index] == secret_code[j] 
+//                 && j != index 
+//                 && check_code[j] != 1 
+//                 && check_answer[index] != 1){
+//                     // printf("Misplaced found at index -> %i | j -> %i\n", index, j);
+//                     misplaced++;
+//                     check_answer[index] = 1;
+//                     check_code[j]       = 1;
+//                     j                   = 3;
+//                 }
+//                 j++; 
+//             }
+//         }
+//         // printf("\nWhile 2 Index Count: %i\n", index);
+//         index++;
+//     }
+
+
+//     printf("----------------------------\n");
+//     printf("Well placed pieces: %i\n", well_placed);
+//     printf("Misplaced pieces: %i\n", misplaced);
+//     printf("----------------------------\n");
+// }
+
+// char read_input(char* p_input){
+//     // for(int i = 0 ; i < 5;i++){
+//     //     read(0, &p_input[i], 1);
+//     // }
+//     // p_input[4] = '\0';
+//     // return *p_input;
+//     int nr;
+//     int index = 0;
+//     char ch;
+//    //read() upon successful completion returns the number of bytes read, if error returns -1, if EOF returns 0
+//     // while((nr = read(0, &p_input[index], 1)) != -1 && nr != 0 && index != 4){
+//     //     if(nr == -1){
+//     //         printf("\nWrong input");
+//     //     }
+//     //     index++;
+//     // } 
+
+//     do  {
+//         nr = read(0,&ch, 1);
+//         p_input[index] = ch;
+//         index++;
+//     } while (nr != -1 && nr != 0 && index != 4);
+
+//     // if(nr != 4){
+//     //         printf("\nWrong input");
+//     // }
+
+//     // if(nr == 1){
+//     //         printf("\n nr == 1\n");
+//     // }
+
+//     // THIS DOESN'T WORK SADLY
+//     // else {
+//     //     if(nr == -1){
+//     //     printf("\nWrong input");
+//     //     }
+//     // }
+
+//     // Apparently while((nr=read(fd,&ch,sizeof(ch))) > 0) isn't very portable to other systems as it doesn't handle -1 which is an error or 0 which is an EOF 
+   
+//     // if(nr == 4){
+//     p_input[4] = '\0';
+//     if(check_player_answer(p_input) == 1){
+//         // return *p_input;
+//         return 1;
+//     } else {
+//         return 00;
+//     }
+//     if(check_player_answer(p_input) == 0){
+//         // HANDLE EOF
+//     }
+//     // }
+
+// }
+
+// void game_engine(char secret_code[], int rounds_declared){
+//     int round_index     = 0;
+//     int answer_check    = 0;
+//     printf("Rounds Declared -> %i\n", rounds_declared);
+//     printf("Secret Code -> %s\n", secret_code);
+//     while(round_index < rounds_declared && answer_check != 1){
+//         printf("\n=========================================\n");
+//         printf("\nRound %i\n", round_index);
+//         // printf("\nSecret Code -> %s\n", secret_code);
+
+//         // TAKE USER INPUT
+//         // char player_answer[5]; // declare char variable
+//         // char ch;
+//         // printf(">");
+//         char player_answer[5];
+//         read_input(player_answer);
+//         // printf(">%s\n", player_answer);
+
+//         // if player checked answer function equals: 1 == success, 0 == Try Again, -1 == Wrong Input!
+
+
+        
+//         if(strlen(player_answer) < 5 && strlen(player_answer) > 0){
+//             // player_answer[3] = '\0';
+//                     // COMPARE INPUT WITH SECRET CODE
+//             if(strcmp(player_answer, secret_code) == 0){
+//                 // printf(">");
+//                 printf("Success!\n");
+//                 printf("\n=========================================\n");
+//                 answer_check = 1;
+//             } else {
+//                 // printf(">");
+//                 determine_diff(player_answer, secret_code);
+//                 printf("Try Again\n");
+//                 round_index += 1;
+//             }
+//         } else {
+//             printf("Wrong input!\n");
+//         }
+
+
+//         //DOESN'T PASS GANDALF
+//         // scanf("%s", player_answer);
+
+//         //      // VET PLAYER ANSWER
+//         // if(check_player_answer(player_answer) == 0){
+//         //     printf("Wrong input!\n");
+//         // } else {
+//         //     // COMPARE INPUT WITH SECRET CODE
+//         //     if(strcmp(player_answer, secret_code) == 0){
+//         //         printf("Success!\n");
+//         //         printf("\n=========================================\n");
+//         //         answer_check = 1;
+//         //     } else {
+//         //         determine_diff(player_answer, secret_code);
+//         //         printf("Try Again\n");
+//         //         round_index += 1;
+//         //     }
+//         // }
+
+//     }
+// }
+
+// ===========================
 
 // https://www.geeksforgeeks.org/time-function-in-c/
 
