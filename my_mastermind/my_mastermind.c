@@ -38,18 +38,47 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+int read_input(char player_answer[]){
+    char ch;
+    int nr, index = 0;
+    while((nr = read(0, &ch,1)) != -1 && nr != 0 && index != 4){
+        // read character by character: each character needs to be checked to see whether it is suitable
+        //if read character does not equal ASCII value of an integer then it must be given an empty space character instead of a newline
+        player_answer[index] = ch;
+        if(ch < 48 || ch > 57){
+            player_answer[index] = 32;
+        } // STILL NEEDS TO HANDLE 10 - NEW LINE && 13 - CARRIAGE RETURN
+        if(ch == 13 || ch == 10){
+            player_answer[index] = 32;
+        }
+        index++;
+    }
+    player_answer[4] = '\0';
+    printf("Player Input Check -> %s", player_answer);
+    // IF INCORRECT RETURN 0, IF CORRECT RETURN 1, IF WRONG INPUT RECURSIVE COMMENT, IF EOF RETURN -1
+    return 0;
+}
+
 int game_engine(char secret_code[], int rounds_declared){
     int round_index     = 0;
     int answer_check    = 0;
     printf("Rounds Declared -> %i\n", rounds_declared);
     printf("Secret Code -> %s\n", secret_code);
     while(round_index < rounds_declared && answer_check != 1){
-        printf("\n---");
-        printf("\nRound %i", round_index);
-        round_index++;
+        printf("\n---\n");
+        printf("Round %i\n", round_index);
+        printf("Secret Code -> %s\n", secret_code); // for testing reference
 
+        int n;
+        char player_answer[5];
+        if((n = read_input(player_answer)) != 1 || n != -1){
+            //IF ANSWER INCORRECT - ADVANCE ROUND
+            round_index++;
+        } else {
+            // IF ANSWER CORRECT OR EOF:
+            answer_check = 1;
+        }
     }
-
     return 00;
 }
 
