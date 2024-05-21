@@ -38,6 +38,11 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+
+
+
+
+
 int check_player_answer(const char* answer){
     int counter = 0;
     while(*answer != '\0'){
@@ -106,7 +111,7 @@ void determine_diff(char* answer, char* secret_code){
     printf("----------------------------\n");
 }
 
-char read_input(char p_input[]){
+char read_input(char* p_input){
     // for(int i = 0 ; i < 5;i++){
     //     read(0, &p_input[i], 1);
     // }
@@ -114,7 +119,8 @@ char read_input(char p_input[]){
     // return *p_input;
     int nr;
     int index = 0;
-    //read() upon successful completion returns the number of bytes read, if error returns -1, if EOF returns 0
+    char ch;
+   //read() upon successful completion returns the number of bytes read, if error returns -1, if EOF returns 0
     // while((nr = read(0, &p_input[index], 1)) != -1 && nr != 0 && index != 4){
     //     if(nr == -1){
     //         printf("\nWrong input");
@@ -123,15 +129,19 @@ char read_input(char p_input[]){
     // } 
 
     do  {
-        nr = read(0,&p_input[index], 1);
+        nr = read(0,&ch, 1);
+        p_input[index] = ch;
         index++;
     } while (nr != -1 && nr != 0 && index != 4);
+
     // if(nr != 4){
     //         printf("\nWrong input");
     // }
-    if(nr == 1){
-            printf("\n nr == 1\n");
-    }
+
+    // if(nr == 1){
+    //         printf("\n nr == 1\n");
+    // }
+
     // THIS DOESN'T WORK SADLY
     // else {
     //     if(nr == -1){
@@ -144,9 +154,13 @@ char read_input(char p_input[]){
     // if(nr == 4){
     p_input[4] = '\0';
     if(check_player_answer(p_input) == 1){
-        return *p_input;
+        // return *p_input;
+        return 1;
     } else {
         return 00;
+    }
+    if(check_player_answer(p_input) == 0){
+        // HANDLE EOF
     }
     // }
 
@@ -160,34 +174,20 @@ void game_engine(char secret_code[], int rounds_declared){
     while(round_index < rounds_declared && answer_check != 1){
         printf("\n=========================================\n");
         printf("\nRound %i\n", round_index);
-        printf("\nSecret Code -> %s\n", secret_code);
+        // printf("\nSecret Code -> %s\n", secret_code);
 
         // TAKE USER INPUT
         // char player_answer[5]; // declare char variable
         // char ch;
-        printf(">");char player_answer[5];
-        
+        // printf(">");
+        char player_answer[5];
         read_input(player_answer);
-        printf(">%s\n", player_answer);
-        
-       
-        // printf("\n->%s\n", player_answer);
+        // printf(">%s\n", player_answer);
 
-        // int indx = 0;
-        // while((*player_answer = read(0, &ch, 1)) > 0){
-        //     printf("\n --> %i\n", player_answer[indx]);
-        //     indx++;
-        // }
-        
-        // 0 - reads input form keyboard
-        // &player_answer - address of the variable where read characters are stored
-        // 1 - specifies the number of byes to be read
-        
+        // if player checked answer function equals: 1 == success, 0 == Try Again, -1 == Wrong Input!
 
-        // if(read(STDIN_FILENO, &player_answer, 4) > 0){
-        //     printf("\n%s\n", player_answer);
-        // }
 
+        
         if(strlen(player_answer) < 5 && strlen(player_answer) > 0){
             // player_answer[3] = '\0';
                     // COMPARE INPUT WITH SECRET CODE
@@ -228,6 +228,8 @@ void game_engine(char secret_code[], int rounds_declared){
 
     }
 }
+
+
 
 int main(int ac, char** av){
 
