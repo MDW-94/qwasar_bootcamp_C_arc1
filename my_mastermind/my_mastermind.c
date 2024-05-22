@@ -38,44 +38,88 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
-char check_ch(char ch){
+int handle_read(char *tmp_ptr, int i){
+
+    // char ch;
+    int n;
+    if((n = read(0, tmp_ptr, 1)) == 1 && i < 5){
+        write(1, tmp_ptr, 1);
+        if(*tmp_ptr == 10 || *tmp_ptr == 14){ //NL or Carriage Return
+
+        }
+
+           //Handle EOF
+        if(*tmp_ptr == '^'){
+
+        }
+    };
+
+
+ 
+
+    //Handle Null Terminator
+    printf("\nindex value -> %i\n", i);
+    if(i == 4){
+        *tmp_ptr = '\0';
+    }
+
+
     // read character by character: each character needs to be checked to see whether it is suitable
     //if read character does not equal ASCII value of an integer then it must be given an empty space character instead of a newline
-    if(ch < 48 || ch > 57){
-        ch = ' ';
-    } // STILL NEEDS TO HANDLE 10 - NEW LINE && 13 - CARRIAGE RETURN
-    if(ch == 13 || ch == 10){
-        ch = ' ';
-    }
-    return ch;
+    // if(ch < 48 || ch > 57){
+    //     ch = ' ';
+    // } 
+    
+    // STILL NEEDS TO HANDLE 10 - NEW LINE && 13 - CARRIAGE RETURN
+
+    // if(ch == 13 || ch == 10){
+    //     ch = ' ';
+    // }
+    // return ch;
     //https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
+    return n;
 }
 
-int my_get_char(char ch){
-    int n = 1;
-    char buf[n];
-    // char *bufp = buf;
-    int i = 0;
-    if(i == 0){
-        i = read(0, &buf, n);
-        ch = buf[0];
-    }
-
-    return 0;
+// int my_get_char(char* player_answer){
+    
     //https://stackoverflow.com/questions/57582732/using-getchar-in-c
     //https://man7.org/linux/man-pages/man3/getchar.3p.html
-}
+// }
 
-int read_input(char player_answer[]){
-    char ch = ' '; // have read in the while loop?
-    int nr, index = 0;
-    while((nr = my_get_char(ch)) != -1 && nr != 0 && index != 4){
-        player_answer[index] = check_ch(ch);
-        index++;
+int read_input(char* ptr_answer_array, char ogstring[]){
+    // initialize_array(ptr_answer_array);
+
+    // Set temp_ptr to first index of original array - CLEAN
+    char* tmp_ptr = ptr_answer_array;
+    int i = 0;
+    for( ; i<5; i++){
+        *tmp_ptr = 00;
+        tmp_ptr++;
     }
-    player_answer[4] = '\0';
-    printf("Player Input Check -> %s", player_answer);
-    printf("\nPost Clear: Player Input Check -> %c", ch);
+    i = 0;
+    *tmp_ptr = '\0';
+    tmp_ptr = ptr_answer_array;
+
+    int n;
+    // int index = 0;
+    while((n = handle_read(tmp_ptr, i)) != 0 && n != -1 && i < 4){
+        // write(1,tmp_ptr,1);
+        // read(0, tmp_ptr, 1)
+        tmp_ptr++;
+        i++;
+        // index++;
+        // printf("\nPlayer Answer Array -> %s\n", ptr_answer_array);
+    }
+
+
+
+    // player_answer[4] = '\0';
+    printf("Player Input Check -> %s", ogstring);
+    // for(int i = 0; i<5;i++){
+    //     printf("%c", *player_answer);
+    // }
+ 
+    // printf("\nPost Clear: Player Input Check -> %c", ch);
     // CLEAR BUFFER!
 
     // IF INCORRECT RETURN 0, IF CORRECT RETURN 1, IF WRONG INPUT RECURSIVE COMMENT, IF EOF RETURN -1
@@ -94,7 +138,8 @@ int game_engine(char secret_code[], int rounds_declared){
 
         int n;
         char player_answer[5];
-        if((n = read_input(player_answer)) != 1 || n != -1){
+        char* p_panswer = player_answer;
+        if((n = read_input(p_panswer, player_answer)) != 1 || n != -1){
             //IF ANSWER INCORRECT - ADVANCE ROUND
             round_index++;
         } else {
