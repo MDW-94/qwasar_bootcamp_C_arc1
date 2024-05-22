@@ -38,16 +38,30 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+char* initialize_ptr(char* tmp_ptr, char* ptr_ref, int i){
+    for( ; i<5; i++){
+        *tmp_ptr = 00;
+        tmp_ptr++;
+    }
+    i = 0;
+    *tmp_ptr = '\0';
+    //Set tmp_ptr to beginning of array
+    return tmp_ptr = ptr_ref;
+}
+
+
 int handle_read(char *tmp_ptr, int i){
 
     // char ch;
     int n;
-    if((n = read(0, tmp_ptr, 1)) == 1 && i < 5){
-        write(1, tmp_ptr, 1);
+    if((n = read(0, tmp_ptr, 1)) != -1 && n != 0 && i < 5){
+        // write(1, tmp_ptr, 1);
 
         //Handle Out of Bounds Characters
         if(*tmp_ptr < '0' || *tmp_ptr > '9'){
-            *tmp_ptr = ' ';
+            return n = -1;
+            // printf("\nWrong Input!");
+            // *tmp_ptr = ' ';
             //needs to say "Wrong Input and let them attempt another guess"
         }
 
@@ -56,21 +70,21 @@ int handle_read(char *tmp_ptr, int i){
 
         }
 
-           //Handle EOF
+        //Handle EOF
         if(*tmp_ptr == '^'){
 
         }
-    };
+    };  
 
 
- 
+
 
     //Handle Null Terminator at end of string
     printf("\nindex value -> %i\n", i);
     if(i == 4){
         *tmp_ptr = '\0';
     }
-
+    return n;
 
     // read character by character: each character needs to be checked to see whether it is suitable
     //if read character does not equal ASCII value of an integer then it must be given an empty space character instead of a newline
@@ -85,7 +99,6 @@ int handle_read(char *tmp_ptr, int i){
     // }
     // return ch;
     //https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
-    return n;
 }
 
 // int my_get_char(char* player_answer){
@@ -100,22 +113,30 @@ int read_input(char* ptr_answer_array, char ogstring[]){
     // Set temp_ptr to first index of original array - CLEAN
     char* tmp_ptr = ptr_answer_array;
     int i = 0;
-    for( ; i<5; i++){
-        *tmp_ptr = 00;
-        tmp_ptr++;
-    }
-    i = 0;
-    *tmp_ptr = '\0';
-    tmp_ptr = ptr_answer_array;
+    tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
+    // //Initialize ptr
+    // int i = 0;
+    // for( ; i<5; i++){
+    //     *tmp_ptr = 00;
+    //     tmp_ptr++;
+    // }
+    // i = 0;
+    // *tmp_ptr = '\0';
+    // //Set tmp_ptr to beginning
+    // tmp_ptr = ptr_answer_array;
 
     int n;
-    // int index = 0;
-    while((n = handle_read(tmp_ptr, i)) != 0 && n != -1 && i < 4){
-        // write(1,tmp_ptr,1);
-        // read(0, tmp_ptr, 1)
+    while((n = handle_read(tmp_ptr, i)) != 0 && i < 4){
         tmp_ptr++;
         i++;
-        // index++;
+        if(n == -1){
+            //Wrong Input
+            //Call initialize tmp_ptr function
+            tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
+            i = 0;
+            printf("\nWrong Input!");
+            // printf("\nWrong Input!"); // PRINTS AT TEH CHARACTER AFTER THE WRONG INPUT - NEEDS TO BE ONCE
+        }
         // printf("\nPlayer Answer Array -> %s\n", ptr_answer_array);
     }
 
