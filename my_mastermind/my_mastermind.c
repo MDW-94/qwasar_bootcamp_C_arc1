@@ -80,47 +80,15 @@ int handle_read(char *tmp_ptr, int i){
         *tmp_ptr = '\0';
     }
     return n;
-
-    // read character by character: each character needs to be checked to see whether it is suitable
-    //if read character does not equal ASCII value of an integer then it must be given an empty space character instead of a newline
-    // if(ch < 48 || ch > 57){
-    //     ch = ' ';
-    // } 
-    
-    // STILL NEEDS TO HANDLE 10 - NEW LINE && 13 - CARRIAGE RETURN
-
-    // if(ch == 13 || ch == 10){
-    //     ch = ' ';
-    // }
-    // return ch;
-    //https://www.cs.cmu.edu/~pattis/15-1XX/common/handouts/ascii.html
 }
-
-// int my_get_char(char* player_answer){
-    
-    //https://stackoverflow.com/questions/57582732/using-getchar-in-c
-    //https://man7.org/linux/man-pages/man3/getchar.3p.html
-// }
 
 int read_input(char* ptr_answer_array, char ogstring[]){
     // initialize_array(ptr_answer_array);
-
     // Set temp_ptr to first index of original array - CLEAN
     char* tmp_ptr = ptr_answer_array;
     int i = 0;
     tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
     printf("Player Input Check -> %s", ogstring);
-    // //Initialize ptr
-    // int i = 0;
-    // for( ; i<5; i++){
-    //     *tmp_ptr = 00;
-    //     tmp_ptr++;
-    // }
-    // i = 0;
-    // *tmp_ptr = '\0';
-    // //Set tmp_ptr to beginning
-    // tmp_ptr = ptr_answer_array;
-
     int n;
     while((n = handle_read(tmp_ptr, i)) != 0 && i < 4){
         tmp_ptr++;
@@ -135,9 +103,6 @@ int read_input(char* ptr_answer_array, char ogstring[]){
         }
         // printf("\nPlayer Answer Array -> %s\n", ptr_answer_array);
     }
-
-
-
     // player_answer[4] = '\0';
     printf("Player Input Check -> %s", ogstring);
     // for(int i = 0; i<5;i++){
