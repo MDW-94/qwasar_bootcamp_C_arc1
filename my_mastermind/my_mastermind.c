@@ -44,6 +44,14 @@ int handle_read(char *tmp_ptr, int i){
     int n;
     if((n = read(0, tmp_ptr, 1)) == 1 && i < 5){
         write(1, tmp_ptr, 1);
+
+        //Handle Out of Bounds Characters
+        if(*tmp_ptr < '0' || *tmp_ptr > '9'){
+            *tmp_ptr = ' ';
+            //needs to say "Wrong Input and let them attempt another guess"
+        }
+
+
         if(*tmp_ptr == 10 || *tmp_ptr == 14){ //NL or Carriage Return
 
         }
@@ -57,7 +65,7 @@ int handle_read(char *tmp_ptr, int i){
 
  
 
-    //Handle Null Terminator
+    //Handle Null Terminator at end of string
     printf("\nindex value -> %i\n", i);
     if(i == 4){
         *tmp_ptr = '\0';
