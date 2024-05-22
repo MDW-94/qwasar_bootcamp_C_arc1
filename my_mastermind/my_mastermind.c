@@ -65,7 +65,6 @@ int handle_read(char *tmp_ptr, int i){
             //needs to say "Wrong Input and let them attempt another guess"
         }
 
-
         if(*tmp_ptr == 10 || *tmp_ptr == 14){ //NL or Carriage Return
 
         }
@@ -75,10 +74,6 @@ int handle_read(char *tmp_ptr, int i){
 
         }
     };  
-
-
-
-
     //Handle Null Terminator at end of string
     printf("\nindex value -> %i\n", i);
     if(i == 4){
@@ -114,6 +109,7 @@ int read_input(char* ptr_answer_array, char ogstring[]){
     char* tmp_ptr = ptr_answer_array;
     int i = 0;
     tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
+    printf("Player Input Check -> %s", ogstring);
     // //Initialize ptr
     // int i = 0;
     // for( ; i<5; i++){
