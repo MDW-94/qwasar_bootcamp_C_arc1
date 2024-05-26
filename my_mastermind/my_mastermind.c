@@ -121,19 +121,20 @@ int read_input(char* ptr_array, char c_array[]) {
     for(int i = 0 ; i < 4;i++){
         c_array[i] = 0;
     }
-    c_array[4] = '\n';
+    // c_array[4] = '\n';
 
   int result = 0;
   while(result != 1 || result != EOF){
     int n = 0;
     int x;
     char ch = 00;
+    int index = 0;
+    char* ptr_c = ptr_array;
+
     //
     //char c_array[5] = {'0','0','0','0','\n'};
-    int index = 0;
     //char* ptr_char = &ch;
     //char* ptr_array = c_array;
-    char* ptr_c = ptr_array;
 
     while((n = read(0,ptr_c,1)) != 0 && n != -1 && *ptr_c != '\n'){ 
 
@@ -143,9 +144,9 @@ int read_input(char* ptr_array, char c_array[]) {
         }
 
       if(x == 1 && *ptr_c == 'd'){
+        //  printf("EOF\n");
          *ptr_c = '0';
          ptr_c = &ch;
-        //  printf("EOF\n");
          n = 0;
          return result = 1;
         }
@@ -164,6 +165,7 @@ int read_input(char* ptr_array, char c_array[]) {
       index++;
       ptr_c++;
       if(index > 3 && n != 0){
+        *ptr_c = '0';
         ptr_c = &ch;
         // printf("buffer changed\n");
       }
@@ -180,9 +182,9 @@ int read_input(char* ptr_array, char c_array[]) {
     if(*ptr_c == '\n' && index < 4){
         *ptr_c = '0';
         x = 2;
-        // for(; index < 4;index++){
-        // c_array[index] = '0';
-        // }
+        for(; index < 4;index++){
+        c_array[index] = '0';
+        }
         // c_array[4] = '\n';
       }
 
