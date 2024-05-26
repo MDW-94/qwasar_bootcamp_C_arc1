@@ -222,7 +222,8 @@ int game_engine(char secret_code[], int rounds_declared){
             if(strcmp(player_answer, secret_code) != 0){
                 determine_diff(player_answer, secret_code);
             } else {
-                printf("Congratz! You did it!\n");
+                printf("Congratz! You did it!");
+                printf("\n");
                 answer_check = 1;
             }
             
@@ -258,12 +259,22 @@ int main(int ac, char** av){
     printf("Will you find the secret code?\n");
     printf("Please enter a valid guess\n");
 
-    rounds_declared= initialize_rounds(ac, av);
+    rounds_declared = initialize_rounds(ac, av);
     game_engine(secret_code, rounds_declared);
 
     return 0;
 }
 
+
+// ===================
+
+// Checking for Segfaults with GDB
+
+// (base) ➜  my_mastermind git:(main) ✗ gcc my_mastermind.c -g
+// (base) ➜  my_mastermind git:(main) ✗ gdb ./a.out 
+
+//https://stackoverflow.com/questions/18423124/please-check-gdb-is-codesigned-see-taskgated8-how-to-get-gdb-installed-w
+//http://www.unknownroad.com/rtfm/gdbtut/gdbtoc.html
 
 // ===========================
 // int check_player_answer(const char* answer){
