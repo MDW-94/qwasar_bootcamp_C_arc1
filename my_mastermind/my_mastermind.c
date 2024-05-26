@@ -8,14 +8,14 @@ char generate_secret_code(int ac, char** av, const int pieces_size, char secret_
       if(ac > 1){ //if there are any args in run command
         char code_param[1]; *code_param = atoi(av[1]);
         if(strcmp(code_param, "-c") && av[2]){
-            printf("\nDeclared Secret Code: Initializing...\n");
+            // printf("\nDeclared Secret Code: Initializing...\n");
             for(int i = 0; i < 4;i++){
                 secret_code[i] = av[2][i];
             }
             secret_code[4] = '\0';
         }
         } else {
-            printf("\nGenerating secret code...\n");
+            // printf("\nGenerating secret code...\n");
             srand(time(0)); 
             // required before rand() to use timestamp as seed for rand generator
             for(int i = 0; i < 4;i++){
@@ -203,12 +203,12 @@ int read_input(char* ptr_array, char c_array[]) {
 int game_engine(char secret_code[], int rounds_declared){
     int round_index     = 0;
     int answer_check    = 0;
-    printf("Rounds Declared -> %i\n", rounds_declared);
-    printf("Secret Code -> %s\n", secret_code);
+    // printf("Rounds Declared -> %i\n", rounds_declared);
+    // printf("Secret Code -> %s\n", secret_code);
     while(round_index < rounds_declared && answer_check != 1){
         printf("\n---\n");
         printf("Round %i\n", round_index);
-        printf("Secret Code -> %s\n", secret_code); // for testing reference
+        // printf("Secret Code -> %s\n", secret_code); // for testing reference
 
         int n;
         char player_answer[5] = {0,0,0,0,'\0'};
@@ -238,23 +238,26 @@ int game_engine(char secret_code[], int rounds_declared){
 
 int main(int ac, char** av){
 
-    time_t sec;
-    time(&sec);
+    // time_t sec;
+    // time(&sec);
 
-    printf("\n=========================================\n");
-    printf("\nHello, my_mastermind -> initializing...\n");
-    printf("Time: %.24s\n", ctime(&sec));
-    printf("\n=========================================\n");
+    // printf("\n=========================================\n");
+    // printf("\nHello, my_mastermind -> initializing...\n");
+    // printf("Time: %.24s\n", ctime(&sec));
+    // printf("\n=========================================\n");
 
     const int pieces_size = 9;
     char secret_code[4];
     int rounds_declared = 0;
 
     generate_secret_code(ac, av, pieces_size, secret_code); 
-    printf("Secret Code: %s\n", secret_code);
+    // printf("Secret Code: %s\n", secret_code);
 
-    printf("\n=========================================\n");
-    printf("\nStarting Game...\n\n");
+    // printf("\n=========================================\n");
+    // printf("\nStarting Game...\n\n");
+
+    printf("Will you find the secret code?\n");
+    printf("Please enter a valid guess\n");
 
     rounds_declared= initialize_rounds(ac, av);
     game_engine(secret_code, rounds_declared);
