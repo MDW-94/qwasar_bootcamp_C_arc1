@@ -66,19 +66,12 @@ int read_input(char* ptr_array, char c_array[]) {
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
         x = 2;
         // printf("x changes (invalid char - inside read while) %i\n", x);
-        // if(index < 4){
-        //     // *ptr_c = '0';
-        //     ptr_c = &ch;
-        //     x = 2;
-        // } else {
-        //     ptr_c = &ch;
-        //     x = 2;
-        // }
       }
 
     //   printf("index %i\n", index);
       index++;
       ptr_c++;
+
       if(index > 3 && n != 0){
         *ptr_c = '\n';
         ptr_c = &ch;
@@ -88,7 +81,6 @@ int read_input(char* ptr_array, char c_array[]) {
             x = 2;
         }
       }
-   
     }
 
     // printf("read while loop finished: x -> %i && index -> %i\n", x, index);
@@ -143,12 +135,14 @@ int read_input(char* ptr_array, char c_array[]) {
 
     if(x == 0 && index == 4){
         // printf("X value -> %i\n", x);
-        printf("Good String -> %s", c_array); //read automatically makes a newline?
+        //printf("Good String -> %s", c_array); //read automatically makes a newline?
+        return 1;
     } 
 
     if((x != 0 && x != 1) || x == 2 || index != 4){
         // printf("X value -> %i\n", x);
-        printf("Wrong input -> %s", c_array); //read automatically makes a newline?
+        //printf("Wrong input -> %s", c_array); //read automatically makes a newline?
+        printf("Wrong Input!\n");
       x = 0;
     }
   
