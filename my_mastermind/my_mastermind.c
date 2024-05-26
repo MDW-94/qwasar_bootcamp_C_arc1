@@ -38,6 +38,56 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
+void determine_diff(char* answer, char* secret_code){
+    // SETUP
+    int well_placed     = 0;
+    int misplaced       = 0;
+    int index           = 0;
+    int check_answer[4] = {0,0,0,0};
+    int check_code[4]   = {0,0,0,0};
+
+    // PT.1
+    while(answer[index] != '\0'){
+        if(answer[index] == secret_code[index]){
+            // printf("WP Found at index -> %i\n", index);
+            well_placed++;
+            check_answer[index]     = 1;
+            check_code[index]       = 1;
+        }
+        // printf("\nWhile 1 Index Count: %i\n", index);
+        index++;
+    }
+
+    // RESET INDEX
+    index               = 0;
+
+    // PT.2
+    while(answer[index] != '\0'){
+        if(answer[index] != secret_code[index]){
+            int j       = 0;
+            while(secret_code[j] != '\0'){
+                if(answer[index] == secret_code[j] 
+                && j != index 
+                && check_code[j] != 1 
+                && check_answer[index] != 1){
+                    // printf("Misplaced found at index -> %i | j -> %i\n", index, j);
+                    misplaced++;
+                    check_answer[index] = 1;
+                    check_code[j]       = 1;
+                    j                   = 3;
+                }
+                j++; 
+            }
+        }
+        // printf("\nWhile 2 Index Count: %i\n", index);
+        index++;
+    }
+    printf("----------------------------\n");
+    printf("Well placed pieces: %i\n", well_placed);
+    printf("Misplaced pieces: %i\n", misplaced);
+    printf("----------------------------\n");
+}
+
 int read_input(char* ptr_array, char c_array[]) {
 
     for(int i = 0 ; i < 4;i++){
@@ -73,7 +123,7 @@ int read_input(char* ptr_array, char c_array[]) {
       ptr_c++;
 
       if(index > 3 && n != 0){
-        *ptr_c = '\n';
+        *ptr_c = '\0';
         ptr_c = &ch;
         // printf("*buffer changed @ %i*\n", index);
         if(index > 4){
@@ -161,13 +211,18 @@ int game_engine(char secret_code[], int rounds_declared){
         printf("Secret Code -> %s\n", secret_code); // for testing reference
 
         int n;
-        char player_answer[5] = {0,0,0,0,'\n'};
+        char player_answer[5] = {0,0,0,0,'\0'};
         char* p_panswer = player_answer;
         if((n = read_input(p_panswer, player_answer)) != 0 || n != -1){
             //IF ANSWER INCORRECT - ADVANCE ROUND
             if(n == 0){
                 return answer_check = 1;
             }
+
+            if(strcmp(player_answer, secret_code) != 0){
+                determine_diff(player_answer, secret_code);
+            }
+            
             round_index++;
             printf("Game Engine String -> %s", player_answer);
         } else {
