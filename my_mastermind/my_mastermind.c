@@ -221,12 +221,14 @@ int game_engine(char secret_code[], int rounds_declared){
 
             if(strcmp(player_answer, secret_code) != 0){
                 determine_diff(player_answer, secret_code);
+            } else {
+                printf("Congratz! You did it!\n");
+                answer_check = 1;
             }
             
             round_index++;
-            printf("Game Engine String -> %s", player_answer);
+            // printf("Game Engine String Check -> %s", player_answer);
         } else {
-            // IF ANSWER CORRECT OR EOF:
             answer_check = 1;
         }
     }
