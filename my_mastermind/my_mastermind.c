@@ -84,7 +84,7 @@ void determine_diff(char* answer, char* secret_code){
     }
     // printf("----------------------------\n");
     printf("Well placed pieces: %i\n", well_placed);
-    printf("Misplaced pieces: %i", misplaced);
+    printf("Misplaced pieces: %i\n", misplaced);
     // printf("----------------------------\n");
 }
 
@@ -206,7 +206,7 @@ int game_engine(char secret_code[], int rounds_declared){
     // printf("Rounds Declared -> %i\n", rounds_declared);
     // printf("Secret Code -> %s\n", secret_code);
     while(round_index < rounds_declared && answer_check != 1){
-        printf("\n---\n");
+        printf("---\n");
         printf("Round %i\n", round_index);
         // printf("Secret Code -> %s\n", secret_code); // for testing reference
 
@@ -234,7 +234,6 @@ int game_engine(char secret_code[], int rounds_declared){
     }
     return 00;
 }
-
 
 int main(int ac, char** av){
 
