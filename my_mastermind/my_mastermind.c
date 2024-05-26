@@ -82,59 +82,15 @@ int handle_read(char *tmp_ptr, int i){
     return n;
 }
 
-// int read_input(char* ptr_answer_array, char ogstring[]){
-//     // initialize_array(ptr_answer_array);
-//     // Set temp_ptr to first index of original array - CLEAN
-//     char* tmp_ptr = ptr_answer_array;
-//     int i = 0;
-//     tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
-//     printf("Player Input Check -> %s", ogstring);
-//     int n;
-//     while((n = handle_read(tmp_ptr, i)) != 0 && i < 4){
-//         tmp_ptr++;
-//         i++;
-//         if(n == -1){
-//             //Wrong Input
-//             //Call initialize tmp_ptr function
-//             tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
-//             i = 0;
-//             printf("\nWrong Input!");
-//             // printf("\nWrong Input!"); // PRINTS AT TEH CHARACTER AFTER THE WRONG INPUT - NEEDS TO BE ONCE
-//         }
-//         // printf("\nPlayer Answer Array -> %s\n", ptr_answer_array);
-//     }
-//     // player_answer[4] = '\0';
-//     printf("Player Input Check -> %s", ogstring);
-//     // for(int i = 0; i<5;i++){
-//     //     printf("%c", *player_answer);
-//     // }
- 
-//     // printf("\nPost Clear: Player Input Check -> %c", ch);
-//     // CLEAR BUFFER!
-
-//     // IF INCORRECT RETURN 0, IF CORRECT RETURN 1, IF WRONG INPUT RECURSIVE COMMENT, IF EOF RETURN -1
-//     return 0;
-// }
-
 int read_input(char* ptr_array, char c_array[]) {
 
     for(int i = 0 ; i < 4;i++){
         c_array[i] = 0;
     }
-    // c_array[4] = '\n';
 
   int result = 0;
-  while(result != 1 || result != EOF){
-    int n = 0;
-    int x;
-    char ch = 00;
-    int index = 0;
-    char* ptr_c = ptr_array;
-
-    //
-    //char c_array[5] = {'0','0','0','0','\n'};
-    //char* ptr_char = &ch;
-    //char* ptr_array = c_array;
+  while(result != 1){
+    int n = 0, index = 0, x = 0; char ch = 00; char* ptr_c = ptr_array;
 
     while((n = read(0,ptr_c,1)) != 0 && n != -1 && *ptr_c != '\n'){ 
 
@@ -152,40 +108,46 @@ int read_input(char* ptr_array, char c_array[]) {
         }
 
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
+        x = 2;
+        printf("x changes (invalid char) %i\n", x);
         if(index < 4){
-            *ptr_c = '0';
+            // *ptr_c = '0';
+            x = 2;
             ptr_c = &ch;
         } else {
+            x = 2;
             ptr_c = &ch;
         }
-        x = 2;
       }
 
     //   printf("index %i\n", index);
       index++;
       ptr_c++;
       if(index > 3 && n != 0){
-        *ptr_c = '0';
+        *ptr_c = '\n';
         ptr_c = &ch;
-        // printf("buffer changed\n");
+        printf("*buffer changed @ %i*\n", index);
+        if(index > 4){
+            printf("*buffer changed @ %i*\n", index);
+            x = 2;
+        }
       }
-      if(index > 4){
-       x = 2;
-      }
+   
     }
+
+    printf("read while loop finished: x -> %i && index -> %i\n", x, index);
 
     if(n == -1){
       return result = 1;
     }
     
-    // If user input is less than 4 characters
     if(*ptr_c == '\n' && index < 4){
         *ptr_c = '0';
         x = 2;
+        printf("x changes (input too short - outside read while loop) %i\n", x);
         for(; index < 4;index++){
         c_array[index] = '0';
         }
-        // c_array[4] = '\n';
       }
 
     if(*ptr_c == '^'){
@@ -194,17 +156,18 @@ int read_input(char* ptr_array, char c_array[]) {
       }
 
     if(x == 1 && *ptr_c == 'd'){
+        //    printf("EOF\n");
        *ptr_c = '0';
        ptr_c = &ch;
-    //    printf("EOF\n");
        n = 0;
        return result = 1;
       }
 
     if((*ptr_c < '0' && *ptr_c != '\n')|| (*ptr_c > '9' && *ptr_c != '\n')){
       x = 2;
+      printf("x changes (invalid char (2)) %i\n", x);
         if(index < 4){
-            *ptr_c = '0';
+            // *ptr_c = '0';
             ptr_c = &ch;
         } else {
             ptr_c = &ch;
@@ -213,23 +176,20 @@ int read_input(char* ptr_array, char c_array[]) {
 
     if(index > 4){
        x = 2;
+       printf("x changes (input to big) %i\n", x);
+        ptr_c = &ch;
       }
 
-    if(index == 4){
-      c_array[4] = '\n';
-     }
-
-    if(x != 2 && index <= 4){
-      printf("Good String -> %s", c_array);
+    if(x != 2 && index == 4){
+        printf("X value -> %i\n", x);
+        printf("Good String -> %s", c_array); //read automatically makes a newline?
     } 
 
-    if(x == 2){
-      printf("Wrong input -> %s\n", c_array);
-    //   printf("x -> %i\n", x);
+    if(x == 2 || index != 4){
+        printf("X value -> %i\n", x);
+        printf("Wrong input -> %s\n", c_array); //read automatically makes a newline?
       x = 0;
     }
-
-    // printf("String Final -> %s", c_array);
 
     if(n == 0){
       return 0;
@@ -525,3 +485,38 @@ int main(int ac, char** av){
 
 // switch(){} for multiple if statements?
 // default: // 
+
+
+// int read_input(char* ptr_answer_array, char ogstring[]){
+//     // initialize_array(ptr_answer_array);
+//     // Set temp_ptr to first index of original array - CLEAN
+//     char* tmp_ptr = ptr_answer_array;
+//     int i = 0;
+//     tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
+//     printf("Player Input Check -> %s", ogstring);
+//     int n;
+//     while((n = handle_read(tmp_ptr, i)) != 0 && i < 4){
+//         tmp_ptr++;
+//         i++;
+//         if(n == -1){
+//             //Wrong Input
+//             //Call initialize tmp_ptr function
+//             tmp_ptr = initialize_ptr(tmp_ptr, ptr_answer_array, i);
+//             i = 0;
+//             printf("\nWrong Input!");
+//             // printf("\nWrong Input!"); // PRINTS AT TEH CHARACTER AFTER THE WRONG INPUT - NEEDS TO BE ONCE
+//         }
+//         // printf("\nPlayer Answer Array -> %s\n", ptr_answer_array);
+//     }
+//     // player_answer[4] = '\0';
+//     printf("Player Input Check -> %s", ogstring);
+//     // for(int i = 0; i<5;i++){
+//     //     printf("%c", *player_answer);
+//     // }
+ 
+//     // printf("\nPost Clear: Player Input Check -> %c", ch);
+//     // CLEAR BUFFER!
+
+//     // IF INCORRECT RETURN 0, IF CORRECT RETURN 1, IF WRONG INPUT RECURSIVE COMMENT, IF EOF RETURN -1
+//     return 0;
+// }
