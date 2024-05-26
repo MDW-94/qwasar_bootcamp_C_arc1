@@ -38,50 +38,6 @@ int initialize_rounds(int ac, char** av){
     return 10;
 }
 
-char* initialize_ptr(char* tmp_ptr, char* ptr_ref, int i){
-    for( ; i<5; i++){
-        *tmp_ptr = 00;
-        tmp_ptr++;
-    }
-    i = 0;
-    *tmp_ptr = '\0';
-    //Set tmp_ptr to beginning of array
-    return tmp_ptr = ptr_ref;
-}
-
-
-int handle_read(char *tmp_ptr, int i){
-
-    // char ch;
-    int n;
-    if((n = read(0, tmp_ptr, 1)) != -1 && n != 0 && i < 5){
-        // write(1, tmp_ptr, 1);
-
-        //Handle Out of Bounds Characters
-        if(*tmp_ptr < '0' || *tmp_ptr > '9'){
-            return n = -1;
-            // printf("\nWrong Input!");
-            // *tmp_ptr = ' ';
-            //needs to say "Wrong Input and let them attempt another guess"
-        }
-
-        if(*tmp_ptr == 10 || *tmp_ptr == 14){ //NL or Carriage Return
-
-        }
-
-        //Handle EOF
-        if(n == 0){
-            return n;
-        }
-    };  
-    //Handle Null Terminator at end of string
-    printf("\nindex value -> %i\n", i);
-    if(i == 4){
-        *tmp_ptr = '\0';
-    }
-    return n;
-}
-
 int read_input(char* ptr_array, char c_array[]) {
 
     for(int i = 0 ; i < 4;i++){
@@ -109,14 +65,14 @@ int read_input(char* ptr_array, char c_array[]) {
 
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
         x = 2;
-        printf("x changes (invalid char) %i\n", x);
+        printf("x changes (invalid char - inside read while) %i\n", x);
         if(index < 4){
             // *ptr_c = '0';
-            x = 2;
             ptr_c = &ch;
+            x = 2;
         } else {
-            x = 2;
             ptr_c = &ch;
+            x = 2;
         }
       }
 
@@ -135,7 +91,12 @@ int read_input(char* ptr_array, char c_array[]) {
    
     }
 
-    printf("read while loop finished: x -> %i && index -> %i\n", x, index);
+    // printf("read while loop finished: x -> %i && index -> %i\n", x, index);
+
+    if(n == 0){
+    x = 1;
+    return 0;
+    }
 
     if(n == -1){
       return result = 1;
@@ -180,19 +141,15 @@ int read_input(char* ptr_array, char c_array[]) {
         ptr_c = &ch;
       }
 
-    if(x != 2 && index == 4){
-        printf("X value -> %i\n", x);
+    if(x == 0 && index == 4){
+        // printf("X value -> %i\n", x);
         printf("Good String -> %s", c_array); //read automatically makes a newline?
     } 
 
-    if(x == 2 || index != 4){
-        printf("X value -> %i\n", x);
-        printf("Wrong input -> %s\n", c_array); //read automatically makes a newline?
+    if((x != 0 && x != 1) || x == 2 || index != 4){
+        // printf("X value -> %i\n", x);
+        printf("Wrong input -> %s", c_array); //read automatically makes a newline?
       x = 0;
-    }
-
-    if(n == 0){
-      return 0;
     }
   
   }
@@ -519,4 +476,49 @@ int main(int ac, char** av){
 
 //     // IF INCORRECT RETURN 0, IF CORRECT RETURN 1, IF WRONG INPUT RECURSIVE COMMENT, IF EOF RETURN -1
 //     return 0;
+// }
+
+
+// int handle_read(char *tmp_ptr, int i){
+
+//     // char ch;
+//     int n;
+//     if((n = read(0, tmp_ptr, 1)) != -1 && n != 0 && i < 5){
+//         // write(1, tmp_ptr, 1);
+
+//         //Handle Out of Bounds Characters
+//         if(*tmp_ptr < '0' || *tmp_ptr > '9'){
+//             return n = -1;
+//             // printf("\nWrong Input!");
+//             // *tmp_ptr = ' ';
+//             //needs to say "Wrong Input and let them attempt another guess"
+//         }
+
+//         if(*tmp_ptr == 10 || *tmp_ptr == 14){ //NL or Carriage Return
+
+//         }
+
+//         //Handle EOF
+//         if(n == 0){
+//             return n;
+//         }
+//     };  
+//     //Handle Null Terminator at end of string
+//     printf("\nindex value -> %i\n", i);
+//     if(i == 4){
+//         *tmp_ptr = '\0';
+//     }
+//     return n;
+// }
+
+
+// char* initialize_ptr(char* tmp_ptr, char* ptr_ref, int i){
+//     for( ; i<5; i++){
+//         *tmp_ptr = 00;
+//         tmp_ptr++;
+//     }
+//     i = 0;
+//     *tmp_ptr = '\0';
+//     //Set tmp_ptr to beginning of array
+//     return tmp_ptr = ptr_ref;
 // }
