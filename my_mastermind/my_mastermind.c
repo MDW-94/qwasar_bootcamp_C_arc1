@@ -66,14 +66,14 @@ int read_input(char* ptr_array, char c_array[]) {
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
         x = 2;
         // printf("x changes (invalid char - inside read while) %i\n", x);
-        if(index < 4){
-            // *ptr_c = '0';
-            ptr_c = &ch;
-            x = 2;
-        } else {
-            ptr_c = &ch;
-            x = 2;
-        }
+        // if(index < 4){
+        //     // *ptr_c = '0';
+        //     ptr_c = &ch;
+        //     x = 2;
+        // } else {
+        //     ptr_c = &ch;
+        //     x = 2;
+        // }
       }
 
     //   printf("index %i\n", index);
