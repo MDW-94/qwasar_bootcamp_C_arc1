@@ -65,7 +65,7 @@ int read_input(char* ptr_array, char c_array[]) {
 
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
         x = 2;
-        printf("x changes (invalid char - inside read while) %i\n", x);
+        // printf("x changes (invalid char - inside read while) %i\n", x);
         if(index < 4){
             // *ptr_c = '0';
             ptr_c = &ch;
@@ -82,9 +82,9 @@ int read_input(char* ptr_array, char c_array[]) {
       if(index > 3 && n != 0){
         *ptr_c = '\n';
         ptr_c = &ch;
-        printf("*buffer changed @ %i*\n", index);
+        // printf("*buffer changed @ %i*\n", index);
         if(index > 4){
-            printf("*buffer changed @ %i*\n", index);
+            // printf("*buffer changed @ %i*\n", index);
             x = 2;
         }
       }
@@ -105,7 +105,7 @@ int read_input(char* ptr_array, char c_array[]) {
     if(*ptr_c == '\n' && index < 4){
         *ptr_c = '0';
         x = 2;
-        printf("x changes (input too short - outside read while loop) %i\n", x);
+        // printf("x changes (input too short - outside read while loop) %i\n", x);
         for(; index < 4;index++){
         c_array[index] = '0';
         }
@@ -126,7 +126,7 @@ int read_input(char* ptr_array, char c_array[]) {
 
     if((*ptr_c < '0' && *ptr_c != '\n')|| (*ptr_c > '9' && *ptr_c != '\n')){
       x = 2;
-      printf("x changes (invalid char (2)) %i\n", x);
+    //   printf("x changes (invalid char (2)) %i\n", x);
         if(index < 4){
             // *ptr_c = '0';
             ptr_c = &ch;
@@ -137,7 +137,7 @@ int read_input(char* ptr_array, char c_array[]) {
 
     if(index > 4){
        x = 2;
-       printf("x changes (input to big) %i\n", x);
+    //    printf("x changes (input to big) %i\n", x);
         ptr_c = &ch;
       }
 
