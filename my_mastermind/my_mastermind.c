@@ -82,10 +82,10 @@ void determine_diff(char* answer, char* secret_code){
         // printf("\nWhile 2 Index Count: %i\n", index);
         index++;
     }
-    printf("----------------------------\n");
+    // printf("----------------------------\n");
     printf("Well placed pieces: %i\n", well_placed);
-    printf("Misplaced pieces: %i\n", misplaced);
-    printf("----------------------------\n");
+    printf("Misplaced pieces: %i", misplaced);
+    // printf("----------------------------\n");
 }
 
 int read_input(char* ptr_array, char c_array[]) {
