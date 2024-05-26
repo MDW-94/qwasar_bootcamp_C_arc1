@@ -118,6 +118,11 @@ int handle_read(char *tmp_ptr, int i){
 
 int read_input(char* ptr_array, char c_array[]) {
 
+    for(int i = 0 ; i < 4;i++){
+        c_array[i] = 0;
+    }
+    c_array[4] = '\n';
+
   int result = 0;
   while(result != 1 || result != EOF){
     int n = 0;
@@ -146,6 +151,12 @@ int read_input(char* ptr_array, char c_array[]) {
         }
 
       if((*ptr_c < '0' && *ptr_c != '\n') || (*ptr_c > '9' && *ptr_c != '\n')){
+        if(index < 4){
+            *ptr_c = '0';
+            ptr_c = &ch;
+        } else {
+            ptr_c = &ch;
+        }
         x = 2;
       }
 
@@ -167,8 +178,12 @@ int read_input(char* ptr_array, char c_array[]) {
     
     // If user input is less than 4 characters
     if(*ptr_c == '\n' && index < 4){
-      *ptr_c = '0';
-      x = 2;
+        *ptr_c = '0';
+        x = 2;
+        // for(; index < 4;index++){
+        // c_array[index] = '0';
+        // }
+        // c_array[4] = '\n';
       }
 
     if(*ptr_c == '^'){
@@ -186,8 +201,12 @@ int read_input(char* ptr_array, char c_array[]) {
 
     if((*ptr_c < '0' && *ptr_c != '\n')|| (*ptr_c > '9' && *ptr_c != '\n')){
       x = 2;
-      *ptr_c = '0';
-      ptr_c = &ch;
+        if(index < 4){
+            *ptr_c = '0';
+            ptr_c = &ch;
+        } else {
+            ptr_c = &ch;
+        }
     }
 
     if(index > 4){
@@ -203,12 +222,12 @@ int read_input(char* ptr_array, char c_array[]) {
     } 
 
     if(x == 2){
-      printf("wrong input\n");
+      printf("Wrong input -> %s\n", c_array);
     //   printf("x -> %i\n", x);
       x = 0;
     }
 
-     printf("String Final -> %s", c_array);
+    // printf("String Final -> %s", c_array);
 
     if(n == 0){
       return 0;
@@ -233,7 +252,11 @@ int game_engine(char secret_code[], int rounds_declared){
         char* p_panswer = player_answer;
         if((n = read_input(p_panswer, player_answer)) != 0 || n != -1){
             //IF ANSWER INCORRECT - ADVANCE ROUND
+            if(n == 0){
+                return answer_check = 1;
+            }
             round_index++;
+            printf("Game Engine String -> %s", player_answer);
         } else {
             // IF ANSWER CORRECT OR EOF:
             answer_check = 1;
