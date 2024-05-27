@@ -4,28 +4,53 @@
 #include <time.h>
 #include <unistd.h>
 
-char generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]){
-      if(ac > 1){ //if there are any args in run command
-        char code_param[1]; *code_param = atoi(av[1]);
-        if(strcmp(code_param, "-c") && av[2]){
-            // printf("\nDeclared Secret Code: Initializing...\n");
-            for(int i = 0; i < 4;i++){
-                secret_code[i] = av[2][i];
-            }
-            secret_code[4] = '\0';
+char* my_strcpy (char* param_1, char* param_2){
+    char* result = param_1;
+
+    while((*param_1++ = *param_2++));
+
+    return result;
+}
+
+// char generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]){
+//       if(ac > 1){ //if there are any args in run command
+//         char code_param[2]; *code_param = atoi(av[1]);
+//         if(strcmp(code_param, "-c") && av[2]){
+//             // printf("\nDeclared Secret Code: Initializing...\n");
+//             for(int i = 0; i < 4;i++){ //potential buffer overflow due to '4' - if input is shorter then issues may occur
+//             // my_strncpy? strncpy(secret_code, av[2], 4);
+//                 secret_code[i] = av[2][i];
+//             }
+//             secret_code[4] = '\0';
+//         }
+//         } else {
+//             // printf("\nGenerating secret code...\n");
+//             srand(time(0)); 
+//             // required before rand() to use timestamp as seed for rand generator
+//             for(int i = 0; i < 4;i++){
+//                 int number = (rand() % pieces_size);
+//                 // printf("%i\n", number);
+//                 secret_code[i] = '0' + number;
+//             }
+//             secret_code[4] = '\0';
+//         }
+//     return *secret_code;
+// }
+
+void generate_secret_code(int ac, char** av, const int pieces_size, char secret_code[]) {
+    if (ac > 1 && strcmp(av[1], "-c") == 0 && av[2]) {
+        // Declared secret code from command line
+        strncpy(secret_code, av[2], 4);
+        secret_code[4] = '\0';  // Ensure null-terminated
+    } else {
+        // Generate random secret code
+        srand(time(0));  // Seed for rand()
+        for (int i = 0; i < 4; i++) {
+            int number = rand() % pieces_size;
+            secret_code[i] = '0' + number;
         }
-        } else {
-            // printf("\nGenerating secret code...\n");
-            srand(time(0)); 
-            // required before rand() to use timestamp as seed for rand generator
-            for(int i = 0; i < 4;i++){
-                int number = (rand() % pieces_size);
-                // printf("%i\n", number);
-                secret_code[i] = '0' + number;
-            }
-            secret_code[4] = '\0';
-        }
-    return *secret_code;
+        secret_code[4] = '\0';
+    }
 }
 
 int initialize_rounds(int ac, char** av){
@@ -247,7 +272,7 @@ int main(int ac, char** av){
     // printf("\n=========================================\n");
 
     const int pieces_size = 9;
-    char secret_code[4];
+    char secret_code[5];
     int rounds_declared = 0;
 
     generate_secret_code(ac, av, pieces_size, secret_code); 
