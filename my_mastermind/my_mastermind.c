@@ -30,10 +30,7 @@ void generate_secret_code(int ac, char** av, const int pieces_size, char secret_
 
 int initialize_rounds(int ac, char** av){
     if(ac > 3 && strcmp(av[3], "-t") == 0 && av[4]){
-        // char code_param[2]; *code_param = atoi(av[3]);
-        // if(strcmp(code_param, "-t") && av[4]){
             return atoi(av[4]);
-        // }
     }
     return 10;
 }
