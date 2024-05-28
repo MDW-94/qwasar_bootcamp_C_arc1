@@ -1,6 +1,6 @@
 # <h1 align="center" >my_mastermind.c</h1>
 
-![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
+<div align="center">![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)</div>
 
 A text-based game written in C that takes user input and evaluates it against a declared/randomly generated secret code. 
 
@@ -11,7 +11,7 @@ Based of the classic code-breaking game Mastermind, the goal is to guess the fou
 >Ctrl + d (^d) has been implemented 
 >to end the program at the players' discretion.
 
-![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
+<div align="center">![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)</div>
 
 ## Table of Contents
 - [Installation](#installation)
