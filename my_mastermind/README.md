@@ -159,3 +159,20 @@ If the player has not managed to guess the Secret Code then the **determine_diff
 This function is responsible for taking user input from STDIN and analysing whether it is an acceptable input for the determine_diff function. It accepts two parameters, the empty character player_answer and a pointer to its first index poisition.
 
 Firstly, this function clears the array of any potential values leftover from previous guesses, initializing the array so it is ready to accept the values from STDIN. 
+
+A parent while loop is triggered to handle the conditions of the read() function utilised in this read_input function.
+
+Read():
+
+This function is responsible for reading in data by a specified amount into a buffer. In this scenario, I have changed the buffer to be the player_answer array so that when the STDIN input from the keyboard is read it is stored directly in the place it needs to be. The read functions first argument is the location of where the data will be read from (here it is set to 0, which is stdin), the second is the location of where the dat will be stored (here this is set to the pointer created for the array) and finally the integer at the end specifies the number of bytes of data to be read at a time (in this asisgnment it is required that it be set to 1).
+
+There were a few issues that I encountered when using read as it was set to read one byte at a time - the main issue was handling a EOF sequence from the user input, as this is overrided whilst the nested read() function is being called within the while loop. As a result there are some if statements to handle the stream of character data as it is being read in.
+
+As the while loop is called several integer variables, a character variable and a pointer variable (set to the positino of the original pointer) are declared - these variables are a menas of either dynamically changing the buffer of the read() function, creating conditions that are met as the data is being read in (in order to trigger EOF or other conditions) or to populate the player_answer array with the users input.
+
+Since read() returns and integer which corresponds to the number of bytes it has read upon being called, the while loop is bound to the condition that while read does not return 0 or -1 (ie. it is still reading characters and hasn't reached the end of the input) then the if statements within are called. Note, there is also a condition to evaluate the character at the dereferenced pointer position, this is to stop a newline being passed into the player_answer array before four characters are declared.
+
+The first sequence of if statements handle EOF - they evaluate whether the dereferenced pointer is equivalent to ctrl + d. It is a two-stage unlocking process of the while loop, the first if statement allows the second to trigger and as a result, end the while. During this process the buffer is swapped to the address of the empty character variable, which is later used to deal with buffer overflow but here it is to prevent unwanted values being placed within the array. This final if statement returns "result = 1" which will terminate the parent while loop, containing the read while loop.
+
+Further handling of the data stream includes the next if statement which evaluates whether the character read in is within the correct range required for the games evaluation (0-9). If the value at the dereferenced pointer position is not within this range, or it is a newline character then the "x" integer variable is set to 2 - this is an error handling process which prevents the data being sent to the player_answer array aand instead returns a "Wrong Input!" message to the player. This is a requirement of the game and means that the player, within the same turn, can input another until that answer is suitable for evaluation (thus incrementing to the next round or wining the game).
+
