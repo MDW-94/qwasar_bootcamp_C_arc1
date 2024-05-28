@@ -1,4 +1,4 @@
-# <h1 align="center" >my_mastermind.c</h1>
+# <h1 align="center" >U+1F522 my_mastermind.c U+1F522</h1>
 
 ![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
 
