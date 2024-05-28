@@ -10,3 +10,16 @@ The game runs in the terminal, recieving input through stdin (the keyboard). Ctr
 
 ![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
 
+## Table of Contents
+- [Installation](#installation)
+- [Usage](#usage)
+
+## Installation
+
+## Usage
+
+To run the project, use the following commands (assuming repository has been pulled to local directory):
+
+```bash
+make
+```
