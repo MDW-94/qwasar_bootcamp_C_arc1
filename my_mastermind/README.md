@@ -3,7 +3,6 @@
 ![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
 
 <div align="center">
-<img src="{https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white}"/>
 
 A text-based game written in C that takes user input and evaluates it against a declared/randomly generated secret code. 
   
@@ -15,10 +14,12 @@ Based of the classic code-breaking game Mastermind, the goal is to guess the fou
 >recieving input through STDIN (the keyboard).  
 >Ctrl + d (^d) has been implemented  
 >to end the program at the players' discretion.
+
+![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
   
 </div>
 
-![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
+
 
 ## Table of Contents
 - [Task](#task)
