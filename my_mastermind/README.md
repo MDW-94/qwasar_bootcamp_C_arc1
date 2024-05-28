@@ -13,7 +13,7 @@ The game runs in the terminal, recieving input through STDIN (the keyboard). Ctr
 ## Table of Contents
 - [Installation](#installation)
 - [Usage](#usage)
-    -[Usage: Customise](#customising-your-game)
+    -[Customise](#customising-your-game)
 
 ## Installation
 
