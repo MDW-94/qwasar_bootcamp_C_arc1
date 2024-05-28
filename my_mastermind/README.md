@@ -162,7 +162,7 @@ Firstly, this function clears the array of any potential values leftover from pr
 
 A parent while loop is triggered to handle the conditions of the read() function utilised in this read_input function.
 
-Read():
+**Read():**
 
 This function is responsible for reading in data by a specified amount into a buffer. In this scenario, I have changed the buffer to be the player_answer array so that when the STDIN input from the keyboard is read it is stored directly in the place it needs to be. The read functions first argument is the location of where the data will be read from (here it is set to 0, which is stdin), the second is the location of where the dat will be stored (here this is set to the pointer created for the array) and finally the integer at the end specifies the number of bytes of data to be read at a time (in this asisgnment it is required that it be set to 1).
 
