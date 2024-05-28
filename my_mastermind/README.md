@@ -11,6 +11,7 @@ Based of the classic code-breaking game Mastermind, the goal is to guess the fou
 >recieving input through STDIN (the keyboard). 
 >Ctrl + d (^d) has been implemented 
 >to end the program at the players' discretion.
+  
 </div>
 
 ![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
