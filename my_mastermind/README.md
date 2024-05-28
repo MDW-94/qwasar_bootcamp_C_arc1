@@ -23,3 +23,25 @@ To run the project, use the following commands (assuming repository has been pul
 ```bash
 make
 ```
+(Note: This will compile and the run program with the default number of 10 Rounds and a randomly generated Secret Code)
+
+To declare a Secret Code:
+
+```bash
+./my_mastermind.c -c <"Your 4 digit code here">
+```
+(Note: Replace <"Your 4 digit code here"> with a valid four digit number, e.g. ./my_mastermind -c 1234)
+
+To declare the number of Rounds:
+
+```bash
+./my_mastermind.c -t <"No. of Rounds">
+```
+
+(Note: Replace <"No. of Rounds"> with a valid number, e.g. ./my_mastermind -t 20)
+
+To Declare both a Secret Code and a Number of Rounds:
+
+```bash
+./my_mastermind.c -c <"4 digit code"> -t <"No. of Rounds">
+```
