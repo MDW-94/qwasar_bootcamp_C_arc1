@@ -1,12 +1,12 @@
-# my_mastermind.c
+# <h1 text-align:center >my_mastermind.c</h1>
 
-![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png);
+![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
 
 A text-based game written in C that takes user input and evaluates it against a declared/randomly generated secret code. 
 
 Based of the classic code-breaking game Mastermind, the goal is to guess the four integer secret code within 10 or a designated number of rounds. If a valid guess isn't correct then feedback will be provided - 'well-placed' integers are ones that are correct in value and position, 'misplaced' integers are ones that are correct in value but inocrrect in position.
 
-The game runs in the terminal, recieving input through stdin (the keyboard). Ctrl + d (^d) has been implemented to end the program at the players' discretion. 
+The game runs in the terminal, recieving input through STDIN (the keyboard). Ctrl + d (^d) has been implemented to end the program at the players' discretion. 
 
 ![Alt Text - A screenshot of the game running, specifically the text prompts in the terminal](./screenshots/Screenshot_2.png)
 
@@ -15,6 +15,18 @@ The game runs in the terminal, recieving input through stdin (the keyboard). Ctr
 - [Usage](#usage)
 
 ## Installation
+
+This program comes with a Makefile which will handle all the necessary compilation processes for installation.
+
+1. Clone the repository:
+```bash
+git clone <repository URL>
+```
+
+2. Compile program in directory:
+```bash
+make
+```
 
 ## Usage
 
