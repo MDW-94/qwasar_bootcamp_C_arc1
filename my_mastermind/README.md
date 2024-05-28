@@ -130,3 +130,16 @@ This function takes a total of four parameters and makes use of a self-built 'my
 
 At the end of both results the final index value of the secret_code array is initialized to '\0'.
 
+This funcion ultimately returns void as the secret code array is declared with the main function. Therefore, the initialized values resulting from the generate_secret_code function are available to be passed through the other functions that run throughout the rest of the game.
+
+### initialize_rounds()
+
+Similarly to the generate_secret_code function this function accepts the argument count and argument vector parameters. Allowing the user to declare the number of rounds for the game they are about to play, if none are declared then the default value is 10 rounds.
+
+The strcmp (string comparison) function is nested within an if statement, if the value returned from strcmp is 0 (ie. there is no difference between the two strings) then the function will run, providing there is a value at the fourth index position of the argument vector array. The comparison is made against "-t".
+
+If the conditions of the if statement are met, then the function calls the atoi function. This function converts the array at the index position of the parent array in the argument vector into a returned value that can be stored in a variable to be used in the program. In this case, it will take the integer value and set the rounds_declared variable to this value.
+
+### game_engine()
+
+This functino is responsible for the running of the entire game. It takes two parameters, a character array (which will be our secret code) and an integer (which will be the number of rounds declared). 
