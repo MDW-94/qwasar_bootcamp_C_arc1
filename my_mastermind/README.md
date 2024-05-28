@@ -142,4 +142,12 @@ If the conditions of the if statement are met, then the function calls the atoi 
 
 ### game_engine()
 
-This functino is responsible for the running of the entire game. It takes two parameters, a character array (which will be our secret code) and an integer (which will be the number of rounds declared). 
+This function is responsible for the running of the entire game. It takes two parameters, a character array (which will be our secret code) and an integer (which will be the number of rounds declared). A couple of integer variables are declared and initialized to 0 (rounds_index, answer_check).
+
+A while loop is declared and bound to the condition that if the rounds_index is less that the rounds_declared (the number of rounds set for the game) then the loop will trigger the following - importantly it will also only run if the answer_check does not reach 1:
+
+During each iteration, a pair of print statements create the visual implication of each round for the player (Round 1, Round 2 etc.). At this point the iteration of the while loop declares and empty array which will be populated with the players input. In order to populate this array the **read_input** function is called - this will be discussed in another section. This function essentially populates the empty array variable defined at each round using a pointer variable and the array itself - the function will return an integer.
+
+If this integer returned is anything other than 1 then the game will end, as this is how errors or EOF is handled within the game. If the value returned is 1 then a strcmp, nested in an if statement is declared. If there are no differences between the secret_code variable and the newly populated player_answer character array then the game ends (as the answer_check is then set to 1 triggering the end of the while loop) - as the player has successfully guessed the secret code!
+
+If the player has not managed to guess the Secret Code then the **determine_diff** function is called, which will perform an evaluation of the two character arrays (the secret code & the players inputtedf answer). After this evaluation, the round_index is incremented, trigger the next while loop iteration and thus the next round of the game that allows for the player to continue guessing.
