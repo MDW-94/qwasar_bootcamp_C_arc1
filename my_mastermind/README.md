@@ -27,7 +27,7 @@ Based of the classic code-breaking game Mastermind, the goal is to guess the fou
 - [Installation](#installation)
 - [Usage](#usage)
     -[ Customise](#customising-your-game)
-- [Key Features (Code Breakdown)](#key-features-code-breakdown)
+- [Key Features || Code Breakdown](#key-features-code-breakdown)
 
 ## Task
 As part of the Elite software Engineering track through Qwasar, Contemporary School of Engineering I was assigned the task of recreating the famous Mastermind game using C.
