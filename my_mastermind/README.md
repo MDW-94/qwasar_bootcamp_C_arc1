@@ -1,8 +1,8 @@
 # <h1 align="center" >&#128290; my_mastermind.c &#128290;</h1>
 
-![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
-
 <div align="center">
+
+![Alt Text - "Will you find the secret code?" The opening line of the game](./screenshots/Screenshot_1.png)
 
 A text-based game written in C that takes user input and evaluates it against a declared/randomly generated secret code. 
   
