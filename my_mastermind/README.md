@@ -89,6 +89,7 @@ make
 ```
 *(Note: Replace <"Your 4 digit code here"> with a valid four digit number, e.g. ./my_mastermind -c 1234)*
 
+<hr/>
 
 2. **To declare the number of Rounds**:
 
@@ -98,6 +99,7 @@ make
 
 *(Note: Replace <"No. of Rounds"> with a valid number, e.g. ./my_mastermind -t 20)*
 
+<hr/>
 
 3. **To Declare both a Secret Code and a Number of Rounds**:
 
@@ -107,7 +109,7 @@ make
 
 ## Key Features (Code Breakdown)
 
-### Command-Line Arguments 
+### - Command-Line Arguments 
 
 As specified by MVP the program accepts command line arguments that define certain parameters of the game at runtime. Within the mian function, the command line arguments are set to 'int ac' (argument count - the number of command line argumetns being passed in) & 'char** av' (argument vector - an array of arrays containing the arguments passed into the program as strings).
 
@@ -116,11 +118,11 @@ These include:
 1. "-c"
 2. <4-Digit Array>
 3. "-t"
-4. <Number of Rounds>
+4. <"Number of Rounds">
 
 These arguments are passed to the respective functions 'generate_secret_code' and 'initialize_rounds' where they are handled to specify customisable properties for the games setup.
 
-### generate_secret_code()
+### - generate_secret_code()
 
 This function takes a total of four parameters and makes use of a self-built 'my_strcpy', strcmp, srand, time and rand utilities. The first two parameters 'ac' and 'av' are the command line arguments defined by the user at compilation time. This function observes the value of ac, noticing that if it is greater than '1' (ie. it has more values than just the program name) then it is to check the second command line argument being passed with the value "-c", determining whether the player is deciding to declare a secret code for play. As this comparison is nested within an if statement there are two potential results for this function:
 
@@ -132,7 +134,7 @@ At the end of both results the final index value of the secret_code array is ini
 
 This funcion ultimately returns void as the secret code array is declared with the main function. Therefore, the initialized values resulting from the generate_secret_code function are available to be passed through the other functions that run throughout the rest of the game.
 
-### initialize_rounds()
+### - initialize_rounds()
 
 Similarly to the generate_secret_code function this function accepts the argument count and argument vector parameters. Allowing the user to declare the number of rounds for the game they are about to play, if none are declared then the default value is 10 rounds.
 
@@ -140,7 +142,7 @@ The strcmp (string comparison) function is nested within an if statement, if the
 
 If the conditions of the if statement are met, then the function calls the atoi function. This function converts the array at the index position of the parent array in the argument vector into a returned value that can be stored in a variable to be used in the program. In this case, it will take the integer value and set the rounds_declared variable to this value.
 
-### game_engine()
+### - game_engine()
 
 This function is responsible for the running of the entire game. It takes two parameters, a character array (which will be our secret code) and an integer (which will be the number of rounds declared). A couple of integer variables are declared and initialized to 0 (rounds_index, answer_check).
 
@@ -151,3 +153,9 @@ During each iteration, a pair of print statements create the visual implication 
 If this integer returned is anything other than 1 then the game will end, as this is how errors or EOF is handled within the game. If the value returned is 1 then a strcmp, nested in an if statement is declared. If there are no differences between the secret_code variable and the newly populated player_answer character array then the game ends (as the answer_check is then set to 1 triggering the end of the while loop) - as the player has successfully guessed the secret code!
 
 If the player has not managed to guess the Secret Code then the **determine_diff** function is called, which will perform an evaluation of the two character arrays (the secret code & the players inputtedf answer). After this evaluation, the round_index is incremented, trigger the next while loop iteration and thus the next round of the game that allows for the player to continue guessing.
+
+### - read_input()
+
+This function is responsible for taking user input from STDIN and analysing whether it is an acceptable input for the determine_diff function. It accepts two parameters, the empty character player_answer and a pointer to its first index poisition.
+
+Firstly, this function clears the array of any potential values leftover from previous guesses, initializing the array so it is ready to accept the values from STDIN. 
