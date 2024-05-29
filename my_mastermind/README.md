@@ -49,7 +49,7 @@ The assignment required me to create a Makefile which would handle all the compi
 #### &#10060; **I was not allowed to use any other functions/syscalls, this included exit**
 
 ### Further Requirements:
-- the program handles the standard *Ctrl + d* (EOF/End Of File) sequence
+- The program handles a standard *Ctrl + d* (EOF/End Of File) sequence
 - Must be compiled with -Wall -Wextra -Werror
 - Multiline macros are forbidden
 - Macros with logic are forbidden (while/if/variables/...)
