@@ -178,5 +178,15 @@ Further handling of the data stream includes the next if statement which evaluat
 
 ### determine_diff()
 
-This function is a two part process of evaluating the player_answer array alongside the secret_code array in order to return feedback on the player's/user's attempt within a round. 
+This function is a two part process of evaluating the player_answer array alongside the secret_code array in order to return feedback on the player's/user's attempt within a round. It accepts two pointers: one to the player_answer array and the other to the secret_code array.
+
+Three integer variables and two integer arrays are initialised for this function. The first two integer variables are to record 'well_placed' or 'misplaced' integers in the comparison - the former being an integer that is correct in value and position in the answer array, the latter being an integer of correct value but incorrect placement.
+
+The two integer arrays are to track when one of these relationship is made, marking the position between the two arrays, as well as preventing duplication of recordings. For example, if a '1' is found twice in the player answer and once in the secret code then depending on its placement it will either increment the well plcaed or misplaced counter. As there is only one of these value in the secret code, the two integer arrays are there to mark where this integer occurs and prevent duplication within the feedback provided to the player - this make more sense in the next parts of the function.
+
+**Pt1: Well Placed Match**
+A while loop is called and bound to the pointer variable 'answer' and it's index through the player_answer array. It traverses the array until reaching the null terminator character at the end. If the current iteration, and thus the current index value being observed is equal in value in both arrays (player_answer and secret code) then the well_placed counter is incremented and a marker for both 'check' arrays is declared. This is means a math has been found at this location in both arrays - a well placed integer. If no mathes are found this loop continues until the end and the index variable is reset to 0.
+
+**Pt 2: Misplaced Match**
+
 
