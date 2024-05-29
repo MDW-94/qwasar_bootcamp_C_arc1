@@ -176,3 +176,7 @@ The first sequence of if statements handle EOF - they evaluate whether the deref
 
 Further handling of the data stream includes the next if statement which evaluates whether the character read in is within the correct range required for the games evaluation (0-9). If the value at the dereferenced pointer position is not within this range, or it is a newline character then the "x" integer variable is set to 2 - this is an error handling process which prevents the data being sent to the player_answer array aand instead returns a "Wrong Input!" message to the player. This is a requirement of the game and means that the player, within the same turn, can input another until that answer is suitable for evaluation (thus incrementing to the next round or wining the game).
 
+### determine_diff()
+
+This function is a two part process of evaluating the player_answer array alongside the secret_code array in order to return feedback on the player's/user's attempt within a round. 
+
