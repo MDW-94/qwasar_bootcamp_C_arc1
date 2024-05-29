@@ -109,7 +109,7 @@ make
 
 ## Key Features (Code Breakdown)
 
-### - Command-Line Arguments 
+### - Command Line Arguments 
 
 As specified by MVP the program accepts command line arguments that define certain parameters of the game at runtime. Within the mian function, the command line arguments are set to 'int ac' (argument count - the number of command line argumetns being passed in) & 'char** av' (argument vector - an array of arrays containing the arguments passed into the program as strings).
 
@@ -176,7 +176,7 @@ The first sequence of if statements handle EOF - they evaluate whether the deref
 
 Further handling of the data stream includes the next if statement which evaluates whether the character read in is within the correct range required for the games evaluation (0-9). If the value at the dereferenced pointer position is not within this range, or it is a newline character then the "x" integer variable is set to 2 - this is an error handling process which prevents the data being sent to the player_answer array aand instead returns a "Wrong Input!" message to the player. This is a requirement of the game and means that the player, within the same turn, can input another until that answer is suitable for evaluation (thus incrementing to the next round or wining the game).
 
-### determine_diff()
+### - determine_diff()
 
 This function is a two part process of evaluating the player_answer array alongside the secret_code array in order to return feedback on the player's/user's attempt within a round. It accepts two pointers: one to the player_answer array and the other to the secret_code array.
 
@@ -185,6 +185,7 @@ Three integer variables and two integer arrays are initialised for this function
 The two integer arrays are to track when one of these relationship is made, marking the position between the two arrays, as well as preventing duplication of recordings. For example, if a '1' is found twice in the player answer and once in the secret code then depending on its placement it will either increment the well plcaed or misplaced counter. As there is only one of these value in the secret code, the two integer arrays are there to mark where this integer occurs and prevent duplication within the feedback provided to the player - this make more sense in the next parts of the function.
 
 **Pt1: Well Placed Match**
+
 A while loop is called and bound to the pointer variable 'answer' and it's index through the player_answer array. It traverses the array until reaching the null terminator character at the end. If the current iteration, and thus the current index value being observed is equal in value in both arrays (player_answer and secret code) then the well_placed counter is incremented and a marker for both 'check' arrays is declared. This is means a math has been found at this location in both arrays - a well placed integer. If no mathes are found this loop continues until the end and the index variable is reset to 0.
 
 **Pt 2: Misplaced Match**
