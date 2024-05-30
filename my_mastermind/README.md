@@ -188,6 +188,10 @@ The two integer arrays are to track when one of these relationship is made, mark
 
 A while loop is called and bound to the pointer variable 'answer' and it's index through the player_answer array. It traverses the array until reaching the null terminator character at the end. If the current iteration, and thus the current index value being observed is equal in value in both arrays (player_answer and secret code) then the well_placed counter is incremented and a marker for both 'check' arrays is declared. This is means a math has been found at this location in both arrays - a well placed integer. If no mathes are found this loop continues until the end and the index variable is reset to 0.
 
+Before teh second part of the function, the index is reset.
+
 **Pt 2: Misplaced Match**
 
+This while loop (bound to the length of the player_answer array, by reference of the pointers) will evaluate whether the value at the index position of both the player_answer array and the secret_code array is not the same. The if statement then proceeds to initialise another while loop (bound to the length of the secret_code array). This while loop creates a second incremenetor "j" which will compare the value at the current index position of the player_answer array against all the other values present in the secret_code array. If there is any value in the secret_code array - that is of the same value as the character value in the player_answer array - then the "misplaced" counter will be incremented. At this point, the index positino of the player_answer array value and the position of the "j" are marked within the "check" arrays, meaning that these positions in both arrays cannot increment either the "well placed" or the "misplaced" counters anymore.
 
+Finally, this function prints out the values of the "misplaced" and "well placed" counters as feedback for the player for their next turn.
