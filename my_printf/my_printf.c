@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdarg.h>
 
 // Function produces output according to a format as described below - write to stdout, the standard output stream
 
@@ -21,7 +22,7 @@
 
 
 
-int main(){
+int main(int ac, char** av){
 
     return 0;
 }
