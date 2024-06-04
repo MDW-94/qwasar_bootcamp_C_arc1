@@ -1,4 +1,3 @@
-
 CC := gcc
 CFLAGS := -g -Wall -Wextra -Werror
 TARGET := my_printf
@@ -13,15 +12,15 @@ all: compile run
 
 
 compile: $(TARGET).c
-        $(CC) $(CFLAGS) my_printf.c -o $(TARGET)
+	$(CC) $(CFLAGS) my_printf.c -o $(TARGET)
 
 run: $(TARGET)
-        ./$(TARGET)
+	./$(TARGET)
 
 # ./$(TARGET) -c "9090" -t 20
 
 # always remember: ggcc filename.c -o filename && ./filename
 
 clean:
-        rm -f *.o
+	rm -f *.o
 
