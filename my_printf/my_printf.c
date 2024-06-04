@@ -1,5 +1,9 @@
 #include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
+
+
+// GLOBAL AND STATIC VARIABLES ARE FORBIDDEN
 
 // Function produces output according to a format as described below - write to stdout, the standard output stream
 
@@ -24,9 +28,12 @@
 
 int main(int ac, char** av){
 
+    char* str;
+    str = (char*) malloc(100*sizeof(char));
+
     if(ac > 1){
         char ch;
-        write(0,&ch,1);
+        write(1,&ch,1);
     } else {
         printf("\nNo stdin available");
     }
@@ -39,3 +46,9 @@ int main(int ac, char** av){
 // stdin has the file descriptor 0.
 // stdout has the file descriptor 1.
 // stderr has the file descriptor 2.
+
+// You can test your code against memory errors by compiling with the debugging flags -g3 -fsanitize=address
+
+// ac is a number of parameters passed to the program.
+// char ** av is an array of arguments.
+
