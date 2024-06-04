@@ -24,16 +24,33 @@
 
 // unathorized functions: printf and co (any print utility), multiline macros are forbidden, including another .c file is forbidden, macros with logic (while/if/variables/...) are forbidden
 
+int my_strcmp(char* src, char* ref){
 
+    return 0;
+}
 
 int main(int ac, char** av){
+
+  
 
     char* str;
     str = (char*) malloc(100*sizeof(char));
 
     if(ac > 1){
-        char ch;
-        write(1,&ch,1);
+
+        int i;
+        while(i < ac){
+
+        if(my_strcmp(av[i], "-c") == 0){
+                printf("\n No printf arguments made");
+            } else {
+                char ch;
+                write(1,&ch,1);
+            }
+        }
+
+        
+
     } else {
         printf("\nNo stdin available");
     }
