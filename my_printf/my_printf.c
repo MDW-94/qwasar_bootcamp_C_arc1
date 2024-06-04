@@ -24,5 +24,18 @@
 
 int main(int ac, char** av){
 
+    if(ac > 1){
+        char ch;
+        write(0,&ch,1);
+    } else {
+        printf("\nNo stdin available");
+    }
+
+
+
     return 0;
 }
+
+// stdin has the file descriptor 0.
+// stdout has the file descriptor 1.
+// stderr has the file descriptor 2.
