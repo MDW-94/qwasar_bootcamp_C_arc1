@@ -52,3 +52,16 @@ int main(int ac, char** av){
 // ac is a number of parameters passed to the program.
 // char ** av is an array of arguments.
 
+
+// https://stackoverflow.com/questions/71790470/standard-input-in-c-with-enough-memory
+
+
+// -----
+
+// In short, it requests a chunk of memory from the operating system where your program is allowed to store stuff until you free it. This memory:
+
+// lives outside the local scope of a function
+
+// the amount of allocated memory is determined at runtime unlike global data known at compile time (i.e. we don't necessarily know how much memory we will need when the program runs)
+
+// The details of how the memory is managed is more complicated -- the point of the malloc/free API is so you as the programmer don't need to manually manage it.
