@@ -39,17 +39,27 @@ int my_strlen(char* str){
   return i;
 }
 
-int sum(int count, ...){
-  va_list args; // used to hold info needed to retrieve the additional arguments
-  
-  va_start(args, count); // initializes va_list for use (to then be used with va_arg & va_end) - takes two args: the variable to the va_list and the "last named parameter"
+char* char_sum(int count, ...){
+  va_list args; 
+  // used to hold info needed to retrieve the additional arguments
+  va_start(args, count); 
+  // initializes va_list for use (to then be used with va_arg & va_end) - takes two args: the variable to the va_list and the "last named parameter"
 
-  int total = 0;
+  char* total = malloc(count + 1); // allocate memory for the string
+    if(total == NULL){
+        return NULL; // handle memory allocation failure
+    }
+
   for(int i = 0; i < count;i++){
-    total += va_arg(args, int); // retrieves the next argument in the list - takes two args, ref to va_list and the data type of the next argument in that list
+    char ch = va_arg(args, int); 
+    //char ch = (char)va_arg(args, int);
+    // retrieves the next argument in the list - takes two args, ref to va_list and the data type of the next argument in that list
+    total[i] = ch;
   }
+  total[count] = '\0';
 
-  va_end(args); // used to clean the ga_list when youre done - helps avoid memory issues
+  va_end(args); 
+  // used to clean the ga_list when youre done - helps avoid memory issues
   return total;
 
   //va_copy copies the state of one va_list to another - useful if you need to iterate over the args more
@@ -68,8 +78,16 @@ int main(int ac, char** av) {
 
         write(1, message, my_strlen(message));
 
-      } 
-      printf("Sum of 1, 2, 3, 4, 5: %d\n", sum(5, 1, 2, 3, 4, 5));
+      }
+
+      char* sum_result = char_sum(5, 'a', 'b', 'c', 'd', 'e');
+      if(sum_result != NULL){
+        printf("Sum function called -> %s\n", sum_result);
+        free(sum_result);
+      } else {
+        printf("Memory allocation failed in char_sum.\n");
+      }
+       
     }
   } else {
     printf("\n No Arguments\n");
@@ -99,3 +117,7 @@ int main(int ac, char** av) {
 // the amount of allocated memory is determined at runtime unlike global data known at compile time (i.e. we don't necessarily know how much memory we will need when the program runs)
 
 // The details of how the memory is managed is more complicated -- the point of the malloc/free API is so you as the programmer don't need to manually manage it.
+
+// -----
+
+// https://stackoverflow.com/questions/28054194/char-type-in-va-arg
