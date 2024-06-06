@@ -1,6 +1,7 @@
 #include <stdio.h>
-#include <stdarg.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
 
 
 // GLOBAL AND STATIC VARIABLES ARE FORBIDDEN
@@ -25,39 +26,55 @@
 // unathorized functions: printf and co (any print utility), multiline macros are forbidden, including another .c file is forbidden, macros with logic (while/if/variables/...) are forbidden
 
 int my_strcmp(char* src, char* ref){
-
-    return 0;
+  while(*src != '\0' && *ref != '\0' && *src == *ref){
+      src++;
+      ref++;
+    }
+  return *(unsigned char*)src - *(unsigned char*)ref;
 }
 
-int main(int ac, char** av){
+int my_strlen(char* str){
+  int i = 0;
+  while(*str++ != '\0'){i++;}
+  return i;
+}
 
+int sum(int count, ...){
+  va_list args; // used to hold info needed to retrieve the additional arguments
   
+  va_start(args, count); // initializes va_list for use (to then be used with va_arg & va_end) - takes two args: the variable to the va_list and the "last named parameter"
 
-    char* str;
-    str = (char*) malloc(100*sizeof(char));
+  int total = 0;
+  for(int i = 0; i < count;i++){
+    total += va_arg(args, int); // retrieves the next argument in the list - takes two args, ref to va_list and the data type of the next argument in that list
+  }
 
-    if(ac > 1){
+  va_end(args); // used to clean the ga_list when youre done - helps avoid memory issues
+  return total;
 
-        int i;
-        while(i < ac){
+  //va_copy copies the state of one va_list to another - useful if you need to iterate over the args more
+}
 
-        if(my_strcmp(av[i], "-c") == 0){
-                printf("\n No printf arguments made");
-            } else {
-                char ch;
-                write(1,&ch,1);
-            }
-        }
 
-        
+int main(int ac, char** av) {
+  //printf("%s\n", av[0]);
 
-    } else {
-        printf("\nNo stdin available");
+  if(ac > 1){
+    char ref_1[] = "-c";
+    char* ptr_1 = ref_1;
+    for(int i=1;i<ac;i++){
+      if(my_strcmp(av[i], ptr_1) == 0){
+        char* message = "-c Argument Called \n";
+
+        write(1, message, my_strlen(message));
+
+      } 
+      printf("Sum of 1, 2, 3, 4, 5: %d\n", sum(5, 1, 2, 3, 4, 5));
     }
-
-
-
-    return 0;
+  } else {
+    printf("\n No Arguments\n");
+  }
+  return 0;
 }
 
 // stdin has the file descriptor 0.
