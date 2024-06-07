@@ -7,14 +7,16 @@ int my_strlen(char* str){
     int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
 }
 
-int my_printf(const char* restrict format, ...){
-    int count = my_strlen(format); // Needs to be initialized to no. of chars in char array - my_strlen?
+int my_printf(char* restrict format, ...){
+    int count = 0;
+    count = my_strlen(format); 
+    // Needs to be initialized to no. of chars in char array - my_strlen?
     va_list args;
     va_start(args, count);
 
     // enough space for end terminator:
     char* output_str = malloc((count + 1)*sizeof(char)); 
-    if(output_str == NULL){return NULL;};
+    if(output_str == NULL){return 0;};
 
     for(int i = 0;i<count;i++){
         // traverse va_list, fetch ints, convert to char data types:
@@ -25,11 +27,14 @@ int my_printf(const char* restrict format, ...){
     output_str[count] = '\0';
     va_end(args);
 
-    while(*output_str++ != '\0'){
+    if(my_strlen(output_str) != 0){
+         while(*output_str++ != '\0'){
         write(1, output_str, 1);
         //write(1, output_str, my_strlen(output_str)); THIS WAY MIGHT NOT WORK DUE TO NOT CONSIDERING SPECIAL CHARACTERS?
+        }
+    } else {
+        printf("\n my_printf -> output_str empty");
     }
-
 
 
     // return output_str? Printf just outputs to the terminal, return is either success, failure or EOF??
