@@ -7,6 +7,17 @@ int my_strlen(char* str){
     int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
 }
 
+char* my_strcpy(char* param_1, char* param_2){
+
+    // for(int i = 0; i < param_3; i++) {
+    //     param_1[i] = param_2[i];
+    // };
+
+    while((*param_1++ = *param_2++));
+
+    return param_1;
+}
+
 int my_printf(char* restrict input_str, ...){
     // Needs to be initialized to no. of chars in char array - my_strlen?
     va_list args;
@@ -15,16 +26,24 @@ int my_printf(char* restrict input_str, ...){
 
     //  create a copy of the original string?
 
+
     // enough space for end terminator:
     int count;
     if((count = my_strlen(input_str)) > 0){ //if there are any characters in the string
         // we now have a number for chars without special characters - we need to know
         // memory required for special characters:
-        char* scan_ptr = input_str;
+        char temp_str[count];
+        my_strcpy(temp_str, input_str);
+        char* scan_ptr = temp_str;
+
         while(*scan_ptr != '\0'){
             // "hello, %-" -stop here and:
             if(*scan_ptr == '%'){
-                *scan_ptr = 00; // remove the special char
+                *scan_ptr = '@'; 
+                // remove the special char - can only be done on a copied string!
+                // ISSUE - THIS WILL PREVENT THE STR FROM EBING COMPLETED LATER
+
+
                 char* look_ptr = scan_ptr++;
                 //look at the next character along
 
@@ -52,8 +71,8 @@ int my_printf(char* restrict input_str, ...){
         if(output_str == NULL){return 0;};
 
         for(int i = 0;i<count;i++){
-            if(input_str[i]){ //if there is a value at input_str[i]
-                output_str[i] = input_str[i];
+            if(temp_str[i]){ //if there is a value at temp_str[i]
+                output_str[i] = temp_str[i];
             }
     
         // traverse va_list, fetch ints, convert to char data types:
