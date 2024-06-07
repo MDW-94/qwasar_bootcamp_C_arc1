@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdarg.h>
+
+int my_strcmp(char* src, char* ref){
+  while(*src != '\0' && *ref != '\0' && *src == *ref){
+      src++;
+      ref++;
+    }
+  return *(unsigned char*)src - *(unsigned char*)ref;
+}
+
+int my_strlen(char* str){
+  int i = 0;
+  while(*str++ != '\0'){i++;}
+  return i;
+}
+
+char* char_sum(int count, ...){
+  va_list args; 
+  // used to hold info needed to retrieve the additional arguments
+  
+  va_start(args, count); 
+  // initializes va_list for use (to then be used with va_arg & va_end) - takes two args: the variable 
+to the va_list and the "last named parameter"
+
+  char total[6] = {00,00,00,00,00,00};
+  for(int i = 0; i < count;i++){
+    char ch = va_arg(args, int); 
+    // retrieves the next argument in the list - takes two args, ref to va_list and the data type of the 
+next argument in that list
+    total[i] = ch;
+  }
+
+  va_end(args); 
+  // used to clean the ga_list when youre done - helps avoid memory issues
+
+  char* ptr_total = total;
+  return ptr_total;
+
+  //va_copy copies the state of one va_list to another - useful if you need to iterate over the args 
+more
+}
+
+
+int main(int ac, char** av) {
+  //printf("%s\n", av[0]);
+
+  if(ac > 1){
+    char ref_1[] = "-c";
+    char* ptr_1 = ref_1;
+    for(int i=1;i<ac;i++){
+      if(my_strcmp(av[i], ptr_1) == 0){
+        char* message = "-c Argument Called \n";
+
+        write(1, message, my_strlen(message));
+
+      } 
+        printf("Sum function called -> ");printf("%s\n", char_sum(5, "a", "b", "c", "d", "e"));
+
+    }
+  } else {
+    printf("\n No Arguments\n");
+  }
+  return 0;
+}
+
+There are several issues in the code provided, particularly with the char_sum function and its usage in 
+main. Here's a detailed breakdown:
+
+Incorrect handling of variable arguments in char_sum function: The char_sum function expects characters 
+but retrieves them as int using va_arg. This is not an issue itself, but the way you pass arguments to 
+char_sum is incorrect.
+
+Returning a local array: The char_sum function returns a pointer to a local array total, which is 
+undefined behavior since the array will be out of scope once the function returns.
+
+Misuse of char_sum function in main: The function char_sum expects individual characters, but you're 
+passing strings ("a", "b", etc.) which is incorrect.
+
+Mixing printf and write: While this is not an error, it is generally good practice to stick to one style 
+of output for consistency.
+
+Let's correct these issues:
+
+Modify char_sum to dynamically allocate memory for the result so that the returned pointer is valid.
+Correct the arguments passed to char_sum in main.
+
+Key changes:
+Dynamic memory allocation in char_sum: The total array is now dynamically allocated, and free is called 
+in main to release the memory.
+Pass individual characters to char_sum: In main, char_sum is called with individual characters instead 
+of strings.
+These changes should resolve the issues and make the code function correctly.
