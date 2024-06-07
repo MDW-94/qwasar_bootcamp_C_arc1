@@ -15,7 +15,18 @@ int my_printf(char* restrict input_str, ...){
 
     // enough space for end terminator:
     int count;
-    if((count = my_strlen(input_str)) > 0){
+    if((count = my_strlen(input_str)) > 0){ //if there are any characters in the string
+        // we now have a number for chars without special characters - we need to know
+        // memory required for special characters:
+        char* scan_ptr = input_str;
+        while(*scan_ptr != '\0'){
+            if(*scan_ptr == '%'){
+                //actions taken for different special chars:
+            }
+            scan_ptr++;
+        }
+
+
         char* output_str = malloc((count + 1)*sizeof(char));
         if(output_str == NULL){return 0;};
 
@@ -29,20 +40,22 @@ int my_printf(char* restrict input_str, ...){
 
         // store in final output string:
         // output_str[i] = ch;
-    }
-    output_str[count] = '\0';
-    va_end(args);
-
-    if(my_strlen(output_str) > 0){
-        while(*output_str != '\0'){
-        write(1, output_str, 1);
-        output_str++; 
-        // has to be here as nested incrementation increments first, then runs code block
-        //write(1, output_str, my_strlen(output_str)); THIS WAY MIGHT NOT WORK DUE TO NOT CONSIDERING SPECIAL CHARACTERS?
         }
-    } else {
-        printf("\n my_printf -> output_str empty\n");
-    }
+        output_str[count] = '\0';
+        va_end(args);
+
+
+        // Pt.2 Output the contents of the output str to the stdout:
+        if(my_strlen(output_str) > 0){
+            while(*output_str != '\0'){
+            write(1, output_str, 1);
+            output_str++; 
+            // has to be here as nested incrementation increments first, then runs code block
+            //write(1, output_str, my_strlen(output_str)); THIS WAY MIGHT NOT WORK DUE TO NOT CONSIDERING SPECIAL CHARACTERS?
+            }
+        } else {
+            printf("\n my_printf -> output_str empty\n");
+        }
 
     } else {
         printf("\n malloc failed");
