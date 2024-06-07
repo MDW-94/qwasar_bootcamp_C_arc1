@@ -20,21 +20,40 @@ int my_printf(char* restrict input_str, ...){
         // memory required for special characters:
         char* scan_ptr = input_str;
         while(*scan_ptr != '\0'){
+            // "hello, %-" -stop here and:
             if(*scan_ptr == '%'){
-                //actions taken for different special chars:
+                *scan_ptr = 00; // remove the special char
+                char* look_ptr = scan_ptr++;
+                //look at the next character along
+
+                // the % character is followed by zero or more of the following flags:
+                // - actions taken for different special chars:
+
+                if(*look_ptr == '%'){
+                    count += 1; // make space for the counter
+                }
+
+                if(*look_ptr == 'i'){
+                    // take the integer given and convert to character?
+                    char ch = va_arg(args, int);
+                }
+
+
             }
             scan_ptr++;
         }
 
+        // After handling the special chars
 
         char* output_str = malloc((count + 1)*sizeof(char));
         if(output_str == NULL){return 0;};
 
         for(int i = 0;i<count;i++){
 
-            output_str[i] = input_str[i];
-
-
+            if(input_str[i]){ //if there is a value at input_str[i]
+                output_str[i] = input_str[i];
+            }
+    
         // traverse va_list, fetch ints, convert to char data types:
         // char ch = va_arg(args, int);
 
