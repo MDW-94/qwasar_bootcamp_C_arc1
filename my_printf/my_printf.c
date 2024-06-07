@@ -13,6 +13,8 @@ int my_printf(char* restrict input_str, ...){
     va_start(args, input_str);
     // last named parameter is input_str before ellipsis
 
+    //  create a copy of the original string?
+
     // enough space for end terminator:
     int count;
     if((count = my_strlen(input_str)) > 0){ //if there are any characters in the string
@@ -34,8 +36,10 @@ int my_printf(char* restrict input_str, ...){
                 }
 
                 if(*look_ptr == 'i'){
-                    // take the integer given and convert to character?
+                    // take the integer given and convert to character?                   
                     char ch = va_arg(args, int);
+                    count += sizeof(ch);
+                    *scan_ptr = ch; // can you change the original str??
                 }
 
 
@@ -44,12 +48,10 @@ int my_printf(char* restrict input_str, ...){
         }
 
         // After handling the special chars
-
         char* output_str = malloc((count + 1)*sizeof(char));
         if(output_str == NULL){return 0;};
 
         for(int i = 0;i<count;i++){
-
             if(input_str[i]){ //if there is a value at input_str[i]
                 output_str[i] = input_str[i];
             }
@@ -92,7 +94,7 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Hello World!\n");
+    my_printf("Hello, %% World!\n");
     return 0;
 }
 
