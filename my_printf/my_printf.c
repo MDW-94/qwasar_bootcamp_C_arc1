@@ -20,21 +20,28 @@ int my_printf(char* restrict input_str, ...){
         if(output_str == NULL){return 0;};
 
         for(int i = 0;i<count;i++){
+
+            output_str[i] = input_str[i];
+
+
         // traverse va_list, fetch ints, convert to char data types:
-        char ch = va_arg(args, int);
+        // char ch = va_arg(args, int);
+
         // store in final output string:
-        output_str[i] = ch;
+        // output_str[i] = ch;
     }
     output_str[count] = '\0';
     va_end(args);
 
-    if(my_strlen(output_str) != 0){
-        while(*output_str++ != '\0'){
+    if(my_strlen(output_str) > 0){
+        while(*output_str != '\0'){
         write(1, output_str, 1);
+        output_str++; 
+        // has to be here as nested incrementation increments first, then runs code block
         //write(1, output_str, my_strlen(output_str)); THIS WAY MIGHT NOT WORK DUE TO NOT CONSIDERING SPECIAL CHARACTERS?
         }
     } else {
-        printf("\n my_printf -> output_str empty");
+        printf("\n my_printf -> output_str empty\n");
     }
 
     } else {
@@ -60,6 +67,9 @@ int main(){
 // ---------
 
 // malloc perservering after va_ends:
-
 // the memory allocated using malloc will persist past the va_end call. The va_end macro is used to clean up the memory used by the va_list macros, but it does not affect any memory allocated with malloc
+
+
+// The last name parameter: va_start:
+// The named parameter in va_start is simply the last parameter before the ellipsis (...)
 
