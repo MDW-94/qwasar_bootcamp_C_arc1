@@ -55,7 +55,7 @@ int my_printf(char* restrict input_str, ...){
                 }
 
                 if(*look_ptr == 'i'){
-                    printf("\n i character recognised \n");
+                    // printf("\n i character recognised \n");
                     // take the integer given and convert to character?                   
                     char ch = va_arg(args, int) + '0';
                     count += sizeof(ch);
@@ -114,7 +114,7 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Hello, %% World! %i\n", 5);
+    my_printf("Hello%i, %% %iWorld! %i\n", 5, 4, 3);
     return 0;
 }
 
