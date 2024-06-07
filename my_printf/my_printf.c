@@ -4,11 +4,11 @@
 #include <stdarg.h>
 
 int my_strlen(char* str){
-    int i = 0;  while(*str++ != '\0'){i++;} return i;
+    int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
 }
 
 int my_printf(const char* restrict format, ...){
-    int count = 0; // Needs to be initialized to no. of chars in char array - my_strlen?
+    int count = my_strlen(format); // Needs to be initialized to no. of chars in char array - my_strlen?
     va_list args;
     va_start(args, count);
 
