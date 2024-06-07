@@ -3,6 +3,10 @@
 #include <unistd.h>
 #include <stdarg.h>
 
+int my_strlen(char* str){
+    int i = 0;  while(*str++ != '\0'){i++;} return i;
+}
+
 int my_printf(const char* restrict format, ...){
     int count = 0; // Needs to be initialized to no. of chars in char array - my_strlen?
     va_list args;
