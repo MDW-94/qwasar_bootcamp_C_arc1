@@ -32,6 +32,8 @@ int my_printf(char* restrict input_str, ...){
     if((count = my_strlen(input_str)) > 0){ //if there are any characters in the string
         // we now have a number for chars without special characters - we need to know
         // memory required for special characters:
+
+        //  TEMP STR MADE THAT CAN BE MODIFIED BEFORE BEING OUTPUTTED
         char temp_str[count];
         my_strcpy(temp_str, input_str);
         char* scan_ptr = temp_str;
@@ -40,25 +42,24 @@ int my_printf(char* restrict input_str, ...){
             // "hello, %-" -stop here and:
             if(*scan_ptr == '%'){
                 *scan_ptr = '@'; 
-                // remove the special char - can only be done on a copied string!
-                // ISSUE - THIS WILL PREVENT THE STR FROM EBING COMPLETED LATER
+                // remove the special char - can only be done to temp str
 
-
-                char* look_ptr = scan_ptr++;
+                char* look_ptr = scan_ptr += 1; // cannot be scan_ptr++ || look_ptr = scan_ptr; look_ptr++; for some reason?
                 //look at the next character along
 
                 // the % character is followed by zero or more of the following flags:
                 // - actions taken for different special chars:
-
                 if(*look_ptr == '%'){
                     count += 1; // make space for the counter
+                    *look_ptr = '%';
                 }
 
                 if(*look_ptr == 'i'){
+                    printf("\n i character recognised \n");
                     // take the integer given and convert to character?                   
                     char ch = va_arg(args, int);
                     count += sizeof(ch);
-                    *scan_ptr = ch; // can you change the original str??
+                    *look_ptr = ch; // can you change the original str??
                 }
 
 
@@ -113,7 +114,7 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Hello, %% World!\n");
+    my_printf("Hello, %% World! %i\n", 5);
     return 0;
 }
 
