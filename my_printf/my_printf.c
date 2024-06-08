@@ -51,9 +51,19 @@ int my_printf(char* restrict input_str, ...){
 
                 if(*look_ptr == 's'){
                     // string conversion
-                    // while((char* str = va_arg(args, int)) != '\0'){
-                    //     *look_ptr++ = str;
-                    // }
+                    char* str = va_arg(args, char*);
+                    int str_len = my_strlen(str); // calc length of input str
+                    int rem_len = my_strlen(scan_ptr+2);
+                    printf("\nstr_len -> %i\n", str_len);
+                    printf("\nrem_len -> %i\n", rem_len);
+                    printf("\ncount -> %i\n", count);
+
+                    while(*str != '\0'){
+                        *look_ptr++ = *str;
+                        count += 1; // printf("counter++");
+                        str++;
+                    }
+                    // *look_ptr = 26;
                 }
 
                 if(*look_ptr == '%'){
@@ -145,7 +155,7 @@ int main(){
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
     my_printf("Test 3 -> percentage sign -> %%\n");
     char message[] = "MESSAGE";
-    my_printf("Test 3 -> String %s\n", message); // printf("Test String %s\n", message);
+    my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
     return 0;
 }
 
