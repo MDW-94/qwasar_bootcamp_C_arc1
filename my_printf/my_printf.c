@@ -48,7 +48,14 @@ int my_printf(char* restrict input_str, ...){
                 //look at the next character along
 
                 // the % is a conversion character - followed by the following conversino specifiers: 
-                
+
+                if(*look_ptr == 's'){
+                    // string conversion
+                    // while((char* str = va_arg(args, int)) != '\0'){
+                    //     *look_ptr++ = str;
+                    // }
+                }
+
                 if(*look_ptr == '%'){
                     count += 1; // make space for the counter
                     *look_ptr = '%';
@@ -64,10 +71,6 @@ int my_printf(char* restrict input_str, ...){
 
                 if(*look_ptr == 'd'){
                     // signed decimal notation
-                }
-
-                if(*look_ptr == 's'){
-                    // string conversion
                 }
 
                 if(*look_ptr == 'o'){
@@ -141,6 +144,8 @@ int main(){
     my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
     my_printf("Test 3 -> percentage sign -> %%\n");
+    char message[] = "MESSAGE";
+    my_printf("Test 3 -> String %s\n", message); // printf("Test String %s\n", message);
     return 0;
 }
 
