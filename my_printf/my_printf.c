@@ -114,7 +114,9 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Hello%i, %% %iWorld! %i\n", 5, 4, 3);
+    my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
+    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3 -> percentage sign -> %%\n");
     return 0;
 }
 
