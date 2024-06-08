@@ -41,9 +41,8 @@ int my_printf(char* restrict input_str, ...){
         while(*scan_ptr != '\0'){
             // "hello, %-" -stop here and:
             if(*scan_ptr == '%'){
-                *scan_ptr = '@'; 
-                // remove the special char - can only be done to temp str
-
+                // *scan_ptr = 8; // this works but removes any empty space before special char
+                *scan_ptr = 26; // this works fine
                 char* look_ptr = scan_ptr += 1; // cannot be scan_ptr++ || look_ptr = scan_ptr; look_ptr++; for some reason?
                 //look at the next character along
 
@@ -62,6 +61,21 @@ int my_printf(char* restrict input_str, ...){
                     *look_ptr = ch; // can you change the original str??
                 }
 
+                // char* look_ptr = scan_ptr += 1;
+
+                // if(*look_ptr == '%'){
+                //     *scan_ptr = '%';
+                //     *look_ptr = 32;
+                // }
+
+                //  if(*look_ptr == 'i'){
+                //     char ch = va_arg(args, int) + '0';
+                //     count += sizeof(ch);
+
+                //     *look_ptr = ch; // the order of these two ref ptr is important and effects whether the args are printed
+                // }
+
+                // // remove the special char - can only be done to temp str
 
             }
             scan_ptr++;
