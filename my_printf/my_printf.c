@@ -51,17 +51,17 @@ int my_printf(char* restrict input_str, ...){
 
                 if(*look_ptr == 's'){
                     // string conversion
-                    char* str = va_arg(args, char*);
-                    int str_len = my_strlen(str); // calc length of input str
-                    int rem_len = my_strlen(scan_ptr+2);
+                    char* arg_str_ptr = va_arg(args, char*);
+                    int str_len = my_strlen(arg_str_ptr); // calc length of input str
+                    int rem_len = my_strlen(scan_ptr+2); //take current scan_ptr pos and determine remaining length
                     printf("\nstr_len -> %i\n", str_len);
                     printf("\nrem_len -> %i\n", rem_len);
                     printf("\ncount -> %i\n", count);
 
-                    while(*str != '\0'){
-                        *look_ptr++ = *str;
+                    while(*arg_str_ptr != '\0'){
+                        *look_ptr++ = *arg_str_ptr;
                         count += 1; // printf("counter++");
-                        str++;
+                        arg_str_ptr++;
                     }
                     // *look_ptr = 26;
                 }
