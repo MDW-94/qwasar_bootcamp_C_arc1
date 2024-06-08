@@ -43,12 +43,12 @@ int my_printf(char* restrict input_str, ...){
             // "hello, %-" -stop here and:
             if(*scan_ptr == '%'){
                 // *scan_ptr = 8; // this works but removes any empty space before special char
-                *scan_ptr = 26; // this works fine
+                *scan_ptr = 26; // this works fine - usually used to mark an erronous data point
                 char* look_ptr = scan_ptr += 1; // cannot be scan_ptr++ || look_ptr = scan_ptr; look_ptr++; for some reason?
                 //look at the next character along
 
-                // the % character is followed by zero or more of the following flags:
-                // - actions taken for different special chars:
+                // the % is a conversion character - followed by the following conversino specifiers: 
+                
                 if(*look_ptr == '%'){
                     count += 1; // make space for the counter
                     *look_ptr = '%';
@@ -62,7 +62,30 @@ int my_printf(char* restrict input_str, ...){
                     *look_ptr = ch; // can you change the original str??
                 }
 
-                
+                if(*look_ptr == 'd'){
+                    // signed decimal notation
+                }
+
+                if(*look_ptr == 's'){
+                    // string conversion
+                }
+
+                if(*look_ptr == 'o'){
+                    // unsigned int argument - convert to octal
+                }
+
+                if(*look_ptr == 'u'){
+                    // unsigned decimal
+                }
+
+                if(*look_ptr == 'x'){
+                    // unsigned hexadecimal
+                }
+
+                if(*look_ptr == 'p'){
+                    // pointer argument printed in hexadecimal
+                }
+
 
             }
             scan_ptr++;
