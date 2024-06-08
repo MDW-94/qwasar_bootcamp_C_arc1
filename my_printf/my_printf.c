@@ -18,6 +18,7 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
+//  Formatted Output Conversion
 int my_printf(char* restrict input_str, ...){
     // Needs to be initialized to no. of chars in char array - my_strlen?
     va_list args;
@@ -61,21 +62,7 @@ int my_printf(char* restrict input_str, ...){
                     *look_ptr = ch; // can you change the original str??
                 }
 
-                // char* look_ptr = scan_ptr += 1;
-
-                // if(*look_ptr == '%'){
-                //     *scan_ptr = '%';
-                //     *look_ptr = 32;
-                // }
-
-                //  if(*look_ptr == 'i'){
-                //     char ch = va_arg(args, int) + '0';
-                //     count += sizeof(ch);
-
-                //     *look_ptr = ch; // the order of these two ref ptr is important and effects whether the args are printed
-                // }
-
-                // // remove the special char - can only be done to temp str
+                
 
             }
             scan_ptr++;
