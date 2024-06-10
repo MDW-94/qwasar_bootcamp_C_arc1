@@ -8,13 +8,7 @@ int my_strlen(char* str){
 }
 
 char* my_strcpy(char* param_1, char* param_2){
-
-    // for(int i = 0; i < param_3; i++) {
-    //     param_1[i] = param_2[i];
-    // };
-
     while((*param_1++ = *param_2++));
-
     return param_1;
 }
 
@@ -177,6 +171,8 @@ int main(){
 }
 
 // ---------
+
+// Fast Git Commit: gaa && gcmsg "-message-" && ggp  
 
 // malloc perservering after va_ends:
 // the memory allocated using malloc will persist past the va_end call. The va_end macro is used to clean up the memory used by the va_list macros, but it does not affect any memory allocated with malloc
