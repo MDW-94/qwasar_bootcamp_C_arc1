@@ -52,30 +52,34 @@ int my_printf(char* restrict input_str, ...){
                 if(*look_ptr == 's'){
                     // string conversion
                     char* arg_str_ptr = va_arg(args, char*);
-                    int str_len = my_strlen(arg_str_ptr); // calc length of input str
+                    // int str_len = my_strlen(arg_str_ptr); // calc length of input str
                     int rem_len = my_strlen(scan_ptr+2); //take current scan_ptr pos and determine remaining length
                     // printf("\nstr_len -> %i\n", str_len);
                     // printf("\nrem_len -> %i\n", rem_len);
                     // printf("\ncount -> %i\n", count);
 
-                    char temp_str[rem_len];
-                    char* ptr_temp_str = temp_str;
-                    char* ref_scan_ptr = scan_ptr + 2;
+                    char temp_str2[rem_len];
+                    char* ptr_temp_str = temp_str2;
+                    char* ref_scan_ptr = scan_ptr + 1;
 
                     for(int i = ((count-1) - rem_len);i<count;i++){
                         *ptr_temp_str++ = *ref_scan_ptr++;
                     }
 
-                    printf("\nTemp storage string -> %s\n", temp_str);
+                    printf("\nTemp storage string -> :%s\n", temp_str2);
 
 
                     while(*arg_str_ptr != '\0'){
-                        *look_ptr++ = *arg_str_ptr;
+                        *scan_ptr++ = *arg_str_ptr++;
                         count += 1; // printf("counter++");
-                        arg_str_ptr++;
                     }
-                    scan_ptr += str_len;
-                    // *look_ptr = 26;
+
+                    // COPIES REMAINING TO THE FINAL
+                    // my_strcpy(temp_str, temp_str2);
+
+                    // scan_ptr += str_len;
+
+                    //Set the original temp string
                 }
 
                 if(*look_ptr == '%'){
