@@ -163,8 +163,8 @@ char* my_strcpy(char* param_1, char* param_2){
 
 // Maybe try substituting in malloc and write in here to make it pass?
 int my_printf(char* restrict input_str, ...){
-    va_list ptr;
-    va_start(ptr, input_str);
+    va_list args;
+    va_start(args, input_str);
 
     int size = 1000;
     char* buffer_ptr = malloc((size + 1)*sizeof(char));
@@ -176,15 +176,31 @@ int my_printf(char* restrict input_str, ...){
         if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
             // buffer_ptr[k] = '\0';
             // k = 0;
-            // if(buffer_ptr[0] != '%'){
+            if(buffer_ptr[0] != '%'){
                 while(*buffer_ptr != '\0'){
                     write(1,buffer_ptr,1);
                     buffer_ptr++;
                 }
+            }
 
+                char format_specifier = input_str[i + 2];
                 
-                if(input_str[i + 2] == 's'){
+                if(format_specifier == 's'){
+                    char* ch1 = va_arg(args, char*);
+                    char* ptr_arg = ch1;
+                    while(*ptr_arg != '\0'){
+                        write(1, ptr_arg, 1);
+                        ptr_arg++;
+                    }
+                }
 
+                if(format_specifier == 'i'){
+                    char ch1 = va_arg(args, int) + '0';
+                    char* ptr_arg = &ch1;
+                    // while(*ptr_arg != '\0'){
+                        write(1,ptr_arg,1);
+                        // ptr_arg++;
+                    // }
                 }
             // } 
             // else {
@@ -232,9 +248,10 @@ int my_printf(char* restrict input_str, ...){
             //     }                
             // }
         }
+        printf("\n index -> %i, buffer_ptr -> %c", k, buffer_ptr[k]);
     }
     // ending traversal
-    va_end(ptr);
+    va_end(args);
     return 0;
 }
 
@@ -284,11 +301,11 @@ int my_printf(char* restrict input_str, ...){
 // }
 
 int main(){
-    my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
+    // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> percentage sign -> %%\n");
-    char message[] = "MESSAGE";
-    my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
+    // my_printf("Test 3 -> percentage sign -> %%\n");
+    // char message[] = "MESSAGE";
+    // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
     return 0;
 }
 
