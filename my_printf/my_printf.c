@@ -176,25 +176,31 @@ int my_printf(char* restrict input_str, ...){
         if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
             // buffer_ptr[k] = '\0';
             // k = 0;
-            if(buffer_ptr[0] != '%'){
+            // if(buffer_ptr[0] != '%'){
                 while(*buffer_ptr != '\0'){
                     write(1,buffer_ptr,1);
                     buffer_ptr++;
                 }
-            } 
-            // else {
-            //     int j = 1;
-            //     char ch1 = 0;
 
-            //     while((ch1 = buffer_ptr[j++]) < 58){}
-            //     // for integers
-            //     if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 
-            //         fprintf(stdout,buffer_ptr,va_arg(ptr, int));
+                if(input_str[i + 2] == 's'){
+
+                }
+            // } 
+            // else {
+            //     // int j = 1;
+            //     char ch1 = input_str[i + 2];
+
+            //     // while((ch1 = buffer_ptr[j++]) < 58){}
+            //     // // for integers
+            //     if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
+            //         printf("\n integer specifier trigger\n");
+            //         // fprintf(stdout,buffer_ptr,va_arg(ptr, int));
             //     }
             //     // for characters
             //     else if( ch1 == 'f'){
-            //         fprintf(stdout, buffer_ptr, va_arg(ptr, double));
+
+            //         // fprintf(stdout, buffer_ptr, va_arg(ptr, double));
             //     }
             //     else if (ch1 == 'l'){
             //         char ch2 = buffer_ptr[2];
