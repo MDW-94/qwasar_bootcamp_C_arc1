@@ -174,8 +174,8 @@ int my_printf(char* restrict input_str, ...){
         buffer_ptr[k++] = input_str[i];
 
         if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
-            buffer_ptr[k] = '\0';
-            k = 0;
+            // buffer_ptr[k] = '\0';
+            // k = 0;
             if(buffer_ptr[0] != '%'){
                 while(*buffer_ptr != '\0'){
                     write(1,buffer_ptr,1);
