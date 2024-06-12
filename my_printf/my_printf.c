@@ -162,113 +162,120 @@ char* my_strcpy(char* param_1, char* param_2){
 // }
 
 // Maybe try substituting in malloc and write in here to make it pass?
-// int my_printf(char* restrict input_str, ...){
-//     va_list ptr;
-//     va_start(ptr, input_str);
+int my_printf(char* restrict input_str, ...){
+    va_list ptr;
+    va_start(ptr, input_str);
 
+    int size = 1000;
+    char* buffer_ptr = malloc((size + 1)*sizeof(char));
+    int k = 0;
+
+    for(int i = 0; input_str[i] != '\0';i++){
+        buffer_ptr[k++] = input_str[i];
+
+        if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
+            buffer_ptr[k] = '\0';
+            k = 0;
+            if(buffer_ptr[0] != '%'){
+                while(*buffer_ptr != '\0'){
+                    write(1,buffer_ptr,1);
+                    buffer_ptr++;
+                }
+            } 
+            // else {
+            //     int j = 1;
+            //     char ch1 = 0;
+
+            //     while((ch1 = buffer_ptr[j++]) < 58){}
+            //     // for integers
+            //     if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
+                
+            //         fprintf(stdout,buffer_ptr,va_arg(ptr, int));
+            //     }
+            //     // for characters
+            //     else if( ch1 == 'f'){
+            //         fprintf(stdout, buffer_ptr, va_arg(ptr, double));
+            //     }
+            //     else if (ch1 == 'l'){
+            //         char ch2 = buffer_ptr[2];
+
+            //         // for long int
+            //         if ( ch2 == 'u' || ch2 == 'd' || ch2 == 'i'){
+            //             fprintf(stdout, buffer_ptr, va_arg(ptr, long));
+            //         }
+            //         else if (ch2 == 'f'){
+            //         fprintf(stdout, buffer_ptr, va_arg(ptr, double));
+            //         }
+            //     }
+            //     else if (ch1 == 'L'){
+            //         char ch2 = buffer_ptr[2];
+
+            //         // for long long int
+            //         if(ch2 == 'u' || ch2 == 'd' || ch2 == 'i'){
+            //             fprintf(stdout, buffer_ptr, va_arg(ptr, long long));
+            //         }
+            //         else if (ch2 == 'f'){
+            //             fprintf(stdout, buffer_ptr, va_arg(ptr, long double));
+            //         }
+            //     }
+            //     else if (ch1 == 's'){
+            //         fprintf(stdout, buffer_ptr, va_arg(ptr, char*));
+            //     }
+            //     else {
+            //         fprintf(stdout, "%s", buffer_ptr);
+            //     }                
+            // }
+        }
+    }
+    // ending traversal
+    va_end(ptr);
+    return 0;
+}
+
+// int my_printf(char* input_str, ...){
+//     va_list args;
+//     va_start(args, input_str);
+
+//     // Create a huge amount of space that can store the original string and all the extra arguments
 //     char token[1000];
 //     int k = 0;
+
+//     // determine size of string with arguments
+//     // Why for loop? We need to track the index and check ahead of the position to determine if the next char is a format specifier
 //     for(int i = 0; input_str[i] != '\0';i++){
 //         token[k++] = input_str[i];
-
-//         if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
-//             token[k] = '\0';
-//             k = 0;
-//             if(token[0] != '%'){
-//                 fprintf(stdout, "%s", token);
-//             } else {
-//                 int j = 1;
-//                 char ch1 = 0;
-
-//                 while((ch1 = token[j++]) < 58){}
-//                 // for integers
-//                 if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
-//                     fprintf(stdout,token,va_arg(ptr, int));
+//         if(input_str[i + 1] == '%'){
+//             if(input_str[i+2] == 's'){
+//                 char* ch1 = va_arg(args, char);
+//                 while(ch1 != '\0'){
+//                     token[k++] = *ch1;
 //                 }
-//                 // for characters
-//                 else if( ch1 == 'f'){
-//                     fprintf(stdout, token, va_arg(ptr, double));
-//                 }
-//                 else if (ch1 == 'l'){
-//                     char ch2 = token[2];
-
-//                     // for long int
-//                     if ( ch2 == 'u' || ch2 == 'd' || ch2 == 'i'){
-//                         fprintf(stdout, token, va_arg(ptr, long));
-//                     }
-//                     else if (ch2 == 'f'){
-//                     fprintf(stdout, token, va_arg(ptr, double));
-//                     }
-//                 }
-//                 else if (ch1 == 'L'){
-//                     char ch2 = token[2];
-
-//                     // for long long int
-//                     if(ch2 == 'u' || ch2 == 'd' || ch2 == 'i'){
-//                         fprintf(stdout, token, va_arg(ptr, long long));
-//                     }
-//                     else if (ch2 == 'f'){
-//                         fprintf(stdout, token, va_arg(ptr, long double));
-//                     }
-//                 }
-//                 else if (ch1 == 's'){
-//                     fprintf(stdout, token, va_arg(ptr, char*));
-//                 }
-//                 else {
-//                     fprintf(stdout, "%s", token);
-//                 }                
 //             }
 //         }
 //     }
-//     // ending traversal
-//     va_end(ptr);
+
+//     //Create a place to store buffer to store all the desired outputs to be written
+
+
+//     // Take the final incremented value of K and set that to the final output buffer size?
+//     char* final_ptr = malloc((k + 1)*sizeof(char));
+//     char* ptr_ptr = final_ptr;
+//     int n;
+//     while(*ptr_ptr++ != '\0'){
+//         *ptr_ptr = 
+//         n = write(1, ptr_ptr, 1);
+//         if(n == -1){
+//             return 0;
+//         }
+//     }
+
+//     // free memory
+//     free(final_ptr);
+//     // end traversal
+//     va_end(args);
+//     printf("\nfunction end reached\n");
 //     return 0;
 // }
-
-int my_printf(char* input_str, ...){
-    va_list args;
-    va_start(args, input_str);
-
-    // Create a huge amount of space that can store the original string and all the extra arguments
-    char token[1000];
-    int k = 0;
-
-    // determine size of string with arguments
-    // Why for loop? We need to track the index and check ahead of the position to determine if the next char is a format specifier
-    for(int i = 0; input_str[i] != '\0';i++){
-        token[k++] = input_str[i];
-        if(input_str[i + 1] == '%'){
-            if(input_str[i+2] == 's'){
-                char* ch1 = va_arg(args, char);
-                while(ch1 != '\0'){
-                    token[k++] = *ch1;
-                }
-            }
-        }
-    }
-
-    //Create a place to store buffer to store all the desired outputs to be written
-
-
-    // Take the final incremented value of K and set that to the final output buffer size?
-    char* final_ptr = malloc((k + 1)*sizeof(char));
-    char* ptr_ptr = final_ptr;
-    int n;
-    while(*ptr_ptr++ != '\0'){
-        *ptr_ptr = 
-        n = write(1, ptr_ptr, 1);
-        if(n == -1){
-            return 0;
-        }
-    }
-
-    // free memory
-    free(final_ptr);
-    // end traversal
-    va_end(args);
-    printf("\nfunction end reached\n");
-    return 0;
-}
 
 int main(){
     my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
