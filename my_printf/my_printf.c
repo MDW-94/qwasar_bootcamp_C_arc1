@@ -42,7 +42,7 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 int number;
-                if((number = va_arg(args, int)) < 10 && number > 0){
+                if((number = va_arg(args, int)) >= 0 && number <= 9){
                     buffer_ptr[k++] = number + '0';
                 }
                 i++;
@@ -100,6 +100,8 @@ int main(){
 }
 
 // ---------
+
+// global-buffer-overflow - indicates your program is accessing memory outside the bounds of a defined string literal - often happens when you try to read and write beyond the allocated size of a string or buffer
 
 // Fast Git Commit: gaa && gcmsg "-message-" && ggp  
 

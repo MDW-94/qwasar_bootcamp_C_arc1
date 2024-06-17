@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -g -Wall -Wextra -Werror
+CFLAGS := -g3 -Wall -Wextra -Werror -fsanitize=address
 TARGET := my_printf
 
 all: compile run
@@ -22,5 +22,5 @@ run: $(TARGET)
 # always remember: ggcc filename.c -o filename && ./filename
 
 clean:
-	rm -f *.o
+	rm -f *.o ./$(TARGET)
 
