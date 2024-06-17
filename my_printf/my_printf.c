@@ -168,7 +168,7 @@ int my_printf(char* restrict input_str, ...){
 
     int size = 1000;
     char* buffer_ptr = malloc((size + 1)*sizeof(char));
-    int k = -1;
+    int k = 0;
 
     for(int i = 0; input_str[i] != '\0';i++){
         buffer_ptr[k++] = input_str[i];
@@ -251,9 +251,12 @@ int my_printf(char* restrict input_str, ...){
             //     }                
             // }
         // }
-        printf("\n| index -> !%i | input_str -> %c | buffer_ptr -> %c", k, input_str[k], buffer_ptr[k]);
+        printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
+    buffer_ptr[k] = '\0';
+    printf("\n|| Copied string -> %s", buffer_ptr);
     // ending traversal
+    free(buffer_ptr);
     va_end(args);
     return 0;
 }
