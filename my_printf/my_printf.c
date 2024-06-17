@@ -172,6 +172,11 @@ int my_printf(char* restrict input_str, ...){
 
     for(int i = 0; input_str[i] != '\0';i++){
         buffer_ptr[k++] = input_str[i];
+
+        if(input_str[i + 1] == '%'){
+            printf("\n- Format Specifier Spotted! -");
+        }
+
         printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
     buffer_ptr[k] = '\0';
