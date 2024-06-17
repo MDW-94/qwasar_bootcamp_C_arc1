@@ -41,10 +41,11 @@ int my_printf(char* restrict input_str, ...){
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
-                // for(int i = 0; i < )
-                buffer_ptr[k++] = va_arg(args, int) + '0';
+                int number;
+                if((number = va_arg(args, int)) < 10 && number > 0){
+                    buffer_ptr[k++] = number + '0';
+                }
                 i++;
-                // if(integer > length of 2) ??
             } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
 
             else if(ch1 == 'c'){
@@ -57,6 +58,11 @@ int my_printf(char* restrict input_str, ...){
                 for(int j = 0; j < my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
                 }
+                i++;
+            }
+
+            else if (ch1 == '%'){
+                buffer_ptr[k++] = '%';
                 i++;
             }
 
