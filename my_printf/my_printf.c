@@ -12,6 +12,16 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
+// char* handle_float(double value){
+//     printf("\n handle_float input ->%f", value);
+//     char token[32] = {'0','0','0','0','0','0','\0'};
+//     char* ptr_output = token;
+
+
+
+//     return ptr_output;
+// }
+
 int my_printf(char* restrict input_str, ...){
     va_list args;
     va_start(args, input_str);
@@ -42,14 +52,22 @@ int my_printf(char* restrict input_str, ...){
                 i++;
             }
 
-            else if(ch1 == 'f'){
-                double value = va_arg(args, double);
-
-                char float_str[32];
-                
-                buffer_ptr[k++] = value;
+            else if(ch1 == 's'){
+                char* ptr_va = va_arg(args, char*);
+                for(int j = 0; j < my_strlen(ptr_va);j++){
+                    buffer_ptr[k++] = ptr_va[j];
+                }
                 i++;
             }
+
+            // else if(ch1 == 'f'){
+            //     double value = va_arg(args, double);
+            //     char* ptr_float_str = handle_float(value);
+            //     for(int j = 0; j<my_strlen(ptr_float_str);j++){
+            //         buffer_ptr[k++] = ptr_float_str[j];
+            //     }
+            //     i++;
+            // }
 
 
         }
@@ -66,8 +84,9 @@ int my_printf(char* restrict input_str, ...){
 int main(){
     // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> int 1 : %c, int 2 : %c, int 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
+    my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!");
+    // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
     // char message[] = "MESSAGE";
     // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
