@@ -26,8 +26,8 @@ int my_printf(char* restrict input_str, ...){
     va_list args;
     va_start(args, input_str);
 
-    int size = 1000;
-    char* buffer_ptr = malloc((size + 1)*sizeof(char));
+    int buffer_size = 1000;
+    char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
     int k = 0;
 
     for(int i = 0; input_str[i] != '\0';i++){
@@ -35,7 +35,7 @@ int my_printf(char* restrict input_str, ...){
             buffer_ptr[k++] = input_str[i];
         } else {
             // HANDLE FORMAT SPECIFIER
-            printf("\n- Format Specifier Spotted! -");
+            printf("\n- Format Specifier Spotted! @ %i -", i);
             char ch1 = input_str[i + 1];
             printf("\n- ch1 -> %c -", ch1);
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
@@ -77,13 +77,15 @@ int my_printf(char* restrict input_str, ...){
 
 
         }
-        printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
+        // wont work with sanitize
+        // printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
     buffer_ptr[k] = '\0';
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     // ending traversal
     free(buffer_ptr);
     va_end(args);
+    printf("\n###################### End of my_printf ######################\n");
     return 0;
 }
 
@@ -102,6 +104,8 @@ int main(){
 // ---------
 
 // global-buffer-overflow - indicates your program is accessing memory outside the bounds of a defined string literal - often happens when you try to read and write beyond the allocated size of a string or buffer
+
+// sanitize error messages - error type 'global-buffer-overflow' - address '0x00010473eed7 - location in code: my_printf.c:80 && main my_printf.c:94
 
 // Fast Git Commit: gaa && gcmsg "-message-" && ggp  
 
