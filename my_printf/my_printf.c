@@ -12,6 +12,84 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
+int my_printf(char* restrict input_str, ...){
+    va_list args;
+    va_start(args, input_str);
+
+    int size = 1000;
+    char* buffer_ptr = malloc((size + 1)*sizeof(char));
+    int k = 0;
+
+    for(int i = 0; input_str[i] != '\0';i++){
+        if(input_str[i] != '%'){
+            buffer_ptr[k++] = input_str[i];
+        } else {
+            // HANDLE FORMAT SPECIFIER
+            printf("\n- Format Specifier Spotted! -");
+            char ch1 = input_str[i + 1];
+            printf("\n- ch1 -> %c -", ch1);
+            // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
+
+            if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
+                // for(int i = 0; i < )
+                buffer_ptr[k++] = va_arg(args, int) + '0';
+                i++;
+                // if(integer > length of 2) ??
+            } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
+
+            else if(ch1 == 'c'){
+                buffer_ptr[k++] = va_arg(args, int);
+                i++;
+            }
+
+            else if(ch1 == 'f'){
+                double value = va_arg(args, double);
+
+                char float_str[32];
+                
+                buffer_ptr[k++] = value;
+                i++;
+            }
+
+
+        }
+        printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
+    }
+    buffer_ptr[k] = '\0';
+    printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
+    // ending traversal
+    free(buffer_ptr);
+    va_end(args);
+    return 0;
+}
+
+int main(){
+    // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
+    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3 -> int 1 : %c, int 2 : %c, int 3 : %c\n", 'z', 'x', 'y');
+    my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
+    // my_printf("Test 3 -> percentage sign -> %%\n");
+    // char message[] = "MESSAGE";
+    // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
+    return 0;
+}
+
+// ---------
+
+// Fast Git Commit: gaa && gcmsg "-message-" && ggp  
+
+// malloc perservering after va_ends:
+// the memory allocated using malloc will persist past the va_end call. The va_end macro is used to clean up the memory used by the va_list macros, but it does not affect any memory allocated with malloc
+
+
+// The last name parameter: va_start:
+// The named parameter in va_start is simply the last parameter before the ellipsis (...)
+
+
+
+
+
+
 //  Formatted Output Conversion
 // int my_printf(char* restrict input_str, ...){
 //     // Needs to be initialized to no. of chars in char array - my_strlen?
@@ -162,73 +240,3 @@ char* my_strcpy(char* param_1, char* param_2){
 // }
 
 // Maybe try substituting in malloc and write in here to make it pass?
-int my_printf(char* restrict input_str, ...){
-    va_list args;
-    va_start(args, input_str);
-
-    int size = 1000;
-    char* buffer_ptr = malloc((size + 1)*sizeof(char));
-    int k = 0;
-
-    for(int i = 0; input_str[i] != '\0';i++){
-        if(input_str[i] != '%'){
-            buffer_ptr[k++] = input_str[i];
-        } else {
-            // HANDLE FORMAT SPECIFIER
-            printf("\n- Format Specifier Spotted! -");
-            char ch1 = input_str[i + 1];
-            printf("\n- ch1 -> %c -", ch1);
-            // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
-
-            if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
-                // for(int i = 0; i < )
-                buffer_ptr[k++] = va_arg(args, int) + '0';
-                i++;
-                // if(integer > length of 2) ??
-            } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
-
-            else if(ch1 == 'c'){
-                buffer_ptr[k++] = va_arg(args, int);
-                i++;
-            }
-
-            else if(ch1 == 'f'){
-                float value = va_arg(args, double);
-                buffer_ptr[k++] = (char)value;
-                i++;
-            }
-
-
-        }
-        printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
-    }
-    buffer_ptr[k] = '\0';
-    printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
-    // ending traversal
-    free(buffer_ptr);
-    va_end(args);
-    return 0;
-}
-
-int main(){
-    // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
-    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> int 1 : %c, int 2 : %c, int 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
-    // my_printf("Test 3 -> percentage sign -> %%\n");
-    // char message[] = "MESSAGE";
-    // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
-    return 0;
-}
-
-// ---------
-
-// Fast Git Commit: gaa && gcmsg "-message-" && ggp  
-
-// malloc perservering after va_ends:
-// the memory allocated using malloc will persist past the va_end call. The va_end macro is used to clean up the memory used by the va_list macros, but it does not affect any memory allocated with malloc
-
-
-// The last name parameter: va_start:
-// The named parameter in va_start is simply the last parameter before the ellipsis (...)
-
