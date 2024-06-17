@@ -187,7 +187,13 @@ int my_printf(char* restrict input_str, ...){
                 // for(int i = 0; i < )
                 buffer_ptr[k++] = va_arg(args, int) + '0';
                 i++;
+                // if(integer > length of 2) ??
             } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
+
+            if(ch1 == 'c'){
+                buffer_ptr[k++] = va_arg(args, int);
+                i++;
+            }
 
 
 
@@ -198,7 +204,7 @@ int my_printf(char* restrict input_str, ...){
         printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
     buffer_ptr[k] = '\0';
-    printf("\n|| Copied string -> %s", buffer_ptr);
+    printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     // ending traversal
     free(buffer_ptr);
     va_end(args);
@@ -253,6 +259,7 @@ int my_printf(char* restrict input_str, ...){
 int main(){
     // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3 -> int 1 : %c, int 2 : %c, int 3 : %c\n", 'z', 'x', 'y');
     // my_printf("Test 3 -> percentage sign -> %%\n");
     // char message[] = "MESSAGE";
     // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
