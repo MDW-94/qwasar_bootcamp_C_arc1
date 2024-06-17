@@ -171,12 +171,13 @@ int my_printf(char* restrict input_str, ...){
     int k = 0;
 
     for(int i = 0; input_str[i] != '\0';i++){
-        buffer_ptr[k++] = input_str[i];
-
-        if(input_str[i + 1] == '%'){
+        if(input_str[i] != '%'){
+            buffer_ptr[k++] = input_str[i];
+        } else {
+            // HANDLE FORMAT SPECIFIER
             printf("\n- Format Specifier Spotted! -");
+            buffer_ptr[k++] = '@';
         }
-
         printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
     buffer_ptr[k] = '\0';
