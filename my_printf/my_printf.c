@@ -14,8 +14,20 @@ char* my_strcpy(char* param_1, char* param_2){
 
 char* handle_large_number(int number){
     printf("\n handle large number -> %i\n", number);
-    char token[32] = {'0','0','0','0','\0'};
+    char token[32];
     char* ptr_output = token;
+
+    int n = (number >=          10) + (number >=         100) + (number >=        1000) +
+            (number >=       10000) + (number >=      100000) + (number >=     1000000) +
+            (number >=    10000000) + (number >=   100000000) + (number >=  1000000000) + 1;
+
+    for(int i = n; i; i--){
+        ptr_output[i-1] = '0' + number%10;
+        number /= 10;
+    }
+
+    // https://www.reddit.com/r/C_Programming/comments/xxcxdu/faster_way_to_convert_double_to_string_not_using_f/
+
     return ptr_output;
 }
 
