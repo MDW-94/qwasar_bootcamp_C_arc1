@@ -178,10 +178,7 @@ int my_printf(char* restrict input_str, ...){
             printf("\n- Format Specifier Spotted! -");
             char ch1 = input_str[i + 1];
             printf("\n- ch1 -> %c -", ch1);
-
-
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
-
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 // for(int i = 0; i < )
@@ -196,14 +193,10 @@ int my_printf(char* restrict input_str, ...){
             }
 
             else if(ch1 == 'f'){
-         
+                float value = va_arg(args, double);
+                buffer_ptr[k++] = (char)value;
+                i++;
             }
-
-
-
-
-
-         
 
 
         }
@@ -216,51 +209,6 @@ int my_printf(char* restrict input_str, ...){
     va_end(args);
     return 0;
 }
-
-// int my_printf(char* input_str, ...){
-//     va_list args;
-//     va_start(args, input_str);
-
-//     // Create a huge amount of space that can store the original string and all the extra arguments
-//     char token[1000];
-//     int k = 0;
-
-//     // determine size of string with arguments
-//     // Why for loop? We need to track the index and check ahead of the position to determine if the next char is a format specifier
-//     for(int i = 0; input_str[i] != '\0';i++){
-//         token[k++] = input_str[i];
-//         if(input_str[i + 1] == '%'){
-//             if(input_str[i+2] == 's'){
-//                 char* ch1 = va_arg(args, char);
-//                 while(ch1 != '\0'){
-//                     token[k++] = *ch1;
-//                 }
-//             }
-//         }
-//     }
-
-//     //Create a place to store buffer to store all the desired outputs to be written
-
-
-//     // Take the final incremented value of K and set that to the final output buffer size?
-//     char* final_ptr = malloc((k + 1)*sizeof(char));
-//     char* ptr_ptr = final_ptr;
-//     int n;
-//     while(*ptr_ptr++ != '\0'){
-//         *ptr_ptr = 
-//         n = write(1, ptr_ptr, 1);
-//         if(n == -1){
-//             return 0;
-//         }
-//     }
-
-//     // free memory
-//     free(final_ptr);
-//     // end traversal
-//     va_end(args);
-//     printf("\nfunction end reached\n");
-//     return 0;
-// }
 
 int main(){
     // my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
