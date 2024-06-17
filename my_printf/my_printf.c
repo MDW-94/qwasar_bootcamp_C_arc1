@@ -168,40 +168,43 @@ int my_printf(char* restrict input_str, ...){
 
     int size = 1000;
     char* buffer_ptr = malloc((size + 1)*sizeof(char));
-    int k = 0;
+    int k = -1;
 
     for(int i = 0; input_str[i] != '\0';i++){
         buffer_ptr[k++] = input_str[i];
 
-        if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
-            // buffer_ptr[k] = '\0';
-            // k = 0;
-            if(buffer_ptr[0] != '%'){
-                while(*buffer_ptr != '\0'){
-                    write(1,buffer_ptr,1);
-                    buffer_ptr++;
-                }
-            }
+        // if(input_str[i + 1] == '%' || input_str[i + 1] == '\0'){
+        //     // buffer_ptr[k] = '\0';
+        //     // k = 0;
+        //     if(buffer_ptr[0] != '%'){
+        //         while(*buffer_ptr != '\0'){
+        //             write(1,buffer_ptr,1);
+        //             buffer_ptr++;
+        //         }
+        //     }
 
-                char format_specifier = input_str[i + 2];
+        //         char format_specifier = input_str[i + 2];
                 
-                if(format_specifier == 's'){
-                    char* ch1 = va_arg(args, char*);
-                    char* ptr_arg = ch1;
-                    while(*ptr_arg != '\0'){
-                        write(1, ptr_arg, 1);
-                        ptr_arg++;
-                    }
-                }
+        //         if(format_specifier == 's'){
+        //             char* ch1 = va_arg(args, char*);
+        //             char* ptr_arg = ch1;
+        //             while(*ptr_arg != '\0'){
+        //                 write(1, ptr_arg, 1);
+        //                 ptr_arg++;
+        //             }
+        //         }
 
-                if(format_specifier == 'i'){
-                    char ch1 = va_arg(args, int) + '0';
-                    char* ptr_arg = &ch1;
-                    // while(*ptr_arg != '\0'){
-                        write(1,ptr_arg,1);
-                        // ptr_arg++;
-                    // }
-                }
+        //         if(format_specifier == 'i'){
+        //             char ch1 = va_arg(args, int) + '0';
+        //             char* ptr_arg = &ch1;
+        //             // while(*ptr_arg != '\0'){
+        //                 write(1,ptr_arg,1);
+        //                 // ptr_arg++;
+        //             // }
+        //         }
+
+
+
             // } 
             // else {
             //     // int j = 1;
@@ -247,8 +250,8 @@ int my_printf(char* restrict input_str, ...){
             //         fprintf(stdout, "%s", buffer_ptr);
             //     }                
             // }
-        }
-        printf("\n index -> %i, buffer_ptr -> %c", k, buffer_ptr[k]);
+        // }
+        printf("\n| index -> !%i | input_str -> %c | buffer_ptr -> %c", k, input_str[k], buffer_ptr[k]);
     }
     // ending traversal
     va_end(args);
