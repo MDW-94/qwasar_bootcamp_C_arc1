@@ -45,7 +45,7 @@ int my_printf(char* restrict input_str, ...){
     va_list args;
     va_start(args, input_str);
 
-    int buffer_size = 1000;
+    int buffer_size = 256;
     char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
     int k = 0;
 
@@ -106,9 +106,14 @@ int my_printf(char* restrict input_str, ...){
     }
     buffer_ptr[k] = '\0';
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
+    
+    int x;
+    while((x = write(1,buffer_ptr,1)) != 0 && x != -1 && *buffer_ptr != '\0'){
+        buffer_ptr++;
+    }
     // ending traversal
-    free(buffer_ptr);
     va_end(args);
+    free(buffer_ptr);
     printf("\n###################### End of my_printf ######################\n");
     return 0;
 }
