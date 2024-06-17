@@ -176,7 +176,24 @@ int my_printf(char* restrict input_str, ...){
         } else {
             // HANDLE FORMAT SPECIFIER
             printf("\n- Format Specifier Spotted! -");
-            buffer_ptr[k++] = '@';
+            char ch1 = input_str[i + 1];
+            printf("\n- ch1 -> %c -", ch1);
+
+
+            // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
+
+
+            if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
+                // for(int i = 0; i < )
+                buffer_ptr[k++] = va_arg(args, int) + '0';
+                i++;
+            } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
+
+
+
+         
+
+
         }
         printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
