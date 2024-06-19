@@ -108,11 +108,14 @@ int my_printf(char* restrict input_str, ...){
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     
     int x;
-    while((x = write(1,buffer_ptr,1)) != 0 && x != -1 && *buffer_ptr != '\0'){
-        buffer_ptr++;
+    char* temp_ptr = buffer_ptr;
+    while((x = write(1,temp_ptr,1)) != 0 && x != -1 && *temp_ptr != '\0'){
+        temp_ptr++;
     }
     // ending traversal
     va_end(args);
+
+    // You need to reference the original pointer before freeing it
     free(buffer_ptr);
     printf("\n###################### End of my_printf ######################\n");
     return 0;
