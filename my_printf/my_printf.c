@@ -7,6 +7,7 @@ int my_strlen(char* str){
     int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
 }
 
+
 char* my_strcpy(char* param_1, char* param_2){
     while((*param_1++ = *param_2++));
     return param_1;
@@ -107,11 +108,12 @@ int my_printf(char* restrict input_str, ...){
     buffer_ptr[k] = '\0';
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     
-    int x;
+    // int x;
     char* temp_ptr = buffer_ptr;
-    while((x = write(1,temp_ptr,1)) != 0 && x != -1 && *temp_ptr != '\0'){
-        temp_ptr++;
-    }
+    // while((x = write(1,temp_ptr,1)) != 0 && x != -1 && *temp_ptr != '\0'){
+    //     temp_ptr++;
+    // }
+    write(1,temp_ptr,k - 1);
     // ending traversal
     va_end(args);
 
