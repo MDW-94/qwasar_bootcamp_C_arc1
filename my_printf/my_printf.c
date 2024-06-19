@@ -122,7 +122,7 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Test 1 -> Hello, World! 1234 !@£$\n");
+    my_printf("Hello, World!\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
     my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
     my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!");
