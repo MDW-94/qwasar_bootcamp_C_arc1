@@ -12,7 +12,7 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
-char* handle_number(int number){
+char* number_to_char(int number){
     printf("\n handle large number -> %i\n", number);
 
     int is_negative = number < 0;
@@ -73,7 +73,7 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 int number = va_arg(args, int);
-                char* ptr_va = handle_number(number);
+                char* ptr_va = number_to_char(number);
                 for(int j = 0;j< my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
                 }
