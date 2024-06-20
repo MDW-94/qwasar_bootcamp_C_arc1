@@ -86,6 +86,13 @@ int my_printf(char* restrict input_str, ...){
                     buffer_ptr[k++] = ptr_va[j];
                     }
                     i++;
+                } else {
+                    char null_result[6] = "(null)";
+                    char* ptr_null = null_result;
+                    for(int j =0;j<6;j++){
+                        buffer_ptr[k++] = ptr_null[j];
+                    }
+                    i++;
                 }
         
             
@@ -133,6 +140,7 @@ int main(){
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
     my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
     my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
     my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
