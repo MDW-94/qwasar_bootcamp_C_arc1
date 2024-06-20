@@ -49,6 +49,9 @@ char* number_to_char(int number){
 }
 
 char* number_to_octal(int number){
+    char out_str[32];
+    char* ptr_out = out_str;
+
     long quotient, octalnum=0;
     int octalNumber[100], i = 1, j;
     quotient = number;
@@ -60,9 +63,13 @@ char* number_to_octal(int number){
 
     for(j = i - 1; j > 0;j--){
         octalnum = octalnum*10 + octalNumber[j];
+        out_str[j] = octalnum + '0';
     }
 
+    return ptr_out;
+
     // https://www.sanfoundry.com/c-program-convert-decimal-octal/
+    // https://en.wikipedia.org/wiki/Octal
 }
 
 int my_printf(char* restrict input_str, ...){
