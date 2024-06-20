@@ -14,7 +14,7 @@ char* my_strcpy(char* param_1, char* param_2){
 }
 
 char* handle_large_number(int number){
-    printf("\n handle large number -> %i\n", number);
+    // printf("\n handle large number -> %i\n", number);
     char token[32];
     char* ptr_output = token;
 
@@ -55,22 +55,23 @@ int my_printf(char* restrict input_str, ...){
             buffer_ptr[k++] = input_str[i];
         } else {
             // HANDLE FORMAT SPECIFIER
-            printf("\n- Format Specifier Spotted! @ %i -", i);
+            // printf("\n- Format Specifier Spotted! @ %i -", i);
             char ch1 = input_str[i + 1];
-            printf("\n- ch1 -> %c -", ch1);
+            // printf("\n- ch1 -> %c -", ch1);
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 int number;
                 if((number = va_arg(args, int)) >= 0 && number <= 9){
-                    buffer_ptr[k++] = number + '0';
+                buffer_ptr[k++] = number + '0';
                 } else {
-                    char* ptr_va = handle_large_number(number);
-                    for(int j = 0;j< my_strlen(ptr_va);j++){
-                        buffer_ptr[k++] = ptr_va[j];
-                    }
+                char* ptr_va = handle_large_number(number);
+                for(int j = 0;j< my_strlen(ptr_va);j++){
+                    buffer_ptr[k++] = ptr_va[j];
+                }
                 }
                 i++;
+                
             } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
 
             else if(ch1 == 'c'){
@@ -79,11 +80,15 @@ int my_printf(char* restrict input_str, ...){
             }
 
             else if(ch1 == 's'){
-                char* ptr_va = va_arg(args, char*);
-                for(int j = 0; j < my_strlen(ptr_va);j++){
+                char* ptr_va;
+                if((ptr_va = va_arg(args, char*)) != NULL){
+                    for(int j = 0; j < my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
+                    }
+                    i++;
                 }
-                i++;
+        
+            
             }
 
             else if (ch1 == '%'){
@@ -127,7 +132,7 @@ int main(){
     my_printf("Hello, World!\n");
     my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
     my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!");
+    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
     my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
