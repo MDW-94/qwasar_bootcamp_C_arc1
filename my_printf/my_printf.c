@@ -49,16 +49,6 @@ char* handle_number(int number){
     return ptr_output;
 }
 
-// char* handle_float(double value){
-//     printf("\n handle_float input ->%f", value);
-//     char token[32] = {'0','0','0','0','0','0','\0'};
-//     char* ptr_output = token;
-
-
-
-//     return ptr_output;
-// }
-
 int my_printf(char* restrict input_str, ...){
     va_list args;
     va_start(args, input_str);
