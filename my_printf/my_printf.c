@@ -15,12 +15,19 @@ char* my_strcpy(char* param_1, char* param_2){
 
 char* handle_large_number(int number){
     // printf("\n handle large number -> %i\n", number);
-    char token[32];
-    char* ptr_output = token;
+    int temp = number;
+    // char* ptr_output = token;
 
-    int n = (number >=          10) + (number >=         100) + (number >=        1000) +
-            (number >=       10000) + (number >=      100000) + (number >=     1000000) +
-            (number >=    10000000) + (number >=   100000000) + (number >=  1000000000) + 1;
+    int n = (temp >=          10) + (temp >=         100) + (temp >=        1000) +
+            (temp >=       10000) + (temp >=      100000) + (temp >=     1000000) +
+            (temp >=    10000000) + (temp >=   100000000) + (temp >=  1000000000) + 1;
+
+    char *ptr_output = (char*)malloc(n + 1);
+    if(!ptr_output){
+        return NULL;
+    }
+
+    ptr_output[n] = '\0';
 
     for(int i = n; i; i--){
         ptr_output[i-1] = '0' + number%10;
@@ -94,8 +101,6 @@ int my_printf(char* restrict input_str, ...){
                     }
                     i++;
                 }
-        
-            
             }
 
             else if (ch1 == '%'){
@@ -131,17 +136,18 @@ int my_printf(char* restrict input_str, ...){
 
     // You need to reference the original pointer before freeing it
     free(buffer_ptr);
-    printf("\n###################### End of my_printf ######################\n");
+    // printf("\n###################### End of my_printf ######################\n");
     return 0;
 }
 
 int main(){
-    my_printf("Hello, World!\n");
-    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
-    my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    // my_printf("Hello, World!\n");
+    // my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    // my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    my_printf("Test 5a -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    printf("\nTest 5b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
     // char message[] = "MESSAGE";
