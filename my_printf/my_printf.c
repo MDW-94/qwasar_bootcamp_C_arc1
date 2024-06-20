@@ -99,6 +99,10 @@ int my_printf(char* restrict input_str, ...){
                 //HANDLE OCTAL
             }
 
+            if(ch1 == 'x'){
+                //HANDLE HEXADECIMAL
+            }
+
             else if(ch1 == 'c'){
                 buffer_ptr[k++] = va_arg(args, int);
                 i++;
@@ -125,33 +129,17 @@ int my_printf(char* restrict input_str, ...){
                 buffer_ptr[k++] = '%';
                 i++;
             }
-
-            // else if(ch1 == 'f'){
-            //     double value = va_arg(args, double);
-            //     char* ptr_float_str = handle_float(value);
-            //     for(int j = 0; j<my_strlen(ptr_float_str);j++){
-            //         buffer_ptr[k++] = ptr_float_str[j];
-            //     }
-            //     i++;
-            // }
-
-
         }
-        // wont work with sanitize
         // printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
     buffer_ptr[k++] = '\0';
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     
-    // int x;
     char* temp_ptr = buffer_ptr;
-    // while((x = write(1,temp_ptr,1)) != 0 && x != -1 && *temp_ptr != '\0'){
-    //     temp_ptr++;
-    // }
     write(1,temp_ptr,k - 1);
+
     // ending traversal
     va_end(args);
-
     // You need to reference the original pointer before freeing it
     free(buffer_ptr);
     // printf("\n###################### End of my_printf ######################\n");
