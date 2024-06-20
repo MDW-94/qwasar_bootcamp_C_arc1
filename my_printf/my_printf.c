@@ -55,6 +55,11 @@ int my_printf(char* restrict input_str, ...){
 
     int buffer_size = 256;
     char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
+    if(!buffer_ptr){
+        va_end(args);
+        return -1;
+    }
+
     int k = 0;
 
     for(int i = 0; input_str[i] != '\0';i++){
@@ -78,7 +83,6 @@ int my_printf(char* restrict input_str, ...){
                 }
                 }
                 i++;
-                
             } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
 
             else if(ch1 == 'c'){
@@ -122,7 +126,7 @@ int my_printf(char* restrict input_str, ...){
         // wont work with sanitize
         // printf("\n| index -> !%i | input_str -> %c", k, input_str[k]);
     }
-    buffer_ptr[k] = '\0';
+    buffer_ptr[k++] = '\0';
     printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     
     // int x;
@@ -141,13 +145,14 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    // my_printf("Hello, World!\n");
-    // my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    // my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
-    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
-    my_printf("Test 5a -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    printf("\nTest 5b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Hello, World!\n");
+    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Test 6 -> %i, %s, %c, %%\n", 1234567890, "Hello", 'A');
+    // printf("\nTest 5b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
     // char message[] = "MESSAGE";
