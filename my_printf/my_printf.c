@@ -13,15 +13,19 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
-char* handle_large_number(int number){
-    // printf("\n handle large number -> %i\n", number);
-    int temp = number;
-    // char* ptr_output = token;
+char* handle_number(int number){
+    printf("\n handle large number -> %i\n", number);
+
+    int is_negative = number < 0;
+    unsigned int abs_number = is_negative ? -number : number;
+    int temp = abs_number;
 
     int n = (temp >=          10) + (temp >=         100) + (temp >=        1000) +
             (temp >=       10000) + (temp >=      100000) + (temp >=     1000000) +
             (temp >=    10000000) + (temp >=   100000000) + (temp >=  1000000000) + 1;
 
+    n += is_negative;
+    
     char *ptr_output = (char*)malloc(n + 1);
     if(!ptr_output){
         return NULL;
@@ -29,12 +33,18 @@ char* handle_large_number(int number){
 
     ptr_output[n] = '\0';
 
-    for(int i = n; i; i--){
-        ptr_output[i-1] = '0' + number%10;
-        number /= 10;
+    for(int i = n; i > 0; i--){
+        ptr_output[i-1] = '0' + abs_number%10;
+        abs_number /= 10;
+    }
+
+    if(is_negative){
+        ptr_output[0] = '-';
     }
 
     // https://www.reddit.com/r/C_Programming/comments/xxcxdu/faster_way_to_convert_double_to_string_not_using_f/
+
+    printf("\n handle large number out -> %s\n", ptr_output);
 
     return ptr_output;
 }
@@ -73,15 +83,15 @@ int my_printf(char* restrict input_str, ...){
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
-                int number;
-                if((number = va_arg(args, int)) >= 0 && number <= 9){
-                buffer_ptr[k++] = number + '0';
-                } else {
-                char* ptr_va = handle_large_number(number);
+                int number = va_arg(args, int);
+                // if((number = va_arg(args, int)) >= 0 && number <= 9){
+                // buffer_ptr[k++] = number + '0';
+                // } else {
+                char* ptr_va = handle_number(number);
                 for(int j = 0;j< my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
                 }
-                }
+                // }
                 i++;
             } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
 
@@ -151,7 +161,7 @@ int main(){
     my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
     my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
     my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    my_printf("Test 6 -> %i, %s, %c, %%\n", 1234567890, "Hello", 'A');
+    my_printf("Test 6 -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
     // printf("\nTest 5b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
