@@ -48,6 +48,23 @@ char* number_to_char(int number){
     return ptr_output;
 }
 
+char* number_to_octal(int number){
+    long quotient, octalnum=0;
+    int octalNumber[100], i = 1, j;
+    quotient = number;
+
+    while (quotient != 0){
+        octalNumber[i++] = quotient % 8;
+        quotient = quotient / 8;
+    }
+
+    for(j = i - 1; j > 0;j--){
+        octalnum = octalnum*10 + octalNumber[j];
+    }
+
+    // https://www.sanfoundry.com/c-program-convert-decimal-octal/
+}
+
 int my_printf(char* restrict input_str, ...){
     va_list args;
     va_start(args, input_str);
@@ -82,6 +99,12 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'o'){
                 //HANDLE OCTAL
+                int number = va_arg(args, int);
+                char* ptr_va = number_to_octal(number);
+                for(int j = 0;j<my_strlen(ptr_va);j++){
+                    buffer_ptr[k++] = ptr_va[j];
+                }
+                i++;
             }
 
             if(ch1 == 'x'){
