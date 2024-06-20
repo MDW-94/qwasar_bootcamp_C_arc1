@@ -172,6 +172,12 @@ int main(){
 
 // ---------
 
+// Formats:
+
+// %d - Decimal:        255
+// %o - Octal:          377
+// %x - Hexadecimal:    ff
+
 // global-buffer-overflow - indicates your program is accessing memory outside the bounds of a defined string literal - often happens when you try to read and write beyond the allocated size of a string or buffer
 
 // sanitize error messages - error type 'global-buffer-overflow' - address '0x00010473eed7 - location in code: my_printf.c:80 && main my_printf.c:94
