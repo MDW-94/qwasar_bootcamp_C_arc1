@@ -93,6 +93,10 @@ int my_printf(char* restrict input_str, ...){
                 //HANDLE HEXADECIMAL
             }
 
+            if(ch1 == 'p'){
+                //HANDLE POINTER HEXADECIMAL
+            }
+
             else if(ch1 == 'c'){
                 buffer_ptr[k++] = va_arg(args, int);
                 i++;
@@ -156,9 +160,11 @@ int main(){
 
 // Formats:
 
-// %d - Decimal:        255
-// %o - Octal:          377
-// %x - Hexadecimal:    ff
+// %d - Decimal:            255
+// %o - Octal:              377
+// %x - Hexadecimal:        ff
+// %p = Pointer address:    0x7ffc12345678
+
 
 // global-buffer-overflow - indicates your program is accessing memory outside the bounds of a defined string literal - often happens when you try to read and write beyond the allocated size of a string or buffer
 
