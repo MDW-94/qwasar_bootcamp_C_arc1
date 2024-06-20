@@ -93,7 +93,11 @@ int my_printf(char* restrict input_str, ...){
                 }
                 // }
                 i++;
-            } // WILL THIS HANDLE INTEGERS WITH >2 UNITS?
+            } 
+
+            if(ch1 == 'o'){
+                //HANDLE OCTAL
+            }
 
             else if(ch1 == 'c'){
                 buffer_ptr[k++] = va_arg(args, int);
