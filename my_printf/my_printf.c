@@ -7,7 +7,6 @@ int my_strlen(char* str){
     int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
 }
 
-
 char* my_strcpy(char* param_1, char* param_2){
     while((*param_1++ = *param_2++));
     return param_1;
@@ -74,14 +73,10 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
                 int number = va_arg(args, int);
-                // if((number = va_arg(args, int)) >= 0 && number <= 9){
-                // buffer_ptr[k++] = number + '0';
-                // } else {
                 char* ptr_va = handle_number(number);
                 for(int j = 0;j< my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
                 }
-                // }
                 i++;
             } 
 
