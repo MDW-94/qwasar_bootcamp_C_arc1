@@ -48,28 +48,83 @@ char* number_to_char(int number){
     return ptr_output;
 }
 
+// char* number_to_octal(int number){
+//     char out_str[32];
+//     char* ptr_out = out_str;
+
+//     long quotient, octalnum=0;
+//     int octalNumber[100], i = 1, j;
+//     quotient = number;
+
+//     while (quotient != 0){
+//         octalNumber[i++] = quotient % 8;
+//         quotient = quotient / 8;
+//     }
+
+//     for(j = i - 1; j > 0;j--){
+//         octalnum = octalnum*10 + octalNumber[j];
+//         out_str[j] = octalnum + '0';
+//     }
+
+//     return ptr_out;
+
+//     // https://www.sanfoundry.com/c-program-convert-decimal-octal/
+//     // https://en.wikipedia.org/wiki/Octal
+// }
+
 char* number_to_octal(int number){
-    char out_str[32];
-    char* ptr_out = out_str;
+    // Array to store octal number digits
+    int octalNumber[32];
+    int i = 0, j;
 
-    long quotient, octalnum=0;
-    int octalNumber[100], i = 1, j;
-    quotient = number;
-
-    while (quotient != 0){
-        octalNumber[i++] = quotient % 8;
-        quotient = quotient / 8;
+    // Process the number to convert to octal
+    while(number != 0 ){
+        octalNumber[i++] = number % 8;
+        number = number / 8;
     }
 
-    for(j = i - 1; j > 0;j--){
-        octalnum = octalnum*10 + octalNumber[j];
-        out_str[j] = octalnum + '0';
+    // Allocate memory for the output string 
+    char* out_str = (char*)malloc((i + 1)*sizeof(char));
+    if(!out_str){
+        // Handle malloc failure
+        return NULL;
     }
 
-    return ptr_out;
+    // Convert the digits to characters in reverse order
+    for(j = 0; j < i;j++){
+        out_str[j] = octalNumber[i - j - 1] + '0';
+    }
+    // reverse the order of digit assignment by leveraging the fact that
+    // the digits in 'octalNumber' are stored from least significant
+    // to most significant (right to left) - while the 'out_st'
+    // needs to stoore these digits from most significant to least significant
+    // (left to right) - [i - j - 1] reverses the order
 
-    // https://www.sanfoundry.com/c-program-convert-decimal-octal/
-    // https://en.wikipedia.org/wiki/Octal
+    // Null-terminate the string
+    out_str[i] = '\0';
+
+    return out_str;
+}
+
+char* number_to_hexadecimal(int number){
+    printf("\nhexa start number -> %i", number);
+    int hexaNumber[32];
+    int i = 0, j;
+
+    while(number != 0){
+        hexaNumber[i++] = number%16;
+        number = number/16;
+        printf("\nhexaNumber -> %i", hexaNumber[i]);
+    }
+
+    char* out_str = (char*)malloc((i+1)*sizeof(char));
+
+    for(j = 0;j < i;j++){
+        out_str[j] = hexaNumber[i - j - 1];
+    }
+    out_str[i] = '\0';
+
+    return out_str;
 }
 
 int my_printf(char* restrict input_str, ...){
@@ -108,6 +163,9 @@ int my_printf(char* restrict input_str, ...){
                 //HANDLE OCTAL
                 int number = va_arg(args, int);
                 char* ptr_va = number_to_octal(number);
+                if(ptr_va != NULL){
+                    free(ptr_va);
+                }
                 for(int j = 0;j<my_strlen(ptr_va);j++){
                     buffer_ptr[k++] = ptr_va[j];
                 }
@@ -116,6 +174,12 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'x'){
                 //HANDLE HEXADECIMAL
+                int number = va_arg(args, int);
+                char* ptr_va = number_to_hexadecimal(number);
+                for(int j = 0;j<my_strlen(ptr_va);j++){
+                    buffer_ptr[k++] = ptr_va[j];
+                }
+                i++;
             }
 
             if(ch1 == 'p'){
@@ -166,13 +230,14 @@ int my_printf(char* restrict input_str, ...){
 }
 
 int main(){
-    my_printf("Hello, World!\n");
-    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
-    my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    my_printf("Test 6 -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
+    // my_printf("Hello, World!\n");
+    // my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    // my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    // my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    // my_printf("Test 5 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    // my_printf("Test 6 -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
+    my_printf("Test 6 -> %i | %d | %o | %x\n", 25, -25, 25, 160);
     // printf("\nTest 5b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     // my_printf("Test 4 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     // my_printf("Test 3 -> percentage sign -> %%\n");
