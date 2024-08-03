@@ -12,40 +12,40 @@ char* my_strcpy(char* param_1, char* param_2){
     return param_1;
 }
 
-char* number_to_char(int number){
-    // printf("\n handle large number -> %i\n", number);
-
-    int is_negative = number < 0;
-    unsigned int abs_number = is_negative ? -number : number;
-    int temp = abs_number;
-
-    int n = (temp >=          10) + (temp >=         100) + (temp >=        1000) +
-            (temp >=       10000) + (temp >=      100000) + (temp >=     1000000) +
-            (temp >=    10000000) + (temp >=   100000000) + (temp >=  1000000000) + 1;
-
-    n += is_negative;
-    
-    char *ptr_output = (char*)malloc(n + 1);
-    if(!ptr_output){
-        return NULL;
+void number_to_char(int number, char* buffer, size_t buffer_size) {
+    if (buffer_size == 0) {
+        return; // If buffer size is 0, we cannot store anything
     }
 
-    ptr_output[n] = '\0';
+    int is_negative = number < 0 ? 1 : 0;
+    unsigned int abs_number = is_negative ? -number : number;
+    int i = 0;
 
-    for(int i = n; i > 0; i--){
-        ptr_output[i-1] = '0' + abs_number%10;
+    // Handle 0 explicitly
+    if (abs_number == 0 && i < (int)buffer_size - 1) {
+        buffer[i++] = '0';
+    }
+
+    // Process each digit
+    while (abs_number != 0 && i < (int)buffer_size - 1) {
+        buffer[i++] = '0' + abs_number % 10;
         abs_number /= 10;
     }
 
-    if(is_negative){
-        ptr_output[0] = '-';
+    // Add negative sign if necessary
+    if (is_negative && i < (int)buffer_size - 1) {
+        buffer[i++] = '-';
     }
 
-    // https://www.reddit.com/r/C_Programming/comments/xxcxdu/faster_way_to_convert_double_to_string_not_using_f/
+    // Null-terminate the string
+    buffer[i] = '\0';
 
-    // printf("\n handle large number out -> %s\n", ptr_output);
-
-    return ptr_output;
+    // Reverse the string
+    for (int start = 0, end = i - 1; start < end; start++, end--) {
+        char temp = buffer[start];
+        buffer[start] = buffer[end];
+        buffer[end] = temp;
+    }
 }
 
 char* number_to_octal(int number, char* buffer, size_t buffer_size) {
@@ -146,13 +146,14 @@ int my_printf(char* restrict input_str, ...){
             // buffer_ptr[k++] = '@'; // Start of copying in variable length argument
 
             if(ch1 == 'i' || ch1 == 'd' || ch1 == 'u' || ch1 == 'h'){
-                int number = va_arg(args, int);
-                char* ptr_va = number_to_char(number);
-                for(int j = 0;j< my_strlen(ptr_va);j++){
-                    buffer_ptr[k++] = ptr_va[j];
+              int number = va_arg(args, int);
+                char number_buffer[12]; // Buffer large enough to hold any int value
+                number_to_char(number, number_buffer, sizeof(number_buffer));
+                for (int j = 0; number_buffer[j] != '\0'; j++) {
+                    buffer_ptr[k++] = number_buffer[j];
                 }
                 i++;
-            } 
+            }
 
             if(ch1 == 'o'){
                 //HANDLE OCTAL
@@ -219,24 +220,23 @@ int my_printf(char* restrict input_str, ...){
     va_end(args);
     // You need to reference the original pointer before freeing it
     free(buffer_ptr);
-    printf("\n###################### End of my_printf ######################\n");
+    // printf("\n###################### End of my_printf ######################\n");
     return 0;
 }
 
 int main(){
     my_printf("Hello, World!\n");
-    my_printf("Test 2 -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3 -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
-    my_printf("Test 5 -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
-    my_printf("Test 6 -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    my_printf("Test 7 -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
-    my_printf("Test 7 -> %i | %d | %o | %x\n", 25, -25, 25, 25);
-    // printf("\nTest 7b -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    // my_printf("Test 8 -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
-    // my_printf("Test 9 -> percentage sign -> %%\n");
-    // char message[] = "MESSAGE";
-    // my_printf("Test 3 -> String - %s - Inserted\n", message); // printf("Test String %s\n", message);
+    my_printf("Test 2   -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3   -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    my_printf("Test 4   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    my_printf("Test 5   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    my_printf("Test 6   -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Test 7   -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
+    my_printf("Test 7   -> %i | %d | %o | %x\n", 25, -25, 25, 25);
+    my_printf("Test 7b  -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Test 8   -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
+    my_printf("Test 9   -> percentage sign -> %%\n");
+
     return 0;
 }
 
@@ -519,3 +519,47 @@ int main(){
 //     // https://www.sanfoundry.com/c-program-convert-decimal-octal/
 //     // https://en.wikipedia.org/wiki/Octal
 // }
+
+// char* number_to_char(int number){
+//     // printf("\n handle large number -> %i\n", number);
+
+//     int is_negative = number < 0;
+//     unsigned int abs_number = is_negative ? -number : number;
+//     int temp = abs_number;
+
+//     int n = (temp >=          10) + (temp >=         100) + (temp >=        1000) +
+//             (temp >=       10000) + (temp >=      100000) + (temp >=     1000000) +
+//             (temp >=    10000000) + (temp >=   100000000) + (temp >=  1000000000) + 1;
+
+//     n += is_negative;
+    
+//     char *ptr_output = (char*)malloc(n + 1);
+//     if(!ptr_output){
+//         return NULL;
+//     }
+
+//     ptr_output[n] = '\0';
+
+//     for(int i = n; i > 0; i--){
+//         ptr_output[i-1] = '0' + abs_number%10;
+//         abs_number /= 10;
+//     }
+
+//     if(is_negative){
+//         ptr_output[0] = '-';
+//     }
+
+//     // https://www.reddit.com/r/C_Programming/comments/xxcxdu/faster_way_to_convert_double_to_string_not_using_f/
+
+//     // printf("\n handle large number out -> %s\n", ptr_output);
+
+//     return ptr_output;
+// }
+
+//     int number = va_arg(args, int);
+//     char* ptr_va = number_to_char(number);
+//     for(int j = 0;j< my_strlen(ptr_va);j++){
+//         buffer_ptr[k++] = ptr_va[j];
+//     }
+//     i++;
+// } 
