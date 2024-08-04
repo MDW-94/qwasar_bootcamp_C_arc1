@@ -1,7 +1,14 @@
+#include "my_printf.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+
+// Try implementing your own tests through unity tersting framework for C
+// https://www.throwtheswitch.org/unity
+
+
 
 int my_strlen(char* str){
     int i = 0;char* temp_ptr = str;while(*temp_ptr++ != '\0'){i++;}return i;
@@ -49,7 +56,8 @@ void number_to_char(int number, char* buffer, size_t buffer_size) {
 }
 
 char* number_to_octal(int number, char* buffer, size_t buffer_size) {
-    int octalNumber[32]; // Array to hold the intermediate hexadecimal values
+    char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
+
     int i = 0, j;
     
     // Special case for 0
@@ -65,9 +73,9 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size) {
     while (number != 0 && i < (int)buffer_size - 1) {
         int remainder = number % 8;
         if (remainder < 10) {
-            octalNumber[i++] = '0' + remainder;
+            buffer_ptr[i++] = '0' + remainder;
         } else {
-            octalNumber[i++] = 'A' + (remainder - 10);
+            buffer_ptr[i++] = 'A' + (remainder - 10);
         }
         number = number / 8;
     }
@@ -80,7 +88,7 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size) {
 
     // Convert the array to a string
     for (j = 0; j < i; j++) {
-        buffer[j] = octalNumber[i - j - 1];
+        buffer[j] = buffer_ptr[i - j - 1];
     }
     buffer[i] = '\0';
 
@@ -121,6 +129,34 @@ char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size) {
 
     return buffer;
 }
+
+// char* pointer_to_memoryAddress(char* ptr_ptr, char* buffer, size_t buffer_size){
+//     int hexaNumber[32];
+//     int i = 0, j;
+
+//     if(ptr_ptr == NULL){
+//         if(buffer_size >= 2){
+//             buffer[0] = '0';
+//             buffer[1] = '\0';
+//         }
+//         return buffer;
+//     }
+
+//     while(&ptr_ptr != '\0' && i < (int)buffer_size - 1){
+
+//     }
+
+//     if (i >= (int)buffer_size) {
+//         return NULL;
+//     }
+
+//     for(j = 0; j < i;j++){
+
+//     }
+//     buffer[i] = '\0';
+
+//     return buffer;
+// }
 
 int my_printf(char* restrict input_str, ...){
     va_list args;
@@ -179,6 +215,13 @@ int my_printf(char* restrict input_str, ...){
 
             if(ch1 == 'p'){
                 //HANDLE POINTER HEXADECIMAL
+                // char* ptr_ptr = va_arg(args, char*);
+                // char hexa_buffer[9];
+                // char* ptr_va = pointer_to_memoryAddress(ptr_ptr, hexa_buffer, sizeof(hexa_buffer));
+                // for(int j = 0;j<my_strlen(ptr_va);j++){
+                //     buffer_ptr[k++] = ptr_va[j];
+                // }
+                // i++;
             }
 
             else if(ch1 == 'c'){
@@ -236,6 +279,9 @@ int main(){
     my_printf("Test 7b  -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
     my_printf("Test 8   -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
     my_printf("Test 9   -> percentage sign -> %%\n");
+    char string[6] = "Hello";
+    char* ptr_str = string;
+    my_printf("Test 10  -> memory addresses -> | %p |\n", ptr_str);
 
     return 0;
 }
