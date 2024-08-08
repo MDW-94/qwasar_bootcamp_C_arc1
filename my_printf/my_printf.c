@@ -139,7 +139,7 @@ char* pointer_to_memoryAddress(void* ptr, char* buffer, size_t buffer_size){
     }
 
     unsigned long address = (unsigned long)ptr;
-    char hex_digits[] = "0123456789abdcef";
+    char hex_digits[] = "0123456789abcdef";
 
     buffer[0] = '0';
     buffer[1] = 'x';
@@ -163,7 +163,9 @@ char* pointer_to_memoryAddress(void* ptr, char* buffer, size_t buffer_size){
     // printf("\n%s", buffer);
 
     return buffer;
-    // "0x3ef211e68648!\" but got \"0x3ef211e68648p!
+    // "0x3ef211e68648!\" but got \"0x3ef211e68648p! - needed to increment the my_printf i++
+
+    // "0x3e43cc4f7648!\" but got \"0x3e43dd4f7648!
 }
 
 int my_printf(char* restrict input_str, ...){
