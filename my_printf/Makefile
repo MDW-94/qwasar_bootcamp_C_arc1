@@ -61,3 +61,5 @@ test: test_compile test_run
 # test_run: Runs the test executable.
 # test_clean: Cleans up the test executable.
 # test: Combines test_compile and test_run to compile and run the tests in one step.
+
+# https://www.throwtheswitch.org/build/make

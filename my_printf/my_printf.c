@@ -134,6 +134,8 @@ char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size) {
 //     int hexaNumber[32];
 //     int i = 0, j;
 
+//     int x = &ptr_ptr;
+
 //     if(ptr_ptr == NULL){
 //         if(buffer_size >= 2){
 //             buffer[0] = '0';
@@ -142,7 +144,7 @@ char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size) {
 //         return buffer;
 //     }
 
-//     while(&ptr_ptr != '\0' && i < (int)buffer_size - 1){
+//     while(x != NULL && i < (int)buffer_size - 1){
 
 //     }
 
@@ -159,6 +161,7 @@ char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size) {
 // }
 
 int my_printf(char* restrict input_str, ...){
+    int return_size;
     va_list args;
     va_start(args, input_str);
 
@@ -213,16 +216,16 @@ int my_printf(char* restrict input_str, ...){
                 i++;
             }
 
-            if(ch1 == 'p'){
-                //HANDLE POINTER HEXADECIMAL
-                // char* ptr_ptr = va_arg(args, char*);
-                // char hexa_buffer[9];
-                // char* ptr_va = pointer_to_memoryAddress(ptr_ptr, hexa_buffer, sizeof(hexa_buffer));
-                // for(int j = 0;j<my_strlen(ptr_va);j++){
-                //     buffer_ptr[k++] = ptr_va[j];
-                // }
-                // i++;
-            }
+            // if(ch1 == 'p'){
+            //     // HANDLE POINTER HEXADECIMAL
+            //     char* ptr_ptr = va_arg(args, char*);
+            //     char hexa_buffer[9];
+            //     char* ptr_va = pointer_to_memoryAddress(ptr_ptr, hexa_buffer, sizeof(hexa_buffer));
+            //     for(int j = 0;j<my_strlen(ptr_va);j++){
+            //         buffer_ptr[k++] = ptr_va[j];
+            //     }
+            //     i++;
+            // }
 
             else if(ch1 == 'c'){
                 buffer_ptr[k++] = va_arg(args, int);
@@ -257,6 +260,7 @@ int my_printf(char* restrict input_str, ...){
     // printf("\n\n|| COPIED STRING -> %s", buffer_ptr);
     
     char* temp_ptr = buffer_ptr;
+    return_size = my_strlen(temp_ptr);
     write(1,temp_ptr,k - 1);
 
     // ending traversal
@@ -264,7 +268,7 @@ int my_printf(char* restrict input_str, ...){
     // You need to reference the original pointer before freeing it
     free(buffer_ptr);
     // printf("\n###################### End of my_printf ######################\n");
-    return 0;
+    return return_size;
 }
 
 int main(){
