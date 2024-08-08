@@ -92,6 +92,8 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size) {
     }
     buffer[i] = '\0';
 
+    free(buffer_ptr);
+
     return buffer;
 }
 
@@ -130,35 +132,39 @@ char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size) {
     return buffer;
 }
 
-// char* pointer_to_memoryAddress(char* ptr_ptr, char* buffer, size_t buffer_size){
-//     int hexaNumber[32];
-//     int i = 0, j;
+char* pointer_to_memoryAddress(void* ptr, char* buffer, size_t buffer_size){
+    // %p prints the address in hexadecimal format 
+    if(buffer_size < 2 * sizeof(void*) + 3){
+        return NULL;
+    }
 
-//     int x = &ptr_ptr;
+    unsigned long address = (unsigned long)ptr;
+    char hex_digits[] = "0123456789abdcef";
 
-//     if(ptr_ptr == NULL){
-//         if(buffer_size >= 2){
-//             buffer[0] = '0';
-//             buffer[1] = '\0';
-//         }
-//         return buffer;
-//     }
+    buffer[0] = '0';
+    buffer[1] = 'x';
 
-//     while(x != NULL && i < (int)buffer_size - 1){
+    int index = 2;
+    int leading_zero = 1;
+    for(int i = (sizeof(void*) * 2) - 1; i >= 0;i--){
+        char digit = hex_digits[(address >> (i*4)) & 0xF];
+        if(digit != '0' || !leading_zero){
+            buffer[index++] = digit;
+            leading_zero = 0;
+        }
+    }
 
-//     }
+    if(index == 2){
+        buffer[index++] = '0';
+    }
 
-//     if (i >= (int)buffer_size) {
-//         return NULL;
-//     }
+    buffer[index] = '\0';
 
-//     for(j = 0; j < i;j++){
+    // printf("\n%s", buffer);
 
-//     }
-//     buffer[i] = '\0';
-
-//     return buffer;
-// }
+    return buffer;
+    // "0x3ef211e68648!\" but got \"0x3ef211e68648p!
+}
 
 int my_printf(char* restrict input_str, ...){
     int return_size;
@@ -194,7 +200,7 @@ int my_printf(char* restrict input_str, ...){
                 i++;
             }
 
-            if(ch1 == 'o'){
+            else if(ch1 == 'o'){
                 //HANDLE OCTAL
                 int number = va_arg(args, int);
                 char octal_buffer[9];
@@ -205,7 +211,7 @@ int my_printf(char* restrict input_str, ...){
                 i++;
             }
 
-            if(ch1 == 'x'){
+            else if(ch1 == 'x'){
                 //HANDLE HEXADECIMAL
                 int number = va_arg(args, int);
                 char hexa_buffer[9];
@@ -216,16 +222,18 @@ int my_printf(char* restrict input_str, ...){
                 i++;
             }
 
-            // if(ch1 == 'p'){
-            //     // HANDLE POINTER HEXADECIMAL
-            //     char* ptr_ptr = va_arg(args, char*);
-            //     char hexa_buffer[9];
-            //     char* ptr_va = pointer_to_memoryAddress(ptr_ptr, hexa_buffer, sizeof(hexa_buffer));
-            //     for(int j = 0;j<my_strlen(ptr_va);j++){
-            //         buffer_ptr[k++] = ptr_va[j];
-            //     }
-            //     i++;
-            // }
+            else if(ch1 == 'p') {
+                char* ptr_ptr = va_arg(args, char*);
+                char address_buffer[2 * sizeof(void*)+3]; // Large enough to hold a pointer in hexadecimal
+                char* ptr_va = pointer_to_memoryAddress(ptr_ptr, address_buffer, sizeof(address_buffer));
+                if(ptr_va != NULL){
+                    for (int j = 0; ptr_va[j] != '\0' && k < buffer_size - 1; j++) {
+                    buffer_ptr[k++] = ptr_va[j];
+                    }
+                    buffer_ptr[k] = '\0';
+                }
+                i++;
+            }
 
             else if(ch1 == 'c'){
                 buffer_ptr[k++] = va_arg(args, int);
@@ -249,7 +257,7 @@ int my_printf(char* restrict input_str, ...){
                 }
             }
 
-            else if (ch1 == '%'){
+            else if(ch1 == '%'){
                 buffer_ptr[k++] = '%';
                 i++;
             }
@@ -267,22 +275,21 @@ int my_printf(char* restrict input_str, ...){
     va_end(args);
     // You need to reference the original pointer before freeing it
     free(buffer_ptr);
-    // printf("\n###################### End of my_printf ######################\n");
     return return_size;
 }
 
 int main(){
-    my_printf("Hello, World!\n");
-    my_printf("Test 2   -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
-    my_printf("Test 3   -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
-    my_printf("Test 4   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
-    my_printf("Test 5   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
-    my_printf("Test 6   -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    my_printf("Test 7   -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
-    my_printf("Test 7   -> %i | %d | %o | %x\n", 25, -25, 25, 25);
-    my_printf("Test 7b  -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
-    my_printf("Test 8   -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
-    my_printf("Test 9   -> percentage sign -> %%\n");
+    // my_printf("Hello, World!\n");
+    // my_printf("Test 2   -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    // my_printf("Test 3   -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    // my_printf("Test 4   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    // my_printf("Test 5   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    // my_printf("Test 6   -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    // my_printf("Test 7   -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
+    // my_printf("Test 7   -> %i | %d | %o | %x\n", 25, -25, 25, 25);
+    // my_printf("Test 7b  -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    // my_printf("Test 8   -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
+    // my_printf("Test 9   -> percentage sign -> %%\n");
     char string[6] = "Hello";
     char* ptr_str = string;
     my_printf("Test 10  -> memory addresses -> | %p |\n", ptr_str);
