@@ -87,14 +87,14 @@ unsigned int abs_number = is_negative ? -number : number;
 
 Then a series of handlers check certain conditions of the number argument passed into the function:
 
-Handle A Zero Case
+##### Handle A Zero Case
 ```
   if(abs_number == 0 && i < (int)buffer_size - 1){
         buffer[i++] = '0';
     }
 ```
 
-Process a Non-Zero Number
+##### Process a Non-Zero Number
 ```
 while(abs_number != 0 && i < (int)buffer_size -1){
     buffer[i++] = '0' + abs_number % 10;
@@ -128,7 +128,7 @@ Example:
 etc.
 
 
-Handle a negative number:
+##### Handle a negative number:
 ```
     if(is_negative && i < (int)buffer_size - 1){
         buffer[i++] = '-';
@@ -137,7 +137,7 @@ Handle a negative number:
 This section of the number_to_char helper function runs if the is_negative returns 1 (true) and the incrementor for the buffer has not reached the maximum size of specified by buffer_size. It's purpose is to add the '-' character to the buffer array after the number to character conversion. 
 
 
-Reversing the String:
+##### Reversing the String:
 ```
  for(int start = 0, end = i -1; start < end; start++, end--){
         char temp = buffer[start];
