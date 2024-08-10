@@ -103,7 +103,7 @@ while(abs_number != 0 && i < (int)buffer_size -1){
 ```
 (Note: abs_number /= 10 is the same as abs_number = abs_number / 10)
 
-##### Modulo Loop (Last Digit Loop):
+###### Modulo Loop (Last Digit Loop):
 This section uses the modulo (%) operator within a while loop to retrieve the singular digits of the argument number:
 
 An example would be if the argument number is 123, then 123 % 10 would be 3, as the quotient would be 12 and the remainder would be 3. This can also be thought of as:
