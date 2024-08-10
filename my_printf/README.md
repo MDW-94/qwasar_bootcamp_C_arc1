@@ -38,7 +38,28 @@ Global and static variables are strictly forbidden!
 </ul>
 
 ## Description
-TODO - How have you solved the problem?
+The my_printf function uses... (malloc, va_list (etc), write, free - returns int return_size)
+
+To create a cleaner and more modular function, within the my_printf are a series of helper and converter functions that fulfill specific tasks. They are a way of breaking up the development and functionality of this program to be more economical as well as readable.
+
+
+### Helper Functions:
+
+#### my_strlen & my_strcpy
+
+### Converter Functions:
+
+#### number_to_char
+
+#### number_to_octal
+
+#### number_to_hexadecimal
+
+#### pointer_to_memoryAddress
+
+
+
+
 
 ## Installation
 TODO - How to install your project? npm install? make? make re?
