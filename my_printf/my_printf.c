@@ -43,3 +43,37 @@ void number_to_char(int number, char* buffer, size_t buffer_size){
         buffer[end] = temp;
     }
 }
+
+char* number_to_octal(int number, char* buffer, size_t buffer_size){
+    char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
+    int i = 0, j;
+
+    // Handle 0
+    if(number == 0){
+        if(buffer_size >= 2){
+            buffer[0] = '0';
+            buffer[1] = '\0';
+        }
+        return buffer;
+    }
+
+    // Convert to hexdecimal 
+    while(number != 0 && i < (int)buffer_size - 1){
+        int remainder = number % 8;
+        if(remainder < 10){
+            buffer_ptr[i++] = '0' + remainder;
+        } else {
+            buffer_ptr[i++] = 'A' + (remainder - 10);
+        }
+        number /= 8;
+    }
+
+    if(i >= (int)buffer_size) return NULL;
+
+    for(j = 0; j < i; j++){
+        buffer[j] = buffer_ptr[i - j - 1];
+    }
+    buffer[i] = '\0';
+
+    return buffer;
+}
