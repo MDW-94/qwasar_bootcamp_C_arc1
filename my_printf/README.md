@@ -103,6 +103,7 @@ while(abs_number != 0 && i < (int)buffer_size -1){
 ```
 (Note: abs_number /= 10 is the same as abs_number = abs_number / 10)
 
+##### Modulo Loop (Last Digit Loop):
 This section uses the modulo (%) operator within a while loop to retrieve the singular digits of the argument number:
 
 An example would be if the argument number is 123, then 123 % 10 would be 3, as the quotient would be 12 and the remainder would be 3. This can also be thought of as:
@@ -113,9 +114,18 @@ An example would be if the argument number is 123, then 123 % 10 would be 3, as 
 '2' would be the 10th place (10^1)
 '3' would be the 1st place (10^0)
 
-After this extraction, adding the '0' to this number converts the result to a character (instead of its original integer type).
+After this extraction, adding the '0' to this number converts the result to a character (instead of its original integer type). Adding a digit to '0' results in the ASCII value for the corresponding character.
 
+After this the converted, singular character is added to the small copy buffer created in the my_printf function. This has now been populated with one of the values from the variable arguments list.
 
+Finally, the abs_number is divided and reinstantiated by a value of 10. This removes the 0.n digit which will have been created from the modulo operator. As the loop iterates again the abs_number will no longer have the last digit and we be professed again until no digits remain:
+
+Example:
+1st iteration : 123, 3 is extracted, copied and removed. abs_number becomes 12
+
+2nd iteration : 12, 2 is extracted, copied and removed. abs_number becomes 1
+
+etc.
 
 
 Handle a negative number:
@@ -124,7 +134,18 @@ Handle a negative number:
         buffer[i++] = '-';
     }
 ```
+This section of the number_to_char helper function runs if the is_negative returns 1 (true) and the incrementor for the buffer has not reached the maximum size of specified by buffer_size. It's purpose is to add the '-' character to the buffer array after the number to character conversion. 
 
+
+Reversing the String:
+```
+ for(int start = 0, end = i -1; start < end; start++, end--){
+        char temp = buffer[start];
+        buffer[start] = buffer[end];
+        buffer[end] = temp;
+    }
+```
+Finally, the buffer will have all the correct characters (including sign if necessary) but will be in a reversed order, this is due to the process of extracting the last digit and storing it within the buffer. The process means the outputted stringi s reverse - therefore this section reverses the string. The result here is that the string will be outputted in the same order as the inputted integer argument.
 
 #### number_to_octal
 
