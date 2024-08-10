@@ -173,6 +173,33 @@ This swapping process is repeated for pairs of characters from the start and end
 This reversal occurs within the buffer that is outputted. So when the function is finally finished, the output of characters in an array will be in the same ordr as the number inputted as an argument.
 
 #### number_to_octal
+This function takes in a number, a pointer to a buffer (a char type array) and a reference to the size of that buffer (size_t) as arguments.
+
+The purpose of this function is to convert a given number into a [octal format](https://en.wikipedia.org/wiki/Octal).
+
+##### What is octal?
+The octal format differs from the decimal format in that the octal format is to base 8, whereas the decimal format is to base 10.
+
+Decimal:
+123 = 1*10^2 + 2*10^1 + 3*10^0
+
+Octal:
+173 = 1*8^2 + 7*8^1 + 3*8^0
+
+The above values are equal in value in their respective base counting systems. As can be seen, the base 8 system uses digits of 0,1,2,3,4,5,6,7 before looping back round to 0. This differs to decimal which contains 0,1,2,3,4,5,6,7,8,9. Therefore, 12 in decimal would be equal in value to 14 in octal. 
+
+Decimal:
+[1,2,3,4,5,6,7,8,9] 1 [1,2] 12
+
+Octal:
+[1,2,3,4,5,6,7,8] 1 [1,2,3,4] 14
+
+The above shows that the number of digits/values is equivalent in both the counting systems.
+
+
+
+
+
 
 
 #### number_to_hexadecimal
