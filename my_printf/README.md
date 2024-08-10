@@ -147,7 +147,33 @@ This section of the number_to_char helper function runs if the is_negative retur
 ```
 Finally, the buffer will have all the correct characters (including sign if necessary) but will be in a reversed order, this is due to the process of extracting the last digit and storing it within the buffer. The process means the outputted stringi s reverse - therefore this section reverses the string. The result here is that the string will be outputted in the same order as the inputted integer argument.
 
+start++ increments, end-- decrements
+
+- 'start = 0' : initializes the 'start' index point to the first element of the array ('buffer[0]')
+
+- 'end = i - 1' : initializes the 'end' index to point to the last valid element of the array. Here, the 'i' represents the number of characters stored in the buffer, so 'i - 1' is the index of the last character
+
+- 'char temp = buffer[start]' : the character at the 'start' index is temporarily stored in the variable 'temp'
+
+- 'buffer[start] = buffer[end]' : the character at the 'end' index is copied to the 'start' index, effectively moving the character from the end of the array to the start
+
+- 'buffer[end] = temp' : the character originally at the 'start' index (stored in 'temp') is copied to the 'end' index, effectively moving the character from the start of the array to the end
+
+This swapping process is repeated for pairs of characters from the start and end of the array, moving inward until the entire array is reversed.
+
+[ 1, 2, 3, 4]
+
+1st iteration: start(1), end(4), temp(1)
+[4, 2, 3, 1] temp = 1
+2nd interation: start = 2, end = 3, temp = 2
+[4, 3, 2, 1] temp = 2
+
+... until start >= end
+
+This reversal occurs within the buffer that is outputted. So when the function is finally finished, the output of characters in an array will be in the same ordr as the number inputted as an argument.
+
 #### number_to_octal
+
 
 #### number_to_hexadecimal
 
