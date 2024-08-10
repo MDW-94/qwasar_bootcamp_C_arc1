@@ -196,10 +196,57 @@ Octal:
 
 The above shows that the number of digits/values is equivalent in both the counting systems.
 
+##### Malloc for Buffer
+```
+   char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
+```
+This function begins by declaring memory on the heap, referencing the buffer_size argument and defining it's size by that of data type char.
 
+This buffer will be used to as a temporary buffer to be read from when teh conversion is completed and outputted to the argument buffer (the buffer passed in which will be populated by the function).
 
+##### Handle 0
+```
+ if(number == 0){
+        if(buffer_size >= 2){
+            buffer[0] = '0';
+            buffer[1] = '\0';
+        }
+        return buffer;
+    }
+```
 
+##### Hexadecimal Conversion Loop
+```
+  while(number != 0 && i < (int)buffer_size - 1){
+        int remainder = number % 8;
+        if(remainder < 10){
+            buffer_ptr[i++] = '0' + remainder;
+        } else {
+            buffer_ptr[i++] = 'A' + (remainder - 10);
+        }
+        number /= 8;
+    }
+```
 
+This loop iterates for as long as the argument number does not equal 0, it will be diminished each time the loop iterates by the conversion process. The incrementor 'i' is also bound to increment for as long as it is no larger than the argument buffer_size (as an index value reference).
+
+##### Handle Null Buffer
+```
+    if(i >= (int)buffer_size) return NULL;
+```
+
+##### Reverse-Copy String to Output Buffer
+```
+    for(j = 0; j < i; j++){
+        buffer[j] = buffer_ptr[i - j - 1];
+    }
+    buffer[i] = '\0';
+
+    return buffer;
+```
+As 'i' has been incremeneted to the final index position of the string given, it acts as a reference to the end of the array. In this for loop the incrementor 'j' is used to reference 'buffer' ascending index positions and as a decrementor value in the 'buffer_ptr' index positions.
+
+Essentially, the loop decrements through the 'buffer_ptr' reference and copies its contents to the 'buffer' indexes in ascending order.
 
 
 #### number_to_hexadecimal
