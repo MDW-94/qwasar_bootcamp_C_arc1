@@ -215,7 +215,7 @@ This buffer will be used to as a temporary buffer to be read from when teh conve
     }
 ```
 
-##### Hexadecimal Conversion Loop
+##### Octal Conversion Loop
 ```
   while(number != 0 && i < (int)buffer_size - 1){
         int remainder = number % 8;
@@ -229,6 +229,8 @@ This buffer will be used to as a temporary buffer to be read from when teh conve
 ```
 
 This loop iterates for as long as the argument number does not equal 0, it will be diminished each time the loop iterates by the conversion process. The incrementor 'i' is also bound to increment for as long as it is no larger than the argument buffer_size (as an index value reference).
+
+In order to convert, 
 
 ##### Handle Null Buffer
 ```
