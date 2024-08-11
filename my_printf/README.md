@@ -172,7 +172,7 @@ This swapping process is repeated for pairs of characters from the start and end
 
 This reversal occurs within the buffer that is outputted. So when the function is finally finished, the output of characters in an array will be in the same ordr as the number inputted as an argument.
 
-#### number_to_octal
+#### number_to_octal %o
 This function takes in a number, a pointer to a buffer (a char type array) and a reference to the size of that buffer (size_t) as arguments.
 
 The purpose of this function is to convert a given number into a [octal format](https://en.wikipedia.org/wiki/Octal).
@@ -259,7 +259,7 @@ As 'i' has been incremeneted to the final index position of the string given, it
 Essentially, the loop decrements through the 'buffer_ptr' reference and copies its contents to the 'buffer' indexes in ascending order.
 
 
-#### number_to_hexadecimal
+#### number_to_hexadecimal %x
 This function is in practically the same as the number_to_octal function, as it follows the same processes to convert the argument number given into an octal format. The only difference is that there is a handler for when the number hexadecimal value goes beyond 9, as in hexadecimal numbers beyond 9 are represented by the characters a,b,c,d,e and f.
 
 ##### What is Hexadecimal?
@@ -284,8 +284,13 @@ In the hexadecimal, 12 is represented as C as the value of 12 doesn't quite fini
 In this function, when the conversion value goes beyond 9 then the characters a,b,c,d,e and f are used instead.
 
 
-#### pointer_to_memoryAddress
+#### pointer_to_memoryAddress %p
+This function takes the a number, buffer, and size_t type (buffer_size) argument in order to return a memory address (hexadecimal value) of a pointer.
 
+##### What is a memory address?
+Is an identifier of a unique location in a computer's memory. It is an address (a reference) of a specific piece of data that is stored. Pointers store memory address and can be used to fetch or point towards the data that is marked by the address. In this function, we are essentially converting the pointer into the address to which is points towards. Note, memory addresses are written as hexdecimals as these are compact ways of notation the data.
+
+##### 
 
 
 

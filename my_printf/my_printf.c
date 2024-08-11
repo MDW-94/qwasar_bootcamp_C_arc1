@@ -100,10 +100,33 @@ char* number_to_hexdecimal(int number, char* buffer, size_t buffer_size){
 
     if(i >= (int)buffer_size) return NULL;
 
-    for(j = 0; j < i;j++){
-        buffer[j] = hezNumber[i - j - 1];
-    }
+    for(j = 0; j < i;j++) buffer[j] = hexaNumber[i - j - 1];
     buffer[i] = '\0';
+
+    return buffer;
+}
+
+char* pointer_to_memoryAddress(void* ptr, char* buffer, size_t buffer_size){
+    if(buffer_size < 2 * sizeof(void*) + 3) return NULL;
+
+    unsigned long address = (unsigned long)ptr;
+    char hex_digits[] = "0123456789abcdef";
+
+    buffer[0] = '0';
+    buffer[1] = 'x';
+
+    int index = 2;
+    int leading_zero = 1;
+    for(int i = (sizeof(void*) * 2) - 1; i >= 0;i--){
+        char digit = hex_digits[(address >> (i*4)) & 0xF];
+        if(digit != '0' || !leading_zero){
+            buffer[index++] = digit;
+            leading_zero = 0;
+        }
+    }
+
+    if(index == 2) buffer[index++] = '0';
+    buffer[index] = '\0';
 
     return buffer;
 }
