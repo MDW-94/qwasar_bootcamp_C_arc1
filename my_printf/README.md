@@ -221,8 +221,6 @@ This buffer will be used to as a temporary buffer to be read from when teh conve
         int remainder = number % 8;
         if(remainder < 10){
             buffer_ptr[i++] = '0' + remainder;
-        } else {
-            buffer_ptr[i++] = 'A' + (remainder - 10);
         }
         number /= 8;
     }
@@ -230,7 +228,17 @@ This buffer will be used to as a temporary buffer to be read from when teh conve
 
 This loop iterates for as long as the argument number does not equal 0, it will be diminished each time the loop iterates by the conversion process. The incrementor 'i' is also bound to increment for as long as it is no larger than the argument buffer_size (as an index value reference).
 
-In order to convert, 
+In order to convert, the loop first retrieves the remainder from the argument number. The remainder is then converted to a char type by adding '0' to make it it's ASCII value. Finally, the number is divided by 8 and then reassigned to the number variable. 
+
+First iteration
+- remainder = 65 % 8 = 1
+- buffer_ptr[0] = '0' + 1 = '1'
+- number = 8 / 8 = 1
+
+Second iteration
+- remainder = 8 % 8 = 0
+- buffer_ptr[1] = '0' + 0 = '0'
+- number - 8 / 8 = 1
 
 ##### Handle Null Buffer
 ```
@@ -252,6 +260,29 @@ Essentially, the loop decrements through the 'buffer_ptr' reference and copies i
 
 
 #### number_to_hexadecimal
+This function is in practically the same as the number_to_octal function, as it follows the same processes to convert the argument number given into an octal format. The only difference is that there is a handler for when the number hexadecimal value goes beyond 9, as in hexadecimal numbers beyond 9 are represented by the characters a,b,c,d,e and f.
+
+##### What is Hexadecimal?
+Is a type of number system that has a base value equal to 16. it is represented as follows:
+
+[0,1,2,3,4,5,6,7,8,9,a,b,c,d,e,f]
+
+A side-by-side comparison with the decimal (base 9) system can be seen here:
+
+Decimal Value of 12:
+
+[1,2,3,4,5,6,7,8,9] 1 [1,2] 12
+
+Hexadecimal Value of 12:
+
+[1,2,3,4,5,6,7,8,9,a,b,c] C
+
+As can be seen, in the decimal system the value of 12 is represented as one whole iteration of the number 1 to 9 then a digit of 2.
+
+In the hexadecimal, 12 is represented as C as the value of 12 doesn't quite finish an iteration of the hexdecimal counting system. For example, 30 in hexdecimal would be represented as 1E and 31 would be 1F - this is because when the iteration reaches the value of 16 is will place a digit on the left-hand side to mark that one iteration has been completed.
+
+In this function, when the conversion value goes beyond 9 then the characters a,b,c,d,e and f are used instead.
+
 
 #### pointer_to_memoryAddress
 

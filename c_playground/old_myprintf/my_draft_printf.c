@@ -69,7 +69,7 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size) {
         return buffer;
     }
 
-    // Convert the number to hexadecimal
+    // Convert the number to octal
     while (number != 0 && i < (int)buffer_size - 1) {
         int remainder = number % 8;
         if (remainder < 10) {

@@ -57,13 +57,11 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size){
         return buffer;
     }
 
-    // Convert to hexdecimal 
+    // Convert to octal 
     while(number != 0 && i < (int)buffer_size - 1){
         int remainder = number % 8;
         if(remainder < 10){
             buffer_ptr[i++] = '0' + remainder;
-        } else {
-            buffer_ptr[i++] = 'A' + (remainder - 10);
         }
         number /= 8;
     }
@@ -72,6 +70,38 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size){
 
     for(j = 0; j < i; j++){
         buffer[j] = buffer_ptr[i - j - 1];
+    }
+    buffer[i] = '\0';
+
+    return buffer;
+}
+
+char* number_to_hexdecimal(int number, char* buffer, size_t buffer_size){
+    int hexaNumber[32];
+    int i = 0, j;
+
+    if(number == 0){
+        if(buffer_size >= 2){
+            buffer[0] = '0';
+            buffer[1] = '\0';
+        }
+        return buffer;
+    }
+
+    while(number != 0 && i < (int)buffer_size - 1){
+        int remainder = number % 16;
+        if(remainder < 10){
+            hexaNumber[i++] = '0' + remainder;
+        } else {
+            hexaNumber[i++] = 'A' + (remainder - 10);
+        }
+        number /= 16;
+    }
+
+    if(i >= (int)buffer_size) return NULL;
+
+    for(j = 0; j < i;j++){
+        buffer[j] = hezNumber[i - j - 1];
     }
     buffer[i] = '\0';
 
