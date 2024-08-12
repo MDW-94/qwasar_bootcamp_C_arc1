@@ -290,7 +290,21 @@ This function takes the a number, buffer, and size_t type (buffer_size) argument
 ##### What is a memory address?
 Is an identifier of a unique location in a computer's memory. It is an address (a reference) of a specific piece of data that is stored. Pointers store memory address and can be used to fetch or point towards the data that is marked by the address. In this function, we are essentially converting the pointer into the address to which is points towards. Note, memory addresses are written as hexdecimals as these are compact ways of notation the data.
 
-##### 
+##### Handle Too Small Buffer Size
+
+```
+    if(buffer_size < 2 * sizeof(void*) + 3) return NULL;
+```
+
+##### Initial Setup of the Function
+```
+    unsigned long address = (unsigned long)ptr;
+    char hex_digits[] = "0123456789abcdef";
+
+    buffer[0] = '0';
+    buffer[1] = 'x';
+```
+
 
 
 
