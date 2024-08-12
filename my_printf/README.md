@@ -304,10 +304,23 @@ Is an identifier of a unique location in a computer's memory. It is an address (
     buffer[0] = '0';
     buffer[1] = 'x';
 ```
+This setup typecasts the argument pointer passed into the function into an 'unsigned long address' (a long integer with no symbol to denote whether it is positive or minus). Afterwards, an array of all the necessary characters for creating a hexdecimal value are instantiated. This is then followed by the final output being created with the first two index position of the outputted buffer defined as '0' and 'x' - this prefix of two digits denote the following value is written in hexadecimal format.
 
+##### Loop With Bit Operations
+In a hexdecimal value (base-16) system each digit corresponds exactly to one 'nibble'. A nimble is a 4 bit piece of data. 
 
+In this loop the right shift ('>>') shifts the bits of a number to the right by a specified number of positions. 
 
+Example:
+```
+x = 0110 0010
+x<<4 = 0010 0000
+```
+Assuming this is an integer of type char which contains only 8 bits, the four bits (from the left) are removed amd 4 new 0 bits are shifted in from the right.
 
+In the above example, a "nibble" would be representative of the '0110' or '0010' chuncks, the 4 bits of data. A byte (8-bits) is composed of two nibbles.
+
+This loop is responsible for extracting a specific 4-bit segment (nibble) from a memory address and converting it into its corresponding hexadecimal character. Shifting bits of the address to the right by 'i*4' effectively moves each nibble to the right. The bitwise '&' is the bitwise AND operator which compares the two numbers, if both are '1' then the result is '1' otherwise it's '0'. '0xF' is used as a mask to isolate the last 4 bits of the shifted value which isolates a single nibble.
 
 ## Installation
 TODO - How to install your project? npm install? make? make re?
