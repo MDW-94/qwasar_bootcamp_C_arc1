@@ -323,10 +323,24 @@ In the above example, a "nibble" would be representative of the '0110' or '0010'
 This loop is responsible for extracting a specific 4-bit segment (nibble) from a memory address and converting it into its corresponding hexadecimal character. Shifting bits of the address to the right by 'i*4' effectively moves each nibble to the right. The bitwise '&' is the bitwise AND operator which compares the two numbers, if both are '1' then the result is '1' otherwise it's '0'. '0xF' is used as a mask to isolate the last 4 bits of the shifted value which isolates a single nibble.
 
 ## Installation
-TODO - How to install your project? npm install? make? make re?
+```
+git clone
+git pull
+```
+After updating the local version, use command:
+```
+make
+```
+This will being the Makefile compilation pipeline which will compile and run the my_printf.c program with the necesssary compilations flags.
+
+As the makefile is responsible for compiling, cleaning and generally assembling the program, a make command followed by the task is necessary. For example:
+```
+make fclean
+```
+Would stand for 'full clean' and would effectively remove all the compiled programs and dependency files.
 
 ## Usage
-TODO - How does it work?
+This my_printf function is based on the linux printf (man printf) which effectively outputs any string with format specifier values to the standard output. It is useful for debugging code or seeing representations of data in a visual output. The function made also return certain types of data which correspond to the memory of the program.
 ```
 ./my_project argument1 argument2
 ```
