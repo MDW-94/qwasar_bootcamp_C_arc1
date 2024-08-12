@@ -130,3 +130,26 @@ char* pointer_to_memoryAddress(void* ptr, char* buffer, size_t buffer_size){
 
     return buffer;
 }
+
+int my_printf(char* restrict input_str, ...){
+    int return_size;
+    va_list args;
+    va_start(args, input_str);
+
+    int buffer_size = 256;
+    char* buffer_ptr = malloc((buffer_size + 1)*sizeof(char));
+    if(!buffer_ptr){
+        va_end(args);
+        return -1;
+    }
+
+    int k = 0;
+    for(int i = 0; input_str[i] != '\0';i++){
+        if(input_str[i] != '%'){
+            buffer_ptr[k++] = input_str[i];
+        } else {
+            char ch1 = input_str[i + 1];
+        }
+    }
+
+}
