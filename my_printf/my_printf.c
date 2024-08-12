@@ -149,6 +149,20 @@ int my_printf(char* restrict input_str, ...){
             buffer_ptr[k++] = input_str[i];
         } else {
             char ch1 = input_str[i + 1];
+            switch(ch1){
+                case 'i':
+                case 'd':
+                case 'u':
+                case 'h':
+                    int number = va_arg(args, int);
+                char number_buffer[12]; // Buffer large enough to hold any int value
+                number_to_char(number, number_buffer, sizeof(number_buffer));
+                for (int j = 0; number_buffer[j] != '\0'; j++) {
+                    buffer_ptr[k++] = number_buffer[j];
+                }
+                i++;
+                break;
+            }
         }
     }
 
