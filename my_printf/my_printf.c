@@ -76,7 +76,7 @@ char* number_to_octal(int number, char* buffer, size_t buffer_size){
     return buffer;
 }
 
-char* number_to_hexdecimal(int number, char* buffer, size_t buffer_size){
+char* number_to_hexadecimal(int number, char* buffer, size_t buffer_size){
     int hexaNumber[32];
     int i = 0, j;
 
@@ -153,7 +153,7 @@ int my_printf(char* restrict input_str, ...){
                 case 'i':
                 case 'd':
                 case 'u':
-                case 'h':
+                case 'h': {
                         int number = va_arg(args, int);
                     char number_buffer[12]; // Buffer large enough to hold any int value
                     number_to_char(number, number_buffer, sizeof(number_buffer));
@@ -162,7 +162,8 @@ int my_printf(char* restrict input_str, ...){
                     }
                     i++;
                     break;
-                case 'o':
+                }
+                case 'o': {
                        //HANDLE OCTAL
                     int number = va_arg(args, int);
                     char octal_buffer[9];
@@ -172,7 +173,8 @@ int my_printf(char* restrict input_str, ...){
                     }
                     i++;
                     break;
-                case 'x':
+                }
+                case 'x': {
                         //HANDLE HEXADECIMAL
                     int number = va_arg(args, int);
                     char hexa_buffer[9];
@@ -182,7 +184,8 @@ int my_printf(char* restrict input_str, ...){
                     }
                     i++;
                     break;
-                case 'p':
+                }
+                case 'p': {
                         //HANDLE MEMORY ADDRESS
                     char* ptr_ptr = va_arg(args, char*);
                     char address_buffer[2 * sizeof(void*)+3]; // Large enough to hold a pointer in hexadecimal
@@ -195,11 +198,13 @@ int my_printf(char* restrict input_str, ...){
                     }
                     i++;
                     break;
-                case 'c':
+                }
+                case 'c': {
                     buffer_ptr[k++] = va_arg(args, int);
                     i++;
                     break;
-                case 's':
+                }
+                case 's': {
                         //HANDLE STRING
                     char* ptr_va;
                     if((ptr_va = va_arg(args, char*)) != NULL){
@@ -216,10 +221,12 @@ int my_printf(char* restrict input_str, ...){
                         i++;
                     }
                     break;
-                case '%':
+                }
+                case '%': {
                     buffer_ptr[k++] = '%';
                     i++;
                     break;
+                }
             }
         }
     }
@@ -232,4 +239,23 @@ int my_printf(char* restrict input_str, ...){
     va_end(args);
     free(buffer_ptr);
     return return_size;
+}
+
+int main(){
+    my_printf("Hello, World!\n");
+    my_printf("Test 2   -> int 1 : %i, int 2 : %i, int 3 : %i\n", 5, 4, 3);
+    my_printf("Test 3   -> char 1 : %c, char 2 : %c, char 3 : %c\n", 'z', 'x', 'y');
+    my_printf("Test 4   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", "world", "!!!!!!");
+    my_printf("Test 5   -> string 1 : %s, string 2 : %s, string 3 : %s\n", "hello", NULL, "!!!!!!");
+    my_printf("Test 6   -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Test 7   -> %i, %s, %c, %%, %d\n", 1234567890, "Hello", 'A', -12);
+    my_printf("Test 7   -> %i | %d | %o | %x\n", 25, -25, 25, 25);
+    my_printf("Test 7b  -> lrg_int 1 : %i, lrg_int 2 : %i, lrg_int 3 : %i\n", 123, 4567, 888999);
+    my_printf("Test 8   -> int 1 : %f, int 2 : %f, int 3 : %f\n", 3.5, 99.9, 234.23);
+    my_printf("Test 9   -> percentage sign -> %%\n");
+    char string[6] = "Hello";
+    char* ptr_str = string;
+    my_printf("Test 10  -> memory addresses -> | %p |\n", ptr_str);
+
+    return 0;
 }
