@@ -342,5 +342,5 @@ Would stand for 'full clean' and would effectively remove all the compiled progr
 ## Usage
 This my_printf function is based on the linux printf (man printf) which effectively outputs any string with format specifier values to the standard output. It is useful for debugging code or seeing representations of data in a visual output. The function made also return certain types of data which correspond to the memory of the program.
 ```
-./my_project argument1 argument2
+./my_printf string_w_format_specifier format_specifier
 ```
