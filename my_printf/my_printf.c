@@ -154,16 +154,82 @@ int my_printf(char* restrict input_str, ...){
                 case 'd':
                 case 'u':
                 case 'h':
+                        int number = va_arg(args, int);
+                    char number_buffer[12]; // Buffer large enough to hold any int value
+                    number_to_char(number, number_buffer, sizeof(number_buffer));
+                    for (int j = 0; number_buffer[j] != '\0'; j++) {
+                        buffer_ptr[k++] = number_buffer[j];
+                    }
+                    i++;
+                    break;
+                case 'o':
+                       //HANDLE OCTAL
                     int number = va_arg(args, int);
-                char number_buffer[12]; // Buffer large enough to hold any int value
-                number_to_char(number, number_buffer, sizeof(number_buffer));
-                for (int j = 0; number_buffer[j] != '\0'; j++) {
-                    buffer_ptr[k++] = number_buffer[j];
-                }
-                i++;
-                break;
+                    char octal_buffer[9];
+                    char* ptr_va = number_to_octal(number, octal_buffer, sizeof(octal_buffer));
+                    for(int j = 0;j<my_strlen(ptr_va);j++){
+                        buffer_ptr[k++] = ptr_va[j];
+                    }
+                    i++;
+                    break;
+                case 'x':
+                        //HANDLE HEXADECIMAL
+                    int number = va_arg(args, int);
+                    char hexa_buffer[9];
+                    char* ptr_va = number_to_hexadecimal(number, hexa_buffer, sizeof(hexa_buffer));
+                    for(int j = 0;j<my_strlen(ptr_va);j++){
+                        buffer_ptr[k++] = ptr_va[j];
+                    }
+                    i++;
+                    break;
+                case 'p':
+                        //HANDLE MEMORY ADDRESS
+                    char* ptr_ptr = va_arg(args, char*);
+                    char address_buffer[2 * sizeof(void*)+3]; // Large enough to hold a pointer in hexadecimal
+                    char* ptr_va = pointer_to_memoryAddress(ptr_ptr, address_buffer, sizeof(address_buffer));
+                    if(ptr_va != NULL){
+                        for (int j = 0; ptr_va[j] != '\0' && k < buffer_size - 1; j++) {
+                        buffer_ptr[k++] = ptr_va[j];
+                        }
+                        buffer_ptr[k] = '\0';
+                    }
+                    i++;
+                    break;
+                case 'c':
+                    buffer_ptr[k++] = va_arg(args, int);
+                    i++;
+                    break;
+                case 's':
+                        //HANDLE STRING
+                    char* ptr_va;
+                    if((ptr_va = va_arg(args, char*)) != NULL){
+                        for(int j = 0; j < my_strlen(ptr_va);j++){
+                        buffer_ptr[k++] = ptr_va[j];
+                        }
+                        i++;
+                    } else {
+                        char null_result[6] = "(null)";
+                        char* ptr_null = null_result;
+                        for(int j =0;j<6;j++){
+                            buffer_ptr[k++] = ptr_null[j];
+                        }
+                        i++;
+                    }
+                    break;
+                case '%':
+                    buffer_ptr[k++] = '%';
+                    i++;
+                    break;
             }
         }
     }
+    buffer_ptr[k++] = '\0';
 
+    char* temp_ptr = buffer_ptr;
+    return_size = my_strlen(temp_ptr);
+    write(1,temp_ptr,k - 1);
+
+    va_end(args);
+    free(buffer_ptr);
+    return return_size;
 }
