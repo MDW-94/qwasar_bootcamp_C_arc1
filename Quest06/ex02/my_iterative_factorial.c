@@ -15,7 +15,6 @@ int my_iterative_factorial(int x){
 }
 
 int main(){
-    
     printf("Test 4! => %i\n", my_iterative_factorial(4));
     printf("Test 3! => %i\n", my_iterative_factorial(3));
     return 0;
