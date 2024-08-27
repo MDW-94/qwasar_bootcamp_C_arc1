@@ -14,6 +14,10 @@ int my_recursive_factorial(int x){
 
 int main(){
     printf("\n\nTest 4! => %i\n", my_recursive_factorial(4));
+    printf("\n\nTest 4! => %i\n", my_recursive_factorial(0));
+    printf("\n\nTest 4! => %i\n", my_recursive_factorial(2));
+    printf("\n\nTest 4! => %i\n", my_recursive_factorial(3));
+
     return 0;
 }
 
